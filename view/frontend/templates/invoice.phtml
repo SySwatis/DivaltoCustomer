@@ -1,0 +1,15 @@
+<?php  $invoiceList = $block->getInvoiceList(); ?>
+	<div class="block">
+		<p><?= __('Your invoices over %1 month(s)','3') ?></p>
+		<p><?= __('Customers') ?> : <?= $block->getGroupCode() ?></p>
+<?php if( is_array($invoiceList) ) : ?>
+	
+	<ul>
+<?php foreach ($invoiceList as $filename) : ?>
+	<li><a href="<?= $block->getBaseUrl().$filename ?>"><?= basename($filename) ?></a></li>
+<?php endforeach ?>
+	</ul>
+<?php else : ?>
+<p><?= __('No invoices yet') ?></p>
+<?php endif ?>
+	</div>

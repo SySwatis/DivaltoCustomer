@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+<!--    	<event name="layout_render_before"> -->
+        <observer name="customer_resgister_observer" instance="Divalto\Customer\Observer\UpdateCustomer" />
+    </event>
+    <event name="controller_action_predispatch_customer_account_createpost">
+        <observer name="customer_account_create_post" instance="Divalto\Customer\Observer\CreatePost" />
+    </event>
+</config>
