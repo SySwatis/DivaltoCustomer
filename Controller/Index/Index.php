@@ -1,7 +1,18 @@
 <?php
 /**
- * Divalto_Customer
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
  */
+
+/**
+ * @category   Divalto
+ * @package    Divalto_Customer
+ * @subpackage Controller
+ */
+
 namespace Divalto\Customer\Controller\Index;
 
 use Magento\Framework\App\RequestInterface;

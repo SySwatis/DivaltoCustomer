@@ -1,8 +1,25 @@
 <?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ */
+
+/**
+ * @category   Divalto
+ * @package    Divalto_Customer
+ * @subpackage Block
+ */
+
 namespace Divalto\Customer\Block;
 
 class Invoice extends \Magento\Framework\View\Element\Template
 {
+
+
+    const DIVALTO_INVOICE_DIR = 'pub/media/wysiwyg/divalto/invoice';
 
     /**
      * Framework driverFile
@@ -32,7 +49,6 @@ class Invoice extends \Magento\Framework\View\Element\Template
      */
     protected $_groupRepository;
 
-    protected $dir ='pub/media/wysiwyg/divalto/invoice';
 
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
@@ -76,12 +92,12 @@ class Invoice extends \Magento\Framework\View\Element\Template
 
     public function getInvoiceDir() 
     {
-        return $this->getBaseMediaDir().$this->dir.$this->getGroupId();
+        return $this->getBaseMediaDir().SELF::DIVALTO_INVOICE_DIR.$this->getGroupId();
     }
 
     public function getInvoiceList() 
     {
-        $divaltoCustomerDir = $this->dir.'/'.$this->getGroupCode();
+        $divaltoCustomerDir = SELF::DIVALTO_INVOICE_DIR.'/'.$this->getGroupCode();
         if( $this->_driverFile->isExists($divaltoCustomerDir) && $this->_driverFile->isReadable($divaltoCustomerDir) ) {
             return  $this->_driverFile->readDirectory($divaltoCustomerDir);
         }

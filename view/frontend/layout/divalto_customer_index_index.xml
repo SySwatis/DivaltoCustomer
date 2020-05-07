@@ -5,8 +5,8 @@
 		<action method="setPageTitle">
 			<argument translate="true" name="title" xsi:type="string">Invoices</argument>
 		</action>
-        </referenceBlock>
-    	<referenceContainer name="content">
-        	<block class="Divalto\Customer\Block\Invoice" name="divalto_customer_index_index" template="Divalto_Customer::invoice.phtml" cacheable="false" />
+    </referenceBlock>
+    <referenceContainer name="content">
+        <block class="Divalto\Customer\Block\Invoice" name="divalto_customer_index_index" template="Divalto_Customer::invoice.phtml" cacheable="false" />
     </referenceContainer>
 </page>

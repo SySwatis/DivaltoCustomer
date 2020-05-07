@@ -1,50 +1,86 @@
 <?php
+/**
+ * @category   Divalto
+ * @package    Divalto_Customer
+ * @subpackage Helper
+ */
+
 namespace Divalto\Customer\Helper;
-use \Magento\Framework\App\Helper\AbstractHelper;
-use \Magento\Framework\App\Helper\Context;
+
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\HTTP\Client\Curl;
+use Psr\Log\LoggerInterface;
+
 class Requester extends AbstractHelper
 {
     protected $curl;
+
+    protected $_logger;
+
     const ERP_API_BASE_URL = 'https://127.0.0.1/erp/api/';
+
+    const ERP_API_BASE_URL_TEST = 'http://www.myerp.lan/';
+
     public function __construct(
-        Context $context,
-         \Magento\Framework\HTTP\Client\Curl $curl
+        LoggerInterface $logger,
+        Curl $curl,
+        Context $context
     ) {
         $this->curl = $curl;
+        $this->_logger = $logger;
         parent::__construct($context);
     }
 
-    public function createCustomer(array $customer)
+    public function filterByValue ($array, $value)
     {
-        $url = self::ERP_API_BASE_URL . 'customer/create';
-        $this->curl->post($url, $customer);
-        if ($this->curl->getStatus() !== 200) {
-            throw new LocalizedException(__('ERP query fail!'));
+        $like = $value;
+        return $result = array_filter($array, function ($item) use ($like) {
+        if (stripos($item['email'], $like) !== false) {
+            return true;
         }
-        $response = json_decode($this->curl->getBody(), true);
-        if ($response['success']) {
-            return $response['customer_erp_id'];   
-        } else {
-            throw new LocalizedException(__($response['error_message']));
-        }
+            return false;
+        });
     }
-    
-    public function updateCustomer(array $customer)
+
+    public function getCustomerErpId($requestParams)
     {
-        $url = self::ERP_API_BASE_URL . 'customer/update';
-        if (!$customer['customer_erp_id']) {
-            throw new LocalizedException(__('Invalid customer ERP ID!'));
-        }
-        $this->curl->post($url, $customer);
+
+        $requestParamEmail = $requestParams['email'];
+        $requestParamCountry = $requestParams['taxvat'];
+
+        $url = self::ERP_API_BASE_URL_TEST;
+        
         if ($this->curl->getStatus() !== 200) {
-            throw new LocalizedException(__('ERP query fail!'));
+            // throw new LocalizedException(__('ERP query fail!'));
+            $this->_logger->debug('ERP query fail ! Status 200 false');
+            return false;
         }
-        $response = json_decode($this->curl->getBody(), true);
-        if ($response['success']) {
-            return $response['customer_erp_id'];
+
+        $this->curl->post($url, $requestParamEmail);
+        
+        $data = json_decode($this->curl->getBody(), true);
+
+        if (!is_array($data)) {
+            // throw new LocalizedException(__('ERP resutl fail!'));
+            $this->_logger->debug('ERP query fail ! No array found.');
+            return false;
         } else {
-            throw new LocalizedException(__($response['error_message']));
+            $customerErpId = $this->filterByValue($data, $requestParamEmail);
+            $index = array_keys($customerErpId);
+            if( is_array($customerErpId) && isset($index[0]) && isset($customerErpId[$index[0]]) ) {
+                return $customerErpId[$index[0]]['customer_erp_id'];
+            }
         }
+
+        return false;
+
     }
+
+    public function getGroupName($requestParams) 
+    {
+        return $this->getCustomerErpId($requestParams);
+    }
+
 }
