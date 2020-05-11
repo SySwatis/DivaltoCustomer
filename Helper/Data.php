@@ -15,12 +15,14 @@
 
 namespace Divalto\Customer\Helper;
 
-use \Magento\Framework\App\Helper\AbstractHelper;
-use \Magento\Framework\App\Helper\Context;
-use \Magento\Customer\Model\GroupFactory;
-use \Magento\Framework\App\RequestInterface;
-use \Magento\Framework\Session\SessionManagerInterface;
-use \Psr\Log\LoggerInterface;
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Filesystem\Driver\File;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Customer\Model\GroupFactory;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Session\SessionManagerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Data
@@ -32,8 +34,12 @@ class Data extends AbstractHelper
     const TAX_CLASS_DEFAULT_ID = 3;
 
     const XML_PATH_DIVALTO_CUSTOMER = 'divalto_customer/';
+
+    const DIVALTO_INVOICE_DIR = 'pub/media/wysiwyg/divalto/invoice';
 	
-	protected $_groupFactory;
+    protected $_driverFile;
+
+    protected $_groupFactory;
 
     protected $_request;
 
@@ -42,6 +48,8 @@ class Data extends AbstractHelper
     protected $_log;
 
 	public function __construct (
+        File $driverFile,
+        StoreManagerInterface $storeManager,
         GroupFactory $groupFactory,
         RequestInterface $request,
         LoggerInterface $logger,
@@ -49,6 +57,8 @@ class Data extends AbstractHelper
 		Context $context
 	)
     {
+        $this->_driverFile = $driverFile;
+        $this->_storeManager = $storeManager;
 		$this->_groupFactory = $groupFactory;
         $this->_request = $request;
         $this->_log = $logger;
@@ -56,18 +66,26 @@ class Data extends AbstractHelper
 		parent::__construct($context);
     }
 
+    public function getDivaltoInvoiceDir() 
+    {
+        return self::DIVALTO_INVOICE_DIR . '/';
+    }
 
-    public function setSessionGroupName($value){
+
+    public function setSessionGroupName($value)
+    {
         $this->_coreSession->start();
         $this->_coreSession->setGroupName($value);
      }
 
-    public function getSessionGroupName(){
+    public function getSessionGroupName()
+    {
         $this->_coreSession->start();
         return $this->_coreSession->getGroupName();
     }
 
-    public function unSessionGroupName(){
+    public function unSessionGroupName()
+    {
         $this->_coreSession->start();
         return $this->_coreSession->unsGroupName();
     }
@@ -103,6 +121,14 @@ class Data extends AbstractHelper
        ->getFirstItem()
        ->getId();
     }
+
+    public function createDirectoryGroupName($groupName) 
+    {
+        $divaltoCustomerDir = $this->getDivaltoInvoiceDir().$groupName;
+        if( !$this->_driverFile->isExists($divaltoCustomerDir) ) {
+            $this->_driverFile->createDirectory($divaltoCustomerDir);
+        }
+    }
     
     public function groupCreate($groupName) 
     {
@@ -113,8 +139,9 @@ class Data extends AbstractHelper
             if(!$this->getCustomerGroupIdByName($groupName)) { 
                 $group = $this->_groupFactory->create();
                 $group->setCode($groupName)
-                ->setTaxClassId(self::TAX_CLASS_DEFAULT_ID) // magic numbers OK, core installers do it?!
+                ->setTaxClassId(self::TAX_CLASS_DEFAULT_ID) // Core installers (Db) : 3 
                 ->save();
+                $this->createDirectoryGroupName($groupName); // Create path users to invoice dir
             }
         } catch (\Exception $e) {
             $this->_log->critical($e->getGroupName());

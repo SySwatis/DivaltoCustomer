@@ -50,28 +50,6 @@ class Debug implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
 
-        // $params = $this->_request->getParams();
-
-        // $paramValue = '';
-        // foreach ($params as $param => $value) {
-        //     # code...
-        //     $paramValue.=' '.$param.' '.$value;
-        // }
-
-        // $customerVatClass = $this->_vatCustomer->checkVatNumber(
-        //     'FR',
-        //     'FR81441914272'
-        // );
-
-        // $this->_log->debug('Observer Debug executing : '.$customerVatClass->getRequestMessage());
-
-        
-        // $customer_erp_id = $this->_helperRequester->debugRequester(); // Divalto request
-        // $this->_helperData->setSessionGroupName('NewVal');
-        $valsession = $this->_helperData->getSessionGroupName();
-        $this->_log->debug('Observer Helper Debug '.$valsession);
-
-      
-     
+        $this->_helperData->createDirectoryGroupName('test0000001');
     }  
 }

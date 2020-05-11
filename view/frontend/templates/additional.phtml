@@ -1,0 +1,24 @@
+<legend class="legend"><span><?= $block->escapeHtmlAttr(__('Administrative Information')) ?></span></legend>
+<div class="field siret required">
+    <label class="label" for="siret">
+      <span><?= $block->escapeHtml(__('Siret')) ?></span>
+    </label>
+    <div class="control">
+       <input type="text" name="siret" id="siret" value="" title="<?= $block->escapeHtmlAttr(__('Siret')) ?>" class="input-text" data-validate="{required:true, siret:true}">
+    </div>
+</div>
+<div class="field ape required">
+    <label class="label" for="ape">
+      <span><?= $block->escapeHtml(__('Code Ape')) ?></span>
+    </label>
+    <div class="control">
+       <input type="text" name="ape" id="ape" value="" title="<?= $block->escapeHtmlAttr(__('Code Ape')) ?>" class="input-text" data-validate="{required:true, ape:true}">
+    </div>
+</div>
+<script type="text/x-magento-init">
+   {
+       "*": {
+           "divaltoMethod": {}
+       }
+   }
+</script>

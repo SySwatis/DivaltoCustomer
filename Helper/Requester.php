@@ -48,7 +48,9 @@ class Requester extends AbstractHelper
     {
 
         $requestParamEmail = $requestParams['email'];
-        $requestParamCountry = $requestParams['taxvat'];
+        // $requestParamCountry = $requestParams['taxvat'];
+        // $requestParamApe = $requestParams['ape'];
+        // $requestParamApe = $requestParams['siret'];
 
         $url = self::ERP_API_BASE_URL_TEST;
         
