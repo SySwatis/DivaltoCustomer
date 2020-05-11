@@ -8,7 +8,9 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-<!--             <block class="Divalto\Customer\Block\Account\Dashboard\Outstanding" name="customer_account_dashboard_outstanding" as="outstanding" template="Divalto_Customer::account/dashboard/outstanding.phtml" before="customer_account_dashboard_info" cacheable="false" /> -->
+            <block class="Divalto\Customer\Block\Account\Dashboard\Outstanding" name="customer_account_dashboard_outstanding" template="Divalto_Customer::account/dashboard/outstanding.phtml" after="customer_account_dashboard_info" cacheable="false" />
+
+ <block class="Divalto\Customer\Block\Account\Dashboard\Address" name="customer_account_dashboard_addresses" template="Divalto_Customer::account/dashboard/addresses.phtml" after="customer_account_dashboard_outstanding" cacheable="false" />
         </referenceContainer>
     </body>
 </page>

@@ -14,7 +14,7 @@
  */
 
 namespace Divalto\Customer\Block\Account\Dashboard;
-class Outstanding extends \Magento\Framework\View\Element\Template
+class Address extends \Magento\Framework\View\Element\Template
 {
 	public function __construct(
         \Magento\Backend\Block\Template\Context $context,        
@@ -25,7 +25,8 @@ class Outstanding extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
-    public function getOutstanding() {
-        return false;
+    public function getAddress() 
+    {
+        return 'First address';
     }
 }

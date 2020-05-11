@@ -16,5 +16,9 @@
                 </arguments>
             </block>
         </referenceBlock>
+
+         <referenceBlock name="customer_account_dashboard_address" remove="true" />
+         <referenceBlock name="customer-account-navigation-address-link" remove="true" />
+         
     </body>
 </page>

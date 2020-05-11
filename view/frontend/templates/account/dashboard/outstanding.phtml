@@ -1,5 +1,9 @@
 <?php $outstanding = $block->getOutstanding() ?>
 <div class="block">
 	<div class="block-title initial"><strong><?= __('Your Oustanding') ?></strong></div>
-<?= $outstanding ?>
+<?php if($outstanding) :  ?>
+	<p><?= __('You can order and pay online') ?></p>
+<?php else : ?>
+	<p><?= __('You can only order, payment online not authorized') ?></p>
+<?php endif ?>
 </div>
