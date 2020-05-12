@@ -16,16 +16,22 @@
 namespace Divalto\Customer\Block\Account\Dashboard;
 class Outstanding extends \Magento\Framework\View\Element\Template
 {
-	public function __construct(
+	protected $_customerSession;
+
+    public function __construct(
+         \Magento\Customer\Model\Session $customer,
         \Magento\Backend\Block\Template\Context $context,        
     
         array $data = []
     )
     {        
+        $this->_customerSession = $customer;
         parent::__construct($context, $data);
     }
 
-    public function getOutstanding() {
-        return false;
+    public function getOutstanding()
+    {
+
+        return $this->_customerSession->getCustomer()->getData('divalto_customer_outstanding_status')==1 ? true : false;
     }
 }
