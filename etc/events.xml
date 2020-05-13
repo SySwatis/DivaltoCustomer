@@ -24,6 +24,9 @@
     <event name="customer_register_success">
         <observer name="customer_resgister_observer" instance="Divalto\Customer\Observer\UpdateCustomer"/>
     </event>
+    <event name="payment_method_is_active">
+        <observer name="customer_payment_disable" instance="Divalto\Customer\Observer\PaymentMethodDisable" />
+    </event>
 <!--     <event name="layout_render_before">
 		<observer name="customer_account_debug" instance="Divalto\Customer\Observer\Debug" />
     </event> -->

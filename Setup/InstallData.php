@@ -41,16 +41,17 @@ class InstallData implements InstallDataInterface
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
 
         
-        // customerAttribute1
+        // Customer Attribute
 
-        $eavSetup->removeAttribute(Customer::ENTITY, 'divalto_customer_user_id');
+        $attributeCode = 'divalto_account_id';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttribute(
             \Magento\Customer\Model\Customer::ENTITY,
-            'divalto_customer_user_id',
+            $attributeCode,
             [
                 'type'         => 'varchar',
-                'label'        => 'Divalto Customer User Id',
+                'label'        => 'Divalto Account Id',
                 'input'        => 'text',
                 'required'     => false,
                 'visible'      => true,
@@ -59,34 +60,35 @@ class InstallData implements InstallDataInterface
                 'system'       => 0,
             ]
         );
-        $customerAttribute1 = $this->eavConfig->getAttribute(Customer::ENTITY, 'divalto_customer_user_id');
+        $customerAttribute_1 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttributeToSet(
             CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
             CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
             null,
-            'divalto_customer_user_id');
+            $attributeCode);
 
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
-        $customerAttribute1->setData(
+        $customerAttribute_1->setData(
             'used_in_forms',
             ['adminhtml_customer']
 
         );
-        $customerAttribute1->save();
+        $customerAttribute_1->save();
 
 
 
-        // customerAttribute2
+        // Customer Attribute 2
 
-        $eavSetup->removeAttribute(Customer::ENTITY, 'divalto_customer_outstanding_status');
+        $attributeCode = 'divalto_outstanding_status';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttribute(
             \Magento\Customer\Model\Customer::ENTITY,
-            'divalto_customer_outstanding_status',
+            $attributeCode,
             [
                 'type'         => 'varchar',
-                'label'        => 'Divalto Customer Outstanding Status',
+                'label'        => 'Divalto Outstanding Status',
                 'input'        => 'select',
                 'source' => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
@@ -98,34 +100,34 @@ class InstallData implements InstallDataInterface
                 'system'       => 0,
             ]
         );
-        $customerAttribute2 = $this->eavConfig->getAttribute(Customer::ENTITY, 'divalto_customer_outstanding_status');
+        $customerAttribute_2 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttributeToSet(
             CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
             CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
             null,
-            'divalto_customer_outstanding_status');
+            $attributeCode);
 
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
-        $customerAttribute2->setData(
+        $customerAttribute_2->setData(
             'used_in_forms',
             ['adminhtml_customer']
-
         );
-        $customerAttribute2->save();
+        $customerAttribute_2->save();
 
         
 
-        // customerAttribute3
+        // Customer Attribute 3
 
-        $eavSetup->removeAttribute(Customer::ENTITY, 'ape');
+        $attributeCode = 'ape';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttribute(
             \Magento\Customer\Model\Customer::ENTITY,
-            'ape',
+            $attributeCode,
             [
                 'type'         => 'varchar',
-                'label'        => 'Divalto Customer User Ape',
+                'label'        => 'Ape',
                 'input'        => 'text',
                 'required'     => false,
                 'visible'      => true,
@@ -134,34 +136,34 @@ class InstallData implements InstallDataInterface
                 'system'       => 0,
             ]
         );
-        $customerAttribute3 = $this->eavConfig->getAttribute(Customer::ENTITY, 'ape');
+        $customerAttribute_3 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttributeToSet(
             CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
             CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
             null,
-            'ape');
+            $attributeCode);
 
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
-        $customerAttribute3->setData(
+        $customerAttribute_3->setData(
             'used_in_forms',
             ['adminhtml_customer']
-
         );
-        $customerAttribute3->save();
+        $customerAttribute_3->save();
 
         
 
-        // customerAttribute4
+        // Customer Attribute 4
 
-        $eavSetup->removeAttribute(Customer::ENTITY, 'siret');
+        $attributeCode = 'siret';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttribute(
             \Magento\Customer\Model\Customer::ENTITY,
-            'siret',
+            $attributeCode,
             [
                 'type'         => 'varchar',
-                'label'        => 'Divalto Customer User Siret',
+                'label'        => 'Siret',
                 'input'        => 'text',
                 'required'     => false,
                 'visible'      => true,
@@ -170,21 +172,20 @@ class InstallData implements InstallDataInterface
                 'system'       => 0,
             ]
         );
-        $customerAttribute4 = $this->eavConfig->getAttribute(Customer::ENTITY, 'siret');
+        $customerAttribute_4 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttributeToSet(
             CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
             CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
             null,
-            'siret');
+            $attributeCode);
 
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
-        $customerAttribute4->setData(
+        $customerAttribute_4->setData(
             'used_in_forms',
             ['adminhtml_customer']
-
         );
-        $customerAttribute4->save();
+        $customerAttribute_4->save();
     }
 }
 ?>
