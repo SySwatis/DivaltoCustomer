@@ -39,4 +39,14 @@ class Address extends \Magento\Framework\View\Element\Template
         }
         return null;
     }
+    public function getCustomerBilling() {
+        $customer = $this->_customerSession->getCustomer();
+        if ($customer) {
+            $billingAddress = $customer->getDefaultBillingAddress();
+            if ($billingAddress) {
+                return $billingAddress;
+            }
+        }
+        return null;
+    }
 }

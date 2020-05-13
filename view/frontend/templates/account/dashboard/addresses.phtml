@@ -1,22 +1,26 @@
+
+<?php $billing = $block->getCustomerBilling() ?? __('No addresses yet') ?>
+<?php $billingStreets = $billing->getStreet() ?>
+
 <?php $delivery = $block->getCustomerDelivery() ?? __('No addresses yet') ?>
 <?php $deliveryStreets = $delivery->getStreet() ?>
 <div class="block block-dashboard-info initial">
 	<div class="block-content initial">
 		<div class="box box-information initial">
-			<div class="block-title initial"><strong><?= __('Addresses') ?></strong></div>
-			<?php if($delivery) : ?>
+			<div class="block-title initial"><strong><?= __('Billing') ?></strong></div>
+			<?php if($billing) : ?>
 			<p>
-			<?= $delivery->getCompany() ?><br>
-			<?php foreach ($deliveryStreets as $street) : ?>
+			<?= $billing->getCompany() ?><br>
+			<?php foreach ($billingStreets as $street) : ?>
 			<?= $street ?><br>
 			<?php endforeach ?>
-			<?= $delivery->getPostcode() ?><br>
-			<?= $delivery->getCity() ?><br>
-			<?= $delivery->getTelephone() ?></p>
+			<?= $billing->getPostcode() ?><br>
+			<?= $billing->getCity() ?><br>
+			<?= $billing->getTelephone() ?></p>
 			<?php endif ?>
 		</div>
 		<div class="box box-information initial">
-			<div class="block-title initial"><strong><?= __('Addresses') ?></strong></div>
+			<div class="block-title initial"><strong><?= __('Shipping') ?></strong></div>
 			<?php if($delivery) : ?>
 			<p>
 			<?= $delivery->getCompany() ?><br>
