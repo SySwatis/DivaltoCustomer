@@ -16,17 +16,27 @@
 namespace Divalto\Customer\Block\Account\Dashboard;
 class Address extends \Magento\Framework\View\Element\Template
 {
-	public function __construct(
+	protected $_customerSession;
+
+    public function __construct(
+        \Magento\Customer\Model\Session $customer,
         \Magento\Backend\Block\Template\Context $context,        
     
         array $data = []
     )
     {        
+        $this->_customerSession = $customer;
         parent::__construct($context, $data);
     }
 
-    public function getAddress() 
-    {
-        return 'First address';
+    public function getCustomerDelivery() {
+        $customer = $this->_customerSession->getCustomer();
+        if ($customer) {
+            $shippingAddress = $customer->getDefaultShippingAddress();
+            if ($shippingAddress) {
+                return $shippingAddress;
+            }
+        }
+        return null;
     }
 }

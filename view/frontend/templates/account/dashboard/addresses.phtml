@@ -1,5 +1,33 @@
-<?php $address = $block->getAddress() ?>
-<div class="block">
-	<div class="block-title initial"><strong><?= __('Addresses') ?></strong></div>
-<?= $address ?>
+<?php $delivery = $block->getCustomerDelivery() ?? __('No addresses yet') ?>
+<?php $deliveryStreets = $delivery->getStreet() ?>
+<div class="block block-dashboard-info initial">
+	<div class="block-content initial">
+		<div class="box box-information initial">
+			<div class="block-title initial"><strong><?= __('Addresses') ?></strong></div>
+			<?php if($delivery) : ?>
+			<p>
+			<?= $delivery->getCompany() ?><br>
+			<?php foreach ($deliveryStreets as $street) : ?>
+			<?= $street ?><br>
+			<?php endforeach ?>
+			<?= $delivery->getPostcode() ?><br>
+			<?= $delivery->getCity() ?><br>
+			<?= $delivery->getTelephone() ?></p>
+			<?php endif ?>
+		</div>
+		<div class="box box-information initial">
+			<div class="block-title initial"><strong><?= __('Addresses') ?></strong></div>
+			<?php if($delivery) : ?>
+			<p>
+			<?= $delivery->getCompany() ?><br>
+			<?php foreach ($deliveryStreets as $street) : ?>
+			<?= $street ?><br>
+			<?php endforeach ?>
+			<?= $delivery->getPostcode() ?><br>
+			<?= $delivery->getCity() ?><br>
+			<?= $delivery->getTelephone() ?></p>
+			<?php endif ?>
+		</div>
+	</div>
+	<p><?= __('For any changes, please contact-us') ?></p>
 </div>

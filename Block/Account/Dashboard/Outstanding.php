@@ -19,7 +19,7 @@ class Outstanding extends \Magento\Framework\View\Element\Template
 	protected $_customerSession;
 
     public function __construct(
-         \Magento\Customer\Model\Session $customer,
+        \Magento\Customer\Model\Session $customer,
         \Magento\Backend\Block\Template\Context $context,        
     
         array $data = []
