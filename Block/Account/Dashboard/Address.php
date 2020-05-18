@@ -49,4 +49,24 @@ class Address extends \Magento\Framework\View\Element\Template
         }
         return null;
     }
+    public function getApe() {
+        $customer = $this->_customerSession->getCustomer();
+        if ($customer) {
+            $ape = $customer->getApe();
+            if ($ape) {
+                return $ape;
+            }
+        }
+        return null;
+    }
+    public function getSiret() {
+        $customer = $this->_customerSession->getCustomer();
+        if ($customer) {
+            $siret = $customer->getSiret();
+            if ($siret) {
+                return $siret;
+            }
+        }
+        return null;
+    }
 }

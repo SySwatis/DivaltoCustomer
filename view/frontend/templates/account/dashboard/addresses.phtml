@@ -1,37 +1,52 @@
+<?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ */
 
-<?php $billing = $block->getCustomerBilling() ?? __('No addresses yet') ?>
-<?php $billingStreets = $billing->getStreet() ?>
-
-<?php $delivery = $block->getCustomerDelivery() ?? __('No addresses yet') ?>
-<?php $deliveryStreets = $delivery->getStreet() ?>
+/**
+ * @category   Divalto
+ * @package    Divalto_Customer
+ * @subpackage view
+ */
+?>
+<?php $billing = $block->getCustomerBilling() ?>
+<?php $delivery = $block->getCustomerDelivery() ?>
+<?php $apeSiret = $block->getApe().' '.$block->getSiret() ?>
 <div class="block block-dashboard-info initial">
 	<div class="block-content initial">
 		<div class="box box-information initial">
 			<div class="block-title initial"><strong><?= __('Billing') ?></strong></div>
-			<?php if($billing) : ?>
-			<p>
+			<p><?php if($billing) : ?>
 			<?= $billing->getCompany() ?><br>
-			<?php foreach ($billingStreets as $street) : ?>
+			<?= $apeSiret ?><br>
+			<?php $billingStreets = $billing->getStreet() ; foreach ($billingStreets as $street) : ?>
 			<?= $street ?><br>
 			<?php endforeach ?>
 			<?= $billing->getPostcode() ?><br>
 			<?= $billing->getCity() ?><br>
-			<?= $billing->getTelephone() ?></p>
-			<?php endif ?>
+			<?= $billing->getTelephone() ?>
+			<?php else : ?>
+			<?= __('No address yet') ?>
+			<?php endif ?></p>
 		</div>
 		<div class="box box-information initial">
 			<div class="block-title initial"><strong><?= __('Shipping') ?></strong></div>
-			<?php if($delivery) : ?>
-			<p>
+			<p><?php if($delivery) : ?>
 			<?= $delivery->getCompany() ?><br>
-			<?php foreach ($deliveryStreets as $street) : ?>
+			<?php $deliveryStreets = $delivery->getStreet(); foreach ($deliveryStreets as $street) : ?>
 			<?= $street ?><br>
 			<?php endforeach ?>
 			<?= $delivery->getPostcode() ?><br>
 			<?= $delivery->getCity() ?><br>
-			<?= $delivery->getTelephone() ?></p>
-			<?php endif ?>
+			<?= $delivery->getTelephone() ?>
+			<?php else : ?>
+			<?= __('No address yet') ?>
+			<?php endif ?></p>
 		</div>
 	</div>
-	<p><?= __('For any changes, please contact-us') ?></p>
+	<p><?= __('For any changes, please <a href=""%1"">contact-us</a>','/contact') ?></p>
 </div>
