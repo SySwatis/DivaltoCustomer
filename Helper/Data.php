@@ -158,7 +158,9 @@ class Data extends AbstractHelper
 
     }
 
-    public function checkVat() {
+    public function checkVat()
+    {
         return;
     }
+    
 }

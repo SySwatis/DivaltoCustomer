@@ -25,8 +25,6 @@ class UpdateCustomer implements ObserverInterface
 {
 	const CUSTOMER_GROUP_DEFAULT_ID = 1;
 
-    const TAX_CLASS_DEFAULT_ID = 3;
-
     protected $_customerRepositoryInterface;
 
     protected $_groupFactory;
