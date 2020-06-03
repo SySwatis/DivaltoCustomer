@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <divalto_customer>
+            <general>
+                <enabled>0</enabled>
+                <debug>0</debug>
+                <divalto_store_id>0</divalto_store_id>
+            </general>
+        </divalto_customer>
+    </default>
+</config>

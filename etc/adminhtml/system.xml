@@ -25,14 +25,19 @@
         <section id="divalto_customer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Customer</label>
             <tab>Divalto</tab>
-            <resource>Divalto_Customer::config_customer</resource>
+            <resource>Divalto_Customer::config</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable module</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="divalto_store_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="debug" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>debug.log</comment>
+                </field>
+                <field id="divalto_store_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Divalto Store Id</label>
                 </field>
                 <!-- <field id="stores" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">

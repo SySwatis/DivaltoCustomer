@@ -22,6 +22,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\GroupFactory;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Session\SessionManagerInterface;
+use Magento\Store\Model\ScopeInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -71,7 +72,6 @@ class Data extends AbstractHelper
         return self::DIVALTO_INVOICE_DIR . '/';
     }
 
-
     public function setSessionGroupName($value)
     {
         $this->_coreSession->start();
@@ -90,7 +90,6 @@ class Data extends AbstractHelper
         return $this->_coreSession->unsGroupName();
     }
 
-
     /**
      * Returns config value
      *
@@ -108,10 +107,9 @@ class Data extends AbstractHelper
      *
      * @return string
      */
-    public function getGeneralConfig($code, $storeId = null)
+    public function getGeneralConfig($field, $storeId = null)
     {
-
-        return $this->getConfigValue(self::XML_PATH_EXTRAPRICE .'general/'. $code, $storeId);
+        return $this->getConfigValue(self::XML_PATH_DIVALTO_CUSTOMER .'general/'. $field, $storeId);
     }
 
     public function getCustomerGroupIdByName($groupName)

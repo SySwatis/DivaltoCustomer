@@ -50,6 +50,14 @@ class Debug implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
 
-        $this->_helperData->createDirectoryGroupName('test0000001');
-    }  
+        //$this->_helperData->createDirectoryGroupName('test0000001');
+        if( $this->getDebugConfig()==1 ) {
+            $this->_log->debug('Debug : Divalto Customer enabled');
+        }
+    }
+
+    public function getDebugConfig()
+    {
+        return $this->_helperData->getGeneralConfig('debug');
+    }
 }
