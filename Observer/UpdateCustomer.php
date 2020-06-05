@@ -60,16 +60,18 @@ class UpdateCustomer implements ObserverInterface
         // Get session group name
 
         $groupName = $this->_helperData->getSessionGroupName();
-        
+
         if($groupName){
 
             $groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
 
             $customer = $observer->getEvent()->getCustomer();
+             $this->_log->debug('Observer UpdateCustomer group debug General : '.$groupId);
     
             if($customer && $groupId){
                 if ($customer->getGroupId() == self::CUSTOMER_GROUP_DEFAULT_ID) {
                     $customer->setGroupId($groupId);
+                    $customer->setCustomAttribute('divalto_outstanding_status',1);
                     $this->_customerRepositoryInterface->save($customer);
                     $this->_log->debug('Observer UpdateCustomer group id : '.$groupId );
                 }
@@ -81,7 +83,7 @@ class UpdateCustomer implements ObserverInterface
             $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
         }
 
-        $this->_helperData->unSessionGroupName();
+        // $this->_helperData->unSessionGroupName();
         
     }
 

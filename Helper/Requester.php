@@ -19,11 +19,14 @@ class Requester extends AbstractHelper
 
     protected $_logger;
 
+     protected $_helperData;
+
     const ERP_API_BASE_URL = 'https://127.0.0.1/erp/api/';
 
     const ERP_API_BASE_URL_TEST = 'http://www.myerp.lan/';
 
     public function __construct(
+        \Divalto\Customer\Helper\Data $helperData,
         LoggerInterface $logger,
         Curl $curl,
         Context $context
@@ -51,6 +54,32 @@ class Requester extends AbstractHelper
         // $requestParamCountry = $requestParams['taxvat'];
         // $requestParamApe = $requestParams['ape'];
         // $requestParamApe = $requestParams['siret'];
+        
+        $postData = array(
+            'Numero_Dossier'=>'',
+            'Email_Client'=>$requestParams['email'],
+            'Raison_Sociale'=>$requestParams['siret'],
+            'Titre'=>'',
+            'Telephone'=>'',
+            'Numero_Siret'=>$requestParams['siret'],
+            'Code_APE'=>$requestParams['ape'],
+            'Numero_TVA'=>'',
+            'Adresse_Facturation'=>array(
+                'Rue'=>'',
+                'Ville'=>'', 
+                'Code_Postal'=>''
+            ),
+            'Adresse_Livraison'=>array(
+                'Rue'=>'',
+                'Ville'=>'',
+                'Code_Postal'=>''
+            ),
+            'Contact'=>array(
+                'Nom'=>$requestParams['lastname'], 
+                'Prenom'=>$requestParams['firstname'], 
+                'Email'=>$requestParams['email']
+            )
+        );
 
         $url = self::ERP_API_BASE_URL_TEST;
         
@@ -60,7 +89,7 @@ class Requester extends AbstractHelper
             return false;
         }
 
-        $this->curl->post($url, $requestParamEmail);
+        $this->curl->post($url, $postData);
         
         $data = json_decode($this->curl->getBody(), true);
 
@@ -72,7 +101,7 @@ class Requester extends AbstractHelper
             $customerErpId = $this->filterByValue($data, $requestParamEmail);
             $index = array_keys($customerErpId);
             if( is_array($customerErpId) && isset($index[0]) && isset($customerErpId[$index[0]]) ) {
-                return $customerErpId[$index[0]]['customer_erp_id'];
+                return $customerErpId[$index[0]]['code_Client'];
             }
         }
 

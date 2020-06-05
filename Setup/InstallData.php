@@ -90,14 +90,14 @@ class InstallData implements InstallDataInterface
                 'type'         => 'varchar',
                 'label'        => 'Divalto Outstanding Status',
                 'input'        => 'select',
-                'source' => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
-                'default' => 0,
+                'source'       => 'Divalto\Customer\Model\Config\Source\OutstandingStatus',
+                'global'       => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'default'      => 0,
                 'required'     => false,
                 'visible'      => true,
                 'user_defined' => true,
                 'position'     => 334,
-                'system'       => 0,
+                'system'       => 0
             ]
         );
         $customerAttribute_2 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);

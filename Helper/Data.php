@@ -20,6 +20,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\GroupFactory;
+use Magento\Customer\Model\Session,
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface;
@@ -38,20 +39,42 @@ class Data extends AbstractHelper
 
     const DIVALTO_INVOICE_DIR = 'pub/media/wysiwyg/divalto/invoice';
 	
+    /**
+     * @var
+     */
     protected $_driverFile;
 
+    /**
+     * @var
+     */
     protected $_groupFactory;
 
+    /**
+     * @var
+     */
+    protected $_customerSession;
+
+    /**
+     * @var
+     */
     protected $_request;
 
+    /**
+     * @var
+     */
     protected $_coreSession;
 
+    /**
+     * @var
+     */
     protected $_log;
+
 
 	public function __construct (
         File $driverFile,
         StoreManagerInterface $storeManager,
         GroupFactory $groupFactory,
+        Session $customerSession,
         RequestInterface $request,
         LoggerInterface $logger,
         SessionManagerInterface $coreSession,
@@ -61,6 +84,7 @@ class Data extends AbstractHelper
         $this->_driverFile = $driverFile;
         $this->_storeManager = $storeManager;
 		$this->_groupFactory = $groupFactory;
+        $this->_customerSession = $customerSession;
         $this->_request = $request;
         $this->_log = $logger;
         $this->_coreSession = $coreSession;
@@ -154,6 +178,26 @@ class Data extends AbstractHelper
         }
         $this->_log->debug('Helper Data GroupCreate :'.$logtxt);
 
+    }
+
+    public function getOutstanding()
+    {
+        $outstanding = $this->_customerSession->getCustomer()->getData('divalto_outstanding_status');
+        return $outstanding > 0  ? true : false;
+    }
+
+    public function getOutstandingValue()
+    {
+        return $this->_customerSession->getCustomer()->getData('divalto_outstanding_status');
+    }
+
+    // https://fr.wikipedia.org/wiki/Code_Insee
+
+    public function siretToVat($siret,$country='FR')
+    {
+        $siren = substr($siret,-9);
+        $key = 12+(3*($siren%97));
+        return $country.$key.$siren;
     }
 
     public function checkVat()

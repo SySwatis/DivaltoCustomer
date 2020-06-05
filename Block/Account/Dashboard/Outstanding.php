@@ -31,7 +31,6 @@ class Outstanding extends \Magento\Framework\View\Element\Template
 
     public function getOutstanding()
     {
-
-        return $this->_customerSession->getCustomer()->getData('divalto_outstanding_status')==1 ? true : false;
+        return $this->_helperData->getOutstanding();
     }
 }
