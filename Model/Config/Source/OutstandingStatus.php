@@ -1,6 +1,17 @@
 <?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ */
 
-// http://blog.chapagain.com.np/magento-2-create-customer-attribute-programmatically-also-update-delete-customer-attribute/
+/**
+ * @category   Divalto
+ * @package    Divalto_Customer
+ * @subpackage Model
+ */
 
 namespace Divalto\Customer\Model\Config\Source;
  

@@ -20,7 +20,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\GroupFactory;
-use Magento\Customer\Model\Session,
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface;
