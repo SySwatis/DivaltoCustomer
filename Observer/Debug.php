@@ -51,9 +51,13 @@ class Debug implements ObserverInterface
     {
 
         //$this->_helperData->createDirectoryGroupName('test0000001');
-        if( $this->getDebugConfig()==1 ) {
-            $this->_log->debug('Debug : Divalto Customer enabled');
-        }
+        // if( $this->getDebugConfig()==1 ) {
+        //     $this->_log->debug('Divalto Customer Debug Enabled');
+        //     $requestParams=array('email'=>'debug@debug.com','siret'=>'','ape'=>'','lastname'=>'','firstname'=>'');
+        //     $data = $this->_helperRequester->getDivaltoCustomerData($requestParams);
+        //     print_r($data);
+        //     exit;
+        // }
     }
 
     public function getDebugConfig()

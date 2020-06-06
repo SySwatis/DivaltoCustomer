@@ -71,21 +71,11 @@ class CreatePost implements ObserverInterface
             // Get all post parameters
 
             $requestParams = $this->_request->getParams();
-            $requestParamEmail = $requestParams['email'];
-            $requestParamCountry = $requestParams['taxvat'];
-
-            // Check country
-
-            if(!isset($requestParams['country'])) {
-                // Debug
-                $requestTaxVat = 'FR';
-            } else {
-                $requestTaxVat = $requestParams['country'];
-            }
 
             // Get group name (code id divalto "users") and send params to api (email, taxvat)
 
-            $groupName = $this->_helperRequester->getGroupName($requestParams);
+            $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($requestParams);
+            $groupName = $divaltoCustomerData['groupe_name'];
 
             // Add group if reponse and create groupe if no exist
 
@@ -95,11 +85,21 @@ class CreatePost implements ObserverInterface
                 $groupName = 'Not found';
             }
 
-            // Check vatNumber
+            // // Check vatNumber
+            //  $requestParamCountry = $requestParams['taxvat'];
 
-            if( isset($requestParamCountry) && isset($requestTaxVat) ){
-                $this->_helperData->checkVat($requestParamCountry, $requestTaxVat);
-            }
+            // // Check country
+
+            // if(!isset($requestParams['country'])) {
+            //     // Debug
+            //     $requestTaxVat = 'FR';
+            // } else {
+            //     $requestTaxVat = $requestParams['country'];
+            // }
+
+            // if( isset($requestParamCountry) && isset($requestTaxVat) ){
+            //     $this->_helperData->checkVat($requestParamCountry, $requestTaxVat);
+            // }
 
             // Add comment to log file
 

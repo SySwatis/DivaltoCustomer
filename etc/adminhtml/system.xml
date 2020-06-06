@@ -40,11 +40,6 @@
                 <field id="divalto_store_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Divalto Store Id</label>
                 </field>
-                <!-- <field id="stores" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Stores</label>
-                     <source_model>Divalto\Customer\Model\Config\Source\Stores</source_model>
-                     <comment>Choisir dans la liste la boutique </comment>
-                </field> -->
             </group>
         </section>
     </system>

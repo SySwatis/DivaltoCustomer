@@ -18,13 +18,17 @@ class Outstanding extends \Magento\Framework\View\Element\Template
 {
 	protected $_customerSession;
 
+    protected $_helperData;
+
     public function __construct(
+        \Divalto\Customer\Helper\Data $helperData,
         \Magento\Customer\Model\Session $customer,
         \Magento\Backend\Block\Template\Context $context,        
     
         array $data = []
     )
     {        
+        $this->_helperData = $helperData;
         $this->_customerSession = $customer;
         parent::__construct($context, $data);
     }

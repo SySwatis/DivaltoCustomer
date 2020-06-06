@@ -195,6 +195,7 @@ class Data extends AbstractHelper
 
     public function siretToVat($siret,$country='FR')
     {
+        if(!is_numeric($siret)) return;
         $siren = substr($siret,-9);
         $key = 12+(3*($siren%97));
         return $country.$key.$siren;
