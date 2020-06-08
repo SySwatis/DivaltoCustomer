@@ -6,6 +6,12 @@
                 <enabled>0</enabled>
                 <debug>0</debug>
                 <divalto_store_id>0</divalto_store_id>
+                <api_key>APIKEYDEMO123456789</api_key>
+                <divalto_store_id>1</divalto_store_id>
+                <divalto_tva_id_default>0</divalto_tva_id_default>
+                <api_url>https://magento.foodcentergroup.com/DivaltoMagento/</api_url>
+                <api_url_test>https://magento.foodcentergroup.com/DivaltoMagento-Test/</api_url_test>
+                <test_mode>1</test_mode>
             </general>
         </divalto_customer>
     </default>

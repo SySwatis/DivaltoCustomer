@@ -20,33 +20,47 @@ use Magento\Framework\Exception\LocalizedException;
 
 class CreatePost implements ObserverInterface
 {
-
+    /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
     protected $_request;
 
+    /**
+     * @var \Magento\Framework\Message\ManagerInterface
+     */
     protected $_messageManager;
 
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
     protected $_log;
 
+    /**
+     * @var \Divalto\Customer\Helper\Data
+     */
     protected $_helperData;
 
+    /**
+     * @var \Divalto\Customer\Helper\Requester
+     */
     protected $_helperRequester;
 
+    /**
+     * @var \Magento\Customer\Model\Vat
+     */
     protected $_vatCustomer;
 
-    /**
-     * @var \Magento\Framework\App\ResponseFactory
-     */
-    private $responseFactory;
 
     /**
-     * @var \Magento\Framework\UrlInterface
+     * Constructor
+     *
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \Magento\Framework\Message\ManagerInterface $messageManager
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Divalto\Customer\Helper\Data $helperData
+     * @param \Divalto\Customer\Helper\Requester $helperRequester
+     * @param \Magento\Customer\Model\Vat $vatCustomer
      */
-    private $url;
-
-    /*
-         * @param UrlFactory $urlFactory
-    */
-
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Message\ManagerInterface $messageManager,
@@ -65,22 +79,28 @@ class CreatePost implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-    
+
+        if(!$this->_helperData->isEnabled()) {
+            return;
+        }
+
         try {
 
             // Get all post parameters
 
             $requestParams = $this->_request->getParams();
 
-            // Get group name (code id divalto "users") and send params to api (email, taxvat)
+            // Get group name (code_Client Divalto "users")
 
             $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($requestParams);
-            $groupName = $divaltoCustomerData['groupe_name'];
+
+            $groupName = $divaltoCustomerData['group_name'];
 
             // Add group if reponse and create groupe if no exist
 
-            if($groupName) { 
+            if( isset($groupName) && $groupName ) { 
                 $this->_helperData->groupCreate($groupName);
+                $this->_helperData->setSessionDivaltoData($divaltoCustomerData); // For update account before register
             } else {
                 $groupName = 'Not found';
             }

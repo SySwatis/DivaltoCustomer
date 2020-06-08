@@ -29,7 +29,7 @@
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable module</label>
+                    <label>Enable Module</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="debug" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -37,9 +37,33 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>debug.log</comment>
                 </field>
-                <field id="divalto_store_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Divalto Store Id</label>
+                <field id="api_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Api Key</label>
+                    <validate>required-entry validate-data</validate>
                 </field>
+                <field id="divalto_store_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Divalto Store Id</label>
+                    <validate>required-entry validate-digits</validate>
+                </field>
+                <field id="divalto_tva_id_default" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Divalto VAT Id Default</label>
+                </field>
+                <field id="api_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Api Url</label>
+                    <validate>required-entry validate-url</validate>
+                    <comment>https://magento.foodcentergroup.com/DivaltoMagento/</comment>
+                </field>
+                <field id="api_url_test" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Api Url Test</label>
+                    <validate>validate-url</validate>
+                    <comment>https://magento.foodcentergroup.com/DivaltoMagento-Test/</comment>
+                </field>
+                <field id="test_mode" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Url Test</comment>
+                </field>
+                
             </group>
         </section>
     </system>

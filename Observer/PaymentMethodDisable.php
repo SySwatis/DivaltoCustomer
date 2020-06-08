@@ -30,8 +30,8 @@ class PaymentMethodDisable implements ObserverInterface {
 	protected $helperData;
 
 	/**
-	 * @param \Magento\Customer\Model\Session $customerSession [description]
-	 * @param \Divalto\Customer\Helper\Data $helperData [description]
+	 * @param \Magento\Customer\Model\Session $customerSession
+	 * @param \Divalto\Customer\Helper\Data $helperData
 	 */
 	public function __construct(
 		\Magento\Customer\Model\Session $customerSession,
@@ -48,6 +48,10 @@ class PaymentMethodDisable implements ObserverInterface {
 	 */
 	public function execute(Observer $observer) 
 	{
+		if(!$this->_helperData->isEnabled()) {
+            return;
+        }
+
 		$payment_method_code = $observer->getEvent()->getMethodInstance()->getCode();
 
 		// 0 = Pas de paiement autorisé

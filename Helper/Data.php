@@ -96,22 +96,22 @@ class Data extends AbstractHelper
         return self::DIVALTO_INVOICE_DIR . '/';
     }
 
-    public function setSessionGroupName($value)
+    public function setSessionDivaltoData($value)
     {
         $this->_coreSession->start();
-        $this->_coreSession->setGroupName($value);
+        $this->_coreSession->setSessionDivaltoData($value);
      }
 
-    public function getSessionGroupName()
+    public function getSessionDivaltoData()
     {
         $this->_coreSession->start();
-        return $this->_coreSession->getGroupName();
+        return $this->_coreSession->getSessionDivaltoData();
     }
 
-    public function unSessionGroupName()
+    public function unsSessionDivaltoData()
     {
         $this->_coreSession->start();
-        return $this->_coreSession->unsGroupName();
+        return $this->_coreSession->unsSessionDivaltoData();
     }
 
     /**
@@ -155,8 +155,6 @@ class Data extends AbstractHelper
     public function groupCreate($groupName) 
     {
 
-        $this->setSessionGroupName($groupName); // For update account before register
-
         try{
             if(!$this->getCustomerGroupIdByName($groupName)) { 
                 $group = $this->_groupFactory->create();
@@ -189,6 +187,11 @@ class Data extends AbstractHelper
     public function getOutstandingValue()
     {
         return $this->_customerSession->getCustomer()->getData('divalto_outstanding_status');
+    }
+
+    public function isEnabled()
+    {
+        return $this->_helperData->getGeneralConfig('enabled')===1 ? true : false;
     }
 
     // https://fr.wikipedia.org/wiki/Code_Insee

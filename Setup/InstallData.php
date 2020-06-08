@@ -147,7 +147,7 @@ class InstallData implements InstallDataInterface
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
         $customerAttribute_3->setData(
             'used_in_forms',
-            ['adminhtml_customer']
+            ['adminhtml_customer','customer_account_create']
         );
         $customerAttribute_3->save();
 
@@ -183,7 +183,7 @@ class InstallData implements InstallDataInterface
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
         $customerAttribute_4->setData(
             'used_in_forms',
-            ['adminhtml_customer']
+            ['adminhtml_customer','customer_account_create']
         );
         $customerAttribute_4->save();
     }
