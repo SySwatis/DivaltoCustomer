@@ -13,29 +13,37 @@
  * @subpackage Block
  */
 
-namespace Divalto\Customer\Block\Account\Dashboard;
-class Outstanding extends \Magento\Framework\View\Element\Template
+namespace Divalto\Customer\Block;
+class LegalForm extends \Magento\Framework\View\Element\Template
 {
-	protected $_customerSession;
 
+    /**
+     * Customer helperData
+     *
+     * @var  \Divalto\Customer\Helper\Data
+     */
     protected $_helperData;
 
     public function __construct(
         \Divalto\Customer\Helper\Data $helperData,
-        \Magento\Customer\Model\Session $customer,
         \Magento\Backend\Block\Template\Context $context,        
-    
         array $data = []
     )
     {        
-        $this->_helperData = $helperData;
-        $this->_customerSession = $customer;
         parent::__construct($context, $data);
+        $this->_helperData = $helperData;
     }
 
-    public function getOutstanding()
-    {
-        return $this->_helperData->getOutstanding();
+    public function getLegalFormHtmlOptions()
+    {  
+        $options = $this->_helperData->getGeneralConfig('legal_form');
+        $html = '';
+        foreach ($options as $key => $value) {
+            # code...
+            $html .= $key.$value;
+        }
+
+        return '<option>getLegalFormHtmlOptions'. $html .'</option>';
     }
     
 }

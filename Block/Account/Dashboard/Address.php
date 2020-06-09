@@ -29,7 +29,8 @@ class Address extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
-    public function getCustomerDelivery() {
+    public function getCustomerDelivery()
+    {
         $customer = $this->_customerSession->getCustomer();
         if ($customer) {
             $shippingAddress = $customer->getDefaultShippingAddress();
@@ -39,7 +40,9 @@ class Address extends \Magento\Framework\View\Element\Template
         }
         return null;
     }
-    public function getCustomerBilling() {
+
+    public function getCustomerBilling()
+    {
         $customer = $this->_customerSession->getCustomer();
         if ($customer) {
             $billingAddress = $customer->getDefaultBillingAddress();
@@ -49,7 +52,9 @@ class Address extends \Magento\Framework\View\Element\Template
         }
         return null;
     }
-    public function getApe() {
+
+    public function getApe()
+    {
         $customer = $this->_customerSession->getCustomer();
         if ($customer) {
             $ape = $customer->getApe();
@@ -59,7 +64,9 @@ class Address extends \Magento\Framework\View\Element\Template
         }
         return null;
     }
-    public function getSiret() {
+
+    public function getSiret()
+    {
         $customer = $this->_customerSession->getCustomer();
         if ($customer) {
             $siret = $customer->getSiret();
@@ -69,4 +76,5 @@ class Address extends \Magento\Framework\View\Element\Template
         }
         return null;
     }
+    
 }

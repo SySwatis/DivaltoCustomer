@@ -191,7 +191,7 @@ class Data extends AbstractHelper
 
     public function isEnabled()
     {
-        return $this->_helperData->getGeneralConfig('enabled')===1 ? true : false;
+        return $this->getGeneralConfig('enabled')===1 ? true : false;
     }
 
     // https://fr.wikipedia.org/wiki/Code_Insee

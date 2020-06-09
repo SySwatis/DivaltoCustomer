@@ -186,6 +186,42 @@ class InstallData implements InstallDataInterface
             ['adminhtml_customer','customer_account_create']
         );
         $customerAttribute_4->save();
+
+
+
+        // Customer Attribute 5
+
+        $attributeCode = 'legal-form';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttribute(
+            \Magento\Customer\Model\Customer::ENTITY,
+            $attributeCode,
+            [
+                'type'         => 'varchar',
+                'label'        => 'Legal Form',
+                'input'        => 'text',
+                'required'     => false,
+                'visible'      => true,
+                'user_defined' => true,
+                'position'     => 337,
+                'system'       => 0,
+            ]
+        );
+        $customerAttribute_5 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttributeToSet(
+            CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
+            CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
+            null,
+            $attributeCode);
+
+        // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
+        $customerAttribute_5->setData(
+            'used_in_forms',
+            ['adminhtml_customer','customer_account_create']
+        );
+        $customerAttribute_5->save();
     }
 }
 ?>

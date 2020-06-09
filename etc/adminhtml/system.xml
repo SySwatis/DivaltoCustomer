@@ -63,6 +63,13 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Url Test</comment>
                 </field>
+                <field id="legal_form" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Legal Form</label>
+                    <frontend_model>Divalto\Customer\Block\Adminhtml\Form\Field\LegalFormRanges</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <!-- <validate>required-entry</validate>
+                    <comment>Separate values with commas : "</comment> -->
+                </field>
                 
             </group>
         </section>

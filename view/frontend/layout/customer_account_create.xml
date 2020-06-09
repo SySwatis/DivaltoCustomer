@@ -1,13 +1,11 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"     xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
  	<body>
-     	<!-- <referenceBlock name="customer_form_register">
+     	<referenceBlock name="customer_form_register">
+     		<block class="Divalto\Customer\Block\LegalForm" name="divalto.customer.form.additional.info" as="divalto_customer_form_additional_info" template="Divalto_Customer::form/register/additional.phtml"/>
          	<arguments>
             	<argument name="show_address_fields" xsi:type="boolean">true</argument>
          	</arguments>
-     	</referenceBlock> -->
+     	</referenceBlock>
 
-     	<referenceContainer name="form.additional.info">
-            <block class="Magento\Framework\View\Element\Template" name="form_additional_info_customer" template="Divalto_Customer::additional.phtml"/>
-        </referenceContainer>
  	</body>
 </page>

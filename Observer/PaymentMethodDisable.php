@@ -20,12 +20,12 @@ use Magento\Framework\Event\ObserverInterface;
 
 class PaymentMethodDisable implements ObserverInterface {
 	/**
-	 * @var
+	 * @var \Magento\Customer\Model\Session
 	 */
 	protected $_customerSession;
 
-	/**
-	 * @var
+	/** 
+	 * @var \Divalto\Customer\Helper\Data
 	 */
 	protected $helperData;
 

@@ -1,4 +1,16 @@
 <legend class="legend"><span><?= $block->escapeHtmlAttr(__('Administrative Information')) ?></span></legend>
+<div class="field legal-form required">
+    <label class="label" for="siret">
+      <span><?= $block->escapeHtml(__('Legal Form')) ?></span>
+    </label>
+    <div class="control">
+       <select id="legal-form" name="legal-form" title="<?= $block->escapeHtmlAttr(__('Legal Form')) ?>" class="validate-select legal-form" data-validate="{required:true}">
+            <option value=""><?= $block->escapeHtml(__('Please select')) ?></option>
+            <?= $block->getLegalFormHtmlOptions() ?>
+            <option value="Other"><?= $block->escapeHtml(__('Other')) ?></option>
+        </select>
+    </div>
+</div>
 <div class="field siret required">
     <label class="label" for="siret">
       <span><?= $block->escapeHtml(__('Siret')) ?></span>
