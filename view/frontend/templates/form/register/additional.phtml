@@ -5,9 +5,7 @@
     </label>
     <div class="control">
        <select id="legal-form" name="legal-form" title="<?= $block->escapeHtmlAttr(__('Legal Form')) ?>" class="validate-select legal-form" data-validate="{required:true}">
-            <option value=""><?= $block->escapeHtml(__('Please select')) ?></option>
-            <?= $block->getLegalFormHtmlOptions() ?>
-            <option value="Other"><?= $block->escapeHtml(__('Other')) ?></option>
+            <option value=""><?= $block->escapeHtml(__('Please select')) ?></option><?= $block->getLegalFormHtmlOptions() ?><option value="Other"><?= $block->escapeHtml(__('Other')) ?></option>
         </select>
     </div>
 </div>
