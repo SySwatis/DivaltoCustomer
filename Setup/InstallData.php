@@ -191,7 +191,7 @@ class InstallData implements InstallDataInterface
 
         // Customer Attribute 5
 
-        $attributeCode = 'legal-form';
+        $attributeCode = 'legal_form';
         $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttribute(

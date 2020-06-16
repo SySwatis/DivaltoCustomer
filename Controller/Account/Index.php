@@ -13,37 +13,37 @@
  * @subpackage Controller
  */
 
-namespace Divalto\Customer\Controller\Index;
+namespace Divalto\Customer\Controller\Account;
 
 use Magento\Framework\App\RequestInterface;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
-	
-	/**
+    
+    /**
      * Customer session
      *
      * @var \Magento\Customer\Model\Session
      */
     protected $_customerSession;
 
-	/**
+    /**
      * Framework pageFactory
      *
      * @var \Magento\Framework\View\Result\PageFactory
      */
-	protected $_pageFactory;
+    protected $_pageFactory;
 
 
-	public function __construct(
-		\Magento\Framework\App\Action\Context $context,
-		\Magento\Customer\Model\Session $customerSession,
-		\Magento\Framework\View\Result\PageFactory $pageFactory
-	) {
-		parent::__construct($context);
-		$this->_customerSession = $customerSession;
-		$this->_pageFactory = $pageFactory;
-	}
+    public function __construct(
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Framework\View\Result\PageFactory $pageFactory
+    ) {
+        parent::__construct($context);
+        $this->_customerSession = $customerSession;
+        $this->_pageFactory = $pageFactory;
+    }
 
     /**
      * Check customer authentication for some actions
@@ -59,9 +59,9 @@ class Index extends \Magento\Framework\App\Action\Action
         return parent::dispatch($request);
     }
     
-	public function execute()
-	{
-		return $this->_pageFactory->create();
-	}
+    public function execute()
+    {
+        return $this->_pageFactory->create();
+    }
 
 }

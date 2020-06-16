@@ -21,7 +21,7 @@ use Magento\Customer\Model\Session;
 use Magento\Customer\Api\GroupRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Invoice extends \Magento\Framework\View\Element\Template
+class InvoiceList extends \Magento\Framework\View\Element\Template
 {
 
     /**
@@ -30,13 +30,6 @@ class Invoice extends \Magento\Framework\View\Element\Template
      * @var \Magento\Framework\Filesystem\Driver\File
      */
     protected $_driverFile;
-    
-    /**
-     * Customer session
-     *
-     * @var \Magento\Customer\Model\Session
-     */
-    protected $_customerSession;
 
     /**
      * Store storeManager
@@ -44,13 +37,6 @@ class Invoice extends \Magento\Framework\View\Element\Template
      * @var  \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
-
-    /**
-     * Customer groupRepository
-     *
-     * @var  \Magento\Customer\Api\GroupRepositoryInterface
-     */
-    protected $_groupRepository;
 
     /**
      * Customer helperData
@@ -62,15 +48,11 @@ class Invoice extends \Magento\Framework\View\Element\Template
     public function __construct(
         Context $context,
         File $driverFile,
-        Session $customerSession,
-        GroupRepositoryInterface $groupRepository,
         StoreManagerInterface $storeManager,
         \Divalto\Customer\Helper\Data $helperData
     ) {
         parent::__construct($context);
-        $this->_groupRepository = $groupRepository;
         $this->_storeManager = $storeManager;
-        $this->_customerSession = $customerSession;
         $this->_helperData = $helperData;
         $this->_driverFile = $driverFile;
     }
@@ -91,19 +73,9 @@ class Invoice extends \Magento\Framework\View\Element\Template
         return $this->_storeManager->getStore()->getBaseMediaDir();
     }
 
-    public function getGroupId() 
-    {
-        return $this->_customerSession->getCustomer()->getGroupId();
-    }
-
-    public function getGroupCode() 
-    {
-        return  $this->_groupRepository->getById($this->_customerSession->getCustomer()->getGroupId())->getCode();
-    }
-
     public function getInvoiceList() 
     {
-        $divaltoCustomerDir = $this->_helperData->getDivaltoInvoiceDir().$this->getGroupCode();
+        $divaltoCustomerDir = $this->_helperData->getDivaltoInvoiceDirSession();
         if( $this->_driverFile->isExists($divaltoCustomerDir) && $this->_driverFile->isReadable($divaltoCustomerDir) ) {
             return  $this->_driverFile->readDirectory($divaltoCustomerDir);
         }

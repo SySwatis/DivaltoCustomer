@@ -27,7 +27,4 @@
     <event name="payment_method_is_active">
         <observer name="customer_payment_disable" instance="Divalto\Customer\Observer\PaymentMethodDisable" />
     </event>
-    <event name="layout_render_before">
-		<observer name="divalto_customer_debug" instance="Divalto\Customer\Observer\Debug" />
-    </event>
 </config>

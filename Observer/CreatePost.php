@@ -96,7 +96,7 @@ class CreatePost implements ObserverInterface
 
             $groupName = $divaltoCustomerData['group_name'];
 
-            // Add group if reponse and create groupe if no exist
+            // Add group if response and create groupe if no exist
 
             if( isset($groupName) && $groupName ) { 
                 $this->_helperData->groupCreate($groupName);
@@ -104,22 +104,6 @@ class CreatePost implements ObserverInterface
             } else {
                 $groupName = 'Not found';
             }
-
-            // // Check vatNumber
-            //  $requestParamCountry = $requestParams['taxvat'];
-
-            // // Check country
-
-            // if(!isset($requestParams['country'])) {
-            //     // Debug
-            //     $requestTaxVat = 'FR';
-            // } else {
-            //     $requestTaxVat = $requestParams['country'];
-            // }
-
-            // if( isset($requestParamCountry) && isset($requestTaxVat) ){
-            //     $this->_helperData->checkVat($requestParamCountry, $requestTaxVat);
-            // }
 
             // Add comment to log file
 

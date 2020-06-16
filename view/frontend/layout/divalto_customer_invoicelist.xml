@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-<!--     <update handle="customer_account"/> -->
+    <update handle="customer_account"/>
     <referenceBlock name="page.main.title">
 		<action method="setPageTitle">
-			<argument translate="true" name="title" xsi:type="string">Debug</argument>
+			<argument translate="true" name="title" xsi:type="string">Invoices</argument>
 		</action>
     </referenceBlock>
     <referenceContainer name="content">
-        <block class="Divalto\Customer\Block\Debug" name="divalto_customer_debug" template="Divalto_Customer::index.phtml" cacheable="false" />
+        <block class="Divalto\Customer\Block\InvoiceList" name="divalto.customer.invoicelist" template="Divalto_Customer::invoice-list.phtml" cacheable="false" />
     </referenceContainer>
 </page>

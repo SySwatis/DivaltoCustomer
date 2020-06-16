@@ -55,72 +55,91 @@ class Requester extends AbstractHelper
 
         // Config Api Url
         
-        $url = $this->_helperData->getGeneralConfig('test_mode') === 1 ? $this->_helperData->getGeneralConfig('api_url_test') : $this->_helperData->getGeneralConfig('api_url');
+        $url = $this->_helperData->getGeneralConfig('test_mode') == 1 ? $this->_helperData->getGeneralConfig('api_url_test') : $this->_helperData->getGeneralConfig('api_url');
 
         if(!$apiKey) {
             return false;
         }
 
         if(isset($requestParams)) {
-        
+
+            
+            // Address (Billing, Delivery)
+            
+            $address = array();
+
+            if( isset($requestParams['street_1']) ) {
+                $street3 = '';
+                if( isset($requestParams['street_2']) ) {
+                    $street2 = ', '.$requestParams['street_2'];
+                }
+                $street3 = '';
+                if( isset($requestParams['street_3']) ) {
+                    $street3 = ', '.$requestParams['street_3'];
+                }
+                $address = array (
+                    'Rue'=>$requestParams['street_1'].$stree2.$street3,
+                    'Ville'=>$requestParams['city'], 
+                    'Code_Postal'=>$requestParams['zip'],
+                    'Pays'=>$requestParams['country']
+                );
+            }
+
             $postData = array(
                 'APIKey'=>$apiKey,
                 'Numero_Dossier'=>$divaltoStoreId,
                 'Email_Client'=>$requestParams['email'],
-                'Raison_Sociale'=>$requestParams['siret'],
-                'Titre'=>'',
-                'Telephone'=>'',
-                'Numero_Siret'=>$requestParams['siret'],
-                'Code_APE'=>$requestParams['ape'],
-                'Numero_TVA'=>$divaltoTvaIdDefault,
-                'Adresse_Facturation'=>array(
-                    'Rue'=>'',
-                    'Ville'=>'', 
-                    'Code_Postal'=>''
-                ),
-                'Adresse_Livraison'=>array(
-                    'Rue'=>'',
-                    'Ville'=>'',
-                    'Code_Postal'=>''
-                ),
-                'Contact'=>array(
-                    'Nom'=>$requestParams['lastname'], 
-                    'Prenom'=>$requestParams['firstname'], 
-                    'Email'=>$requestParams['email']
-                )
+                // 'Raison_Sociale'=>$requestParams['siret'],
+                // 'Titre'=>$requestParams['legal_form'],
+                // 'Telephone'=>$requestParams['telephone'],
+                // 'Numero_Siret'=>$requestParams['siret'],
+                // 'Code_APE'=>$requestParams['ape'],
+                // 'Numero_TVA'=>$divaltoTvaIdDefault,
+                // 'Adresse_Facturation'=>$address,
+                // 'Adresse_Livraison'=>$address,
+                // 'Contact'=>array(
+                //     'Nom'=>$requestParams['lastname'], 
+                //     'Prenom'=>$requestParams['firstname'],
+                //     'Telephone'=>$requestParams['telephone'],
+                //     'Email'=>$requestParams['email'],
+                //     'Fonction'=>''
+                // )
             );
+
         } else {
+
             return false;
         }
 
         $this->_curl->post($url, $postData);
 
-        if ($this->_curl->getStatus() !== 200) {
+        $statusCode = $this->_curl->getStatus();
 
-            $statusCode = $this->_curl->getStatus();
-            switch ($statusCode) {
-                case 400 : 
-                    $logText = 'Incorrect Data'; break;
-                case 401 : 
-                    $logText = 'Unauthenticated User'; break;
-                case 404 : 
-                    $logText = 'Page Not Found'; break;
-                default:
-                    $logText = 'Unknown http status code'; break;
-            }
-            $this->_logger->debug('ERP query fail '.$logText.' : '.htmlentities($statusCode));
-
-            return false;
-        }
-        
         $data = json_decode($this->_curl->getBody(), true);
 
-        if (!is_array($data)) {
-            // throw new LocalizedException(__('ERP resutl fail!'));
-            $this->_logger->debug('ERP resutl fail !');
-            return false;
+        if ($statusCode !== 200) {
 
-        } else {
+            $logText = '';
+
+            // switch ($statusCode) {
+            //     case 400 : 
+            //         $logText = 'Incorrect Data'; break;
+            //     case 401 : 
+            //         $logText = 'Unauthenticated User'; break;
+            //     case 404 : 
+            //         $logText = 'Page Not Found'; break;
+            //     default:
+            //         $logText = 'Unknown http status code'; break;
+            // }
+            
+            if ( is_array($data) && isset($data['message']) ) {
+                $logText = $data['message'].' '.$statusCode;
+            }
+            $this->_logger->debug('Observer Requester, ERP query fail : '.$logText);
+            return false;
+        }
+
+        if ( is_array($data) && isset($data['liste_contact'])) {
             // Filter result by post email
             $divaltoCustomerData = $this->filterByValue($data['liste_contact'], $requestParams['email']);
             $index = array_keys($divaltoCustomerData);
@@ -130,6 +149,11 @@ class Requester extends AbstractHelper
                     'outstanding_status' => $divaltoCustomerData[$index[0]]['autorisation_Paiement']
                 );
             }
+
+        } else {
+             // throw new LocalizedException(__('ERP resutl fail!'));
+            $this->_logger->debug('ERP resutl fail !');
+            return false;
         }
 
         return false;

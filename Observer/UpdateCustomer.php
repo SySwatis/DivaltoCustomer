@@ -85,7 +85,7 @@ class UpdateCustomer implements ObserverInterface
 
             // Add Warning message
 
-            $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
+            // $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
         }
 
         // $this->_helperData->unSessionGroupName();

@@ -19,7 +19,7 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
-        <route frontName="factures" id="divalto_customer">
+        <route frontName="divalto" id="divalto">
             <module name="Divalto_Customer"/>
         </route>
     </router>

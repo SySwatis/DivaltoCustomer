@@ -21,9 +21,9 @@ use Magento\Framework\Filesystem\Driver\File;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\GroupFactory;
 use Magento\Customer\Model\Session;
-use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Customer\Api\GroupRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -37,7 +37,7 @@ class Data extends AbstractHelper
 
     const XML_PATH_DIVALTO_CUSTOMER = 'divalto_customer/';
 
-    const DIVALTO_INVOICE_DIR = 'pub/media/wysiwyg/divalto/invoice';
+    const DIVALTO_DIR = 'pub/media/wysiwyg/divalto/';
 	
     /**
      * @var
@@ -57,17 +57,17 @@ class Data extends AbstractHelper
     /**
      * @var
      */
-    protected $_request;
+    protected $_log;
+
+    /**
+     * @var  \Magento\Customer\Api\GroupRepositoryInterface
+     */
+    protected $_groupRepository;
 
     /**
      * @var
      */
     protected $_coreSession;
-
-    /**
-     * @var
-     */
-    protected $_log;
 
 
 	public function __construct (
@@ -75,8 +75,8 @@ class Data extends AbstractHelper
         StoreManagerInterface $storeManager,
         GroupFactory $groupFactory,
         Session $customerSession,
-        RequestInterface $request,
         LoggerInterface $logger,
+        GroupRepositoryInterface $groupRepository,
         SessionManagerInterface $coreSession,
 		Context $context
 	)
@@ -85,15 +85,31 @@ class Data extends AbstractHelper
         $this->_storeManager = $storeManager;
 		$this->_groupFactory = $groupFactory;
         $this->_customerSession = $customerSession;
-        $this->_request = $request;
         $this->_log = $logger;
+        $this->_groupRepository = $groupRepository;
         $this->_coreSession = $coreSession;
 		parent::__construct($context);
     }
 
-    public function getDivaltoInvoiceDir() 
+
+    public function getGroupId() 
     {
-        return self::DIVALTO_INVOICE_DIR . '/';
+        return $this->_customerSession->getCustomer()->getGroupId();
+    }
+
+    public function getGroupCode() 
+    {
+        return  $this->_groupRepository->getById($this->_customerSession->getCustomer()->getGroupId())->getCode();
+    }
+
+    public function getDivaltoInvoiceDir($groupName) 
+    {
+        return self::DIVALTO_DIR . $groupName . '/invoice';
+    }
+
+    public function getDivaltoInvoiceDirSession() 
+    {
+        return $this->getDivaltoInvoiceDir($this->getGroupeCode());
     }
 
     public function setSessionDivaltoData($value)
@@ -146,7 +162,7 @@ class Data extends AbstractHelper
 
     public function createDirectoryGroupName($groupName) 
     {
-        $divaltoCustomerDir = $this->getDivaltoInvoiceDir().$groupName;
+        $divaltoCustomerDir = $this->getDivaltoInvoiceDir($groupName);
         if( !$this->_driverFile->isExists($divaltoCustomerDir) ) {
             $this->_driverFile->createDirectory($divaltoCustomerDir);
         }
@@ -166,16 +182,6 @@ class Data extends AbstractHelper
         } catch (\Exception $e) {
             $this->_log->critical($e->getGroupName());
         }
-
-        // Add comment to log file
-        
-        $requestParams = $this->_request->getParams();
-        $logtxt= '';
-        foreach ($requestParams as $param => $value) {
-            $logtxt .=  ' '.$param.' '.$value;
-        }
-        $this->_log->debug('Helper Data GroupCreate :'.$logtxt);
-
     }
 
     public function getOutstanding()
@@ -191,12 +197,12 @@ class Data extends AbstractHelper
 
     public function isEnabled()
     {
-        return $this->getGeneralConfig('enabled')===1 ? true : false;
+        return $this->getGeneralConfig('enabled')==1 ? true : false;
     }
 
     // https://fr.wikipedia.org/wiki/Code_Insee
 
-    public function siretToVat($siret,$country='FR')
+    public function siretToVatNumber($siret,$country='FR')
     {
         if(!is_numeric($siret)) return;
         $siren = substr($siret,-9);
@@ -204,8 +210,9 @@ class Data extends AbstractHelper
         return $country.$key.$siren;
     }
 
-    public function checkVat()
+    public function checkVat($siret,$country)
     {
+        $vatNumber = $this->siretToVatNumber($siret,$country);
         return;
     }
     
