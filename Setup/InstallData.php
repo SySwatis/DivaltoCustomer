@@ -222,6 +222,43 @@ class InstallData implements InstallDataInterface
             ['adminhtml_customer','customer_account_create']
         );
         $customerAttribute_5->save();
+
+
+
+        // Customer Attribute 6
+
+        $attributeCode = 'company_name';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttribute(
+            \Magento\Customer\Model\Customer::ENTITY,
+            $attributeCode,
+            [
+                'type'         => 'varchar',
+                'label'        => 'Company Name',
+                'input'        => 'text',
+                'required'     => false,
+                'visible'      => true,
+                'user_defined' => true,
+                'position'     => 338,
+                'system'       => 0,
+            ]
+        );
+        $customerAttribute_6 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttributeToSet(
+            CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
+            CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
+            null,
+            $attributeCode);
+
+        // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
+        $customerAttribute_6->setData(
+            'used_in_forms',
+            ['adminhtml_customer','customer_account_create']
+        );
+        $customerAttribute_6->save();
+
     }
 }
 ?>

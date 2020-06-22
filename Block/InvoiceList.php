@@ -73,6 +73,11 @@ class InvoiceList extends \Magento\Framework\View\Element\Template
         return $this->_storeManager->getStore()->getBaseMediaDir();
     }
 
+    public function getGroupCode()
+    {
+        return $this->_helperData->getGroupCode();
+    }
+
     public function getInvoiceList() 
     {
         $divaltoCustomerDir = $this->_helperData->getDivaltoInvoiceDirSession();

@@ -9,6 +9,14 @@
         </select>
     </div>
 </div>
+<div class="field company-name required">
+    <label class="label" for="company-name">
+      <span><?= $block->escapeHtml(__('Company Name')) ?></span>
+    </label>
+    <div class="control">
+       <input type="text" name="company-name" id="company_name" value="" title="<?= $block->escapeHtmlAttr(__('Company Name')) ?>" class="input-text" data-validate="{required:true, company-name:true}">
+    </div>
+</div>
 <div class="field siret required">
     <label class="label" for="siret">
       <span><?= $block->escapeHtml(__('Siret')) ?></span>
@@ -17,6 +25,7 @@
        <input type="text" name="siret" id="siret" value="" title="<?= $block->escapeHtmlAttr(__('Siret')) ?>" class="input-text" data-validate="{required:true, siret:true}">
     </div>
 </div>
+
 <div class="field ape required">
     <label class="label" for="ape">
       <span><?= $block->escapeHtml(__('Code Ape')) ?></span>

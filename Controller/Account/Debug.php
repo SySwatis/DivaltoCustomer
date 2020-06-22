@@ -34,17 +34,23 @@ class Debug extends \Magento\Framework\App\Action\Action
      */
 	protected $_pageFactory;
 
+    protected $_helperRequester;
+
+    protected $_helperData;
+
 
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
 		\Magento\Customer\Model\Session $customerSession,
 		\Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Divalto\Customer\Helper\Requester $helperRequester
+        \Divalto\Customer\Helper\Requester $helperRequester,
+        \Divalto\Customer\Helper\data $helperData
 	) {
 		parent::__construct($context);
 		$this->_customerSession = $customerSession;
 		$this->_pageFactory = $pageFactory;
         $this->_helperRequester = $helperRequester;
+        $this->_helperData = $helperData;
 	}
 
     /**
@@ -64,19 +70,29 @@ class Debug extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         
-        //if( $this->getDebugConfig()==1 ) {
+        if( $this->_helperData->getDebugConfig()==1 ) {
             // $this->_log->debug('Divalto Customer Observer Debug Enabled');
             // $this->_helperData->createDirectoryGroupName('test0000001');
-            $requestParams=array('email'=>'stephanejimenez2@free.fr','siret'=>'','ape'=>'','lastname'=>'','firstname'=>'','legal_form'=>'','telephone'=>'');
+            $requestParams=array(
+                'email'=>'contact@pachadistribution.com',
+                // 'siret'=>'','ape'=>'',
+                // 'lastname'=>'','firstname'=>'',
+                // 'legal_form'=>'','telephone'=>''
+            );
+
+            
             $data = $this->_helperRequester->getDivaltoCustomerData($requestParams);
+            echo '<pre>';
             print_r($data);
+            echo '</pre>'.'<br>';
             // $this->_helperData->setSessionDivaltoData($data);
             // $dataGet = $this->_helperData->getSessionDivaltoData();
             // echo isset($dataGet['group_name']) ? $dataGet['group_name'] : 'no group name';
             // exit;
-        //}
+             die('debug');
+        }
 
-        die('debug');
+       
     }
 
 }

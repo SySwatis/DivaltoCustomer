@@ -63,32 +63,37 @@ class UpdateCustomer implements ObserverInterface
 
         // Get session Divalto Data (response)
 
-        $divaltoData = $this->_helperData->getSessionDivaltoData();
-        $groupName = $divaltoData['group_name'];
-        $outStandingStatus = $divaltoData['outstanding_status'];
+        $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
+        $outStandingStatus = $sessionDivaltoData['outstanding_status'];
 
-        if( isset($groupName) && $groupName ){
+        if( isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
 
+            $groupName = $sessionDivaltoData['group_name'];
             $groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
 
             $customer = $observer->getEvent()->getCustomer();
-    
-            if($customer && $groupId){
-                if ($customer->getGroupId() == self::CUSTOMER_GROUP_DEFAULT_ID) {
-                    $customer->setGroupId($groupId);
-                    $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
-                    $this->_customerRepositoryInterface->save($customer);
-                    $this->_log->debug('Observer UpdateCustomer Group Id : '.$groupId);
+            if($customer){
+
+                if($groupId) {
+                    if ($customer->getGroupId() == self::CUSTOMER_GROUP_DEFAULT_ID) {
+                        $customer->setGroupId($groupId);
+                        $this->_log->debug('Observer UpdateCustomer Group Id : '.$groupId);
+                    }
                 }
+
+                $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
+                $customer->setCustomAttribute('divalto_account_id',$groupName);
+                $this->_customerRepositoryInterface->save($customer);
+
             }
+
         } else {
 
             // Add Warning message
-
-            // $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
+            $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
         }
 
-        // $this->_helperData->unSessionGroupName();
+        $this->_helperData->unsSessionGroupName();
         
     }
 

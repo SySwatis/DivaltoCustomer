@@ -61,55 +61,19 @@ class Requester extends AbstractHelper
             return false;
         }
 
-        if(isset($requestParams)) {
-
-            
-            // Address (Billing, Delivery)
-            
-            $address = array();
-
-            if( isset($requestParams['street_1']) ) {
-                $street3 = '';
-                if( isset($requestParams['street_2']) ) {
-                    $street2 = ', '.$requestParams['street_2'];
-                }
-                $street3 = '';
-                if( isset($requestParams['street_3']) ) {
-                    $street3 = ', '.$requestParams['street_3'];
-                }
-                $address = array (
-                    'Rue'=>$requestParams['street_1'].$stree2.$street3,
-                    'Ville'=>$requestParams['city'], 
-                    'Code_Postal'=>$requestParams['zip'],
-                    'Pays'=>$requestParams['country']
-                );
-            }
-
+        if(isset($requestParams)&&isset($requestParams['email'])) {
             $postData = array(
-                'APIKey'=>$apiKey,
-                'Numero_Dossier'=>$divaltoStoreId,
-                'Email_Client'=>$requestParams['email'],
-                // 'Raison_Sociale'=>$requestParams['siret'],
-                // 'Titre'=>$requestParams['legal_form'],
-                // 'Telephone'=>$requestParams['telephone'],
-                // 'Numero_Siret'=>$requestParams['siret'],
-                // 'Code_APE'=>$requestParams['ape'],
-                // 'Numero_TVA'=>$divaltoTvaIdDefault,
-                // 'Adresse_Facturation'=>$address,
-                // 'Adresse_Livraison'=>$address,
-                // 'Contact'=>array(
-                //     'Nom'=>$requestParams['lastname'], 
-                //     'Prenom'=>$requestParams['firstname'],
-                //     'Telephone'=>$requestParams['telephone'],
-                //     'Email'=>$requestParams['email'],
-                //     'Fonction'=>''
-                // )
+                // 'Numero_Dossier'=>$divaltoStoreId,
+                'Email_Client'=>$requestParams['email']
             );
-
         } else {
-
             return false;
         }
+
+        // Token HTTheader
+        $headers = ["APIKey" => $apiKey];
+
+        $this->_curl->setHeaders($headers);
 
         $this->_curl->post($url, $postData);
 
@@ -152,7 +116,7 @@ class Requester extends AbstractHelper
 
         } else {
              // throw new LocalizedException(__('ERP resutl fail!'));
-            $this->_logger->debug('ERP resutl fail !');
+            $this->_logger->debug('ERP result fail !');
             return false;
         }
 

@@ -94,15 +94,16 @@ class CreatePost implements ObserverInterface
 
             $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($requestParams);
 
-            $groupName = $divaltoCustomerData['group_name'];
+            // Default (log)
+
+            $groupName = 'Not found';
 
             // Add group if response and create groupe if no exist
 
-            if( isset($groupName) && $groupName ) { 
+            if( isset($divaltoCustomerData['group_name']) && $divaltoCustomerData['group_name'] ) {
+                $groupName = $divaltoCustomerData['group_name'];
                 $this->_helperData->groupCreate($groupName);
                 $this->_helperData->setSessionDivaltoData($divaltoCustomerData); // For update account before register
-            } else {
-                $groupName = 'Not found';
             }
 
             // Add comment to log file

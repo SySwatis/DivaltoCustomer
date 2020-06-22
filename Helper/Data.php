@@ -109,7 +109,7 @@ class Data extends AbstractHelper
 
     public function getDivaltoInvoiceDirSession() 
     {
-        return $this->getDivaltoInvoiceDir($this->getGroupeCode());
+        return $this->getDivaltoInvoiceDir($this->getGroupCode());
     }
 
     public function setSessionDivaltoData($value)
@@ -137,9 +137,7 @@ class Data extends AbstractHelper
      */
     public function getConfigValue($field, $storeId = null)
     {
-        return $this->scopeConfig->getValue(
-            $field, ScopeInterface::SCOPE_STORE, $storeId
-        );
+        return $this->scopeConfig->getValue($field, ScopeInterface::SCOPE_STORE, $storeId);
     }
 
     /**
@@ -160,6 +158,14 @@ class Data extends AbstractHelper
        ->getId();
     }
 
+    public function getCustomerGroupIdByTaxvat($taxvat)
+    {
+       return $this->_groupFactory->create()->getCollection()
+       ->addFieldToFilter("taxvat", array("eq" => $taxvat))
+       ->getFirstItem()
+       ->getId();
+    }
+
     public function createDirectoryGroupName($groupName) 
     {
         $divaltoCustomerDir = $this->getDivaltoInvoiceDir($groupName);
@@ -170,15 +176,14 @@ class Data extends AbstractHelper
     
     public function groupCreate($groupName) 
     {
-
         try{
             if(!$this->getCustomerGroupIdByName($groupName)) { 
                 $group = $this->_groupFactory->create();
                 $group->setCode($groupName)
                 ->setTaxClassId(self::TAX_CLASS_DEFAULT_ID) // Core installers (Db) : 3 
                 ->save();
-                $this->createDirectoryGroupName($groupName); // Create path users to invoice dir
             }
+            $this->createDirectoryGroupName($groupName); // Create path users to invoice dir
         } catch (\Exception $e) {
             $this->_log->critical($e->getGroupName());
         }
@@ -198,6 +203,11 @@ class Data extends AbstractHelper
     public function isEnabled()
     {
         return $this->getGeneralConfig('enabled')==1 ? true : false;
+    }
+
+    public function getDebugConfig()
+    {
+        return $this->getGeneralConfig('debug')==1 ? true : false;
     }
 
     // https://fr.wikipedia.org/wiki/Code_Insee
