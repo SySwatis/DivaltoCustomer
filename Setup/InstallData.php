@@ -259,6 +259,114 @@ class InstallData implements InstallDataInterface
         );
         $customerAttribute_6->save();
 
+        
+
+        // Customer Attribute 7
+
+        $attributeCode = 'divalto_response';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttribute(
+            \Magento\Customer\Model\Customer::ENTITY,
+            $attributeCode,
+            [
+                'type'         => 'varchar',
+                'label'        => 'Divalto Response',
+                'input'        => 'text',
+                'required'     => false,
+                'visible'      => true,
+                'user_defined' => true,
+                'position'     => 338,
+                'system'       => 0,
+            ]
+        );
+        $customerAttribute_7 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttributeToSet(
+            CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
+            CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
+            null,
+            $attributeCode);
+
+        // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
+        $customerAttribute_7->setData(
+            'used_in_forms',
+            ['adminhtml_customer']
+        );
+        $customerAttribute_7->save();
+
+
+
+        // Customer Attribute 8
+
+        $attributeCode = 'divalto_extrafield_1';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttribute(
+            \Magento\Customer\Model\Customer::ENTITY,
+            $attributeCode,
+            [
+                'type'         => 'varchar',
+                'label'        => 'Divalto Extra Field 1',
+                'input'        => 'text',
+                'required'     => false,
+                'visible'      => true,
+                'user_defined' => true,
+                'position'     => 338,
+                'system'       => 0,
+            ]
+        );
+        $customerAttribute_9 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttributeToSet(
+            CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
+            CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
+            null,
+            $attributeCode);
+
+        // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
+        $customerAttribute_9->setData(
+            'used_in_forms',
+            ['adminhtml_customer']
+        );
+        $customerAttribute_9->save();
+
+
+
+        // Customer Attribute 9
+
+        $attributeCode = 'divalto_extrafield_2';
+        $eavSetup->removeAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttribute(
+            \Magento\Customer\Model\Customer::ENTITY,
+            $attributeCode,
+            [
+                'type'         => 'varchar',
+                'label'        => 'Divalto Extra Field 2',
+                'input'        => 'text',
+                'required'     => false,
+                'visible'      => true,
+                'user_defined' => true,
+                'position'     => 338,
+                'system'       => 0,
+            ]
+        );
+        $customerAttribute_8 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
+
+        $eavSetup->addAttributeToSet(
+            CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
+            CustomerMetadataInterface::ATTRIBUTE_SET_ID_CUSTOMER,
+            null,
+            $attributeCode);
+
+        // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
+        $customerAttribute_8->setData(
+            'used_in_forms',
+            ['adminhtml_customer']
+        );
+        $customerAttribute_8->save();
+
     }
 }
 ?>

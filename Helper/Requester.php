@@ -15,6 +15,9 @@ use Psr\Log\LoggerInterface;
 
 class Requester extends AbstractHelper
 {
+    
+    const CUSTOMER_GROUP_DEFAULT_NAME = 'General';
+
     protected $_curl;
 
     protected $_logger;
@@ -33,85 +36,143 @@ class Requester extends AbstractHelper
         parent::__construct($context);
     }
 
-    public function filterByValue ($array, $value)
-    {
-        $like = $value;
-        return $result = array_filter($array, function ($item) use ($like) {
-            if (stripos($item['email_Contact'], $like) !== false) {
-                return true;
-            }
-            return false;
-        });
-    }
+    // public function filterByValue ($array, $value)
+    // {
+    //     $like = $value;
+    //     return $result = array_filter($array, function ($item) use ($like) {
+    //         if (stripos($item['email_Contact'], $like) !== false) {
+    //             return true;
+    //         }
+    //         return false;
+    //     });
+    // }
 
-    public function getDivaltoCustomerData($requestParams)
+    public function getDivaltoCustomerData($postData, $action='ping')
     {
-        
-        // Config
 
         $apiKey = $this->_helperData->getGeneralConfig('api_key');
-        $divaltoStoreId = $this->_helperData->getGeneralConfig('divalto_store_id');
-        $divaltoTvaIdDefault = $this->_helperData->getGeneralConfig('divalto_tva_id_default');
 
         // Config Api Url
         
         $url = $this->_helperData->getGeneralConfig('test_mode') == 1 ? $this->_helperData->getGeneralConfig('api_url_test') : $this->_helperData->getGeneralConfig('api_url');
 
+        // Check Operator action
+        // ... ( / or ? )
+        // 
+
+        // Add Action to url
+
+        $url .= $action;
+
+
+        // Check Api Key
+
         if(!$apiKey) {
             return false;
         }
 
-        if(isset($requestParams)&&isset($requestParams['email'])) {
-            $postData = array(
-                // 'Numero_Dossier'=>$divaltoStoreId,
-                'Email_Client'=>$requestParams['email']
-            );
-        } else {
+        // Check Data and Data key Email
+
+        if( !isset($postData) && !isset($postData['Contact']['Email']) && $action === 'CreerClient' ) {
             return false;
         }
 
-        // Token HTTheader
-        $headers = ["APIKey" => $apiKey];
+        if( !isset($postData) && !isset($postData['Client_Particulier']['Contact']['Email']) && $action === 'CreerCommande' ) {
+            return false;
+        }
+
+        // Content type Json
+        
+        $dataJson = json_encode($postData); 
+        $contentLength = strlen($dataJson);
+
+        // Header
+
+        $headers = ["APIKey" => $apiKey,"Content-Type"=>"application/json","Content-Length"=> $contentLength,"Accept-Encoding"=>"gzip,deflate"];
+
+        // Curl Options
+
+        $options = [
+            CURLOPT_CUSTOMREQUEST=>"POST",
+            CURLOPT_POSTFIELDS=>$dataJson,
+            CURLOPT_RETURNTRANSFER=>true
+        ];
 
         $this->_curl->setHeaders($headers);
-
-        $this->_curl->post($url, $postData);
+        $this->_curl->setOptions($options);
+        $this->_curl->post($url, $dataJson);
 
         $statusCode = $this->_curl->getStatus();
-
         $data = json_decode($this->_curl->getBody(), true);
 
+        $responseText = 'Status: '.$statusCode;
+
         if ($statusCode !== 200) {
-
-            $logText = '';
-
-            // switch ($statusCode) {
-            //     case 400 : 
-            //         $logText = 'Incorrect Data'; break;
-            //     case 401 : 
-            //         $logText = 'Unauthenticated User'; break;
-            //     case 404 : 
-            //         $logText = 'Page Not Found'; break;
-            //     default:
-            //         $logText = 'Unknown http status code'; break;
-            // }
-            
-            if ( is_array($data) && isset($data['message']) ) {
-                $logText = $data['message'].' '.$statusCode;
+            $responseText .= ' => ';
+            switch ($statusCode) {
+                case 400 : 
+                    $responseText .= 'Incorrect Data'; break;
+                case 401 : 
+                    $responseText .= 'Unauthenticated User'; break;
+                case 404 : 
+                    $responseText .= 'Page Not Found'; break;
+                default:
+                    $responseText .= 'Unknown http status code'; break;
             }
-            $this->_logger->debug('Observer Requester, ERP query fail : '.$logText);
-            return false;
+            
+            $this->_logger->debug('Observer Requester, ERP query fail : '.$responseText);
         }
 
-        if ( is_array($data) && isset($data['liste_contact'])) {
-            // Filter result by post email
-            $divaltoCustomerData = $this->filterByValue($data['liste_contact'], $requestParams['email']);
-            $index = array_keys($divaltoCustomerData);
-            if( is_array($divaltoCustomerData) && isset($index[0]) && isset($divaltoCustomerData[$index[0]]) ) {
-                return array(
-                    'group_name'         => $divaltoCustomerData[$index[0]]['code_Client'],
-                    'outstanding_status' => $divaltoCustomerData[$index[0]]['autorisation_Paiement']
-                );
+        if ( is_array($data) ) {
+
+            // CreerClient
+
+            if($action == 'CreerClient') {
+
+                if( isset($data['liste_contact']) ) {
+                    return array(
+                        'group_name'         => $data['liste_contact'][0]['code_Client'],
+                        'outstanding_status' => 1,  // CB only Divalto/Customer/Model/Config/Source/OutstandingStatus.php
+                        'divalto_response' => $responseText,
+                        'divalto_extrafield_1'=>'',
+                        'divalto_extrafield_2'=>''
+                    );
+                }
+
+                if( isset($data['liste_contact']) ) {
+                    return array(
+                        'group_name'         => $data['liste_contact'][0]['code_Client'],
+                        'outstanding_status' => 1,  // CB only Divalto/Customer/Model/Config/Source/OutstandingStatus.php
+                        'divalto_response' => $responseText,
+                        'divalto_extrafield_1'=>'',
+                        'divalto_extrafield_2'=>''
+                    );
+                }
+
+                if( isset($data['message']) ) {
+                    return array(
+                        'group_name'         => self::CUSTOMER_GROUP_DEFAULT_NAME,
+                        'outstanding_status' => 0,  // CB only Divalto/Customer/Model/Config/Source/OutstandingStatus.php
+                        'divalto_response' => $responseText.' | '.$data['message'],
+                        'divalto_extrafield_1'=>'',
+                        'divalto_extrafield_2'=>''
+                    );
+                }
+
+            }
+
+            // CreerCommande
+
+            if($action == 'CreerCommande') {
+
+                if( isset($data['numero_Commande_Divalto']) ) {
+                     return array('comment'=>$data['numero_Commande_Divalto']);
+                }
+
+                if( isset($data['message']) ) {
+                     return array('comment'=>$responseText.' | '.$data['message']);
+                }
+
             }
 
         } else {

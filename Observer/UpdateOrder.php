@@ -38,7 +38,14 @@ class UpdateOrder implements ObserverInterface
 
 	public function execute(\Magento\Framework\Event\Observer $observer)
 	{
+		
+		if(!$this->_helperData->isEnabled()) {
+            return;
+        }
+
 		$order = $observer->getEvent()->getOrder();
+
+		        // $divaltoTvaIdDefault = $this->_helperData->getGeneralConfig('divalto_tva_id_default');
 
 		// if ... no comment ?
 

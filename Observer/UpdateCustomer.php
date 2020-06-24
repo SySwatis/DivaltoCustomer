@@ -65,6 +65,9 @@ class UpdateCustomer implements ObserverInterface
 
         $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
         $outStandingStatus = $sessionDivaltoData['outstanding_status'];
+        $response = $sessionDivaltoData['divalto_response'];
+        $extrafield_1 = $sessionDivaltoData['divalto_extrafield_1'];
+        $extrafield_2 = $sessionDivaltoData['divalto_extrafield_2'];
 
         if( isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
 
@@ -83,6 +86,9 @@ class UpdateCustomer implements ObserverInterface
 
                 $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
                 $customer->setCustomAttribute('divalto_account_id',$groupName);
+                $customer->setCustomAttribute('divalto_response',$response);
+                $customer->setCustomAttribute('divalto_extrafield_1',$extrafield_1);
+                $customer->setCustomAttribute('divalto_extrafield_2',$extrafield_2);
                 $this->_customerRepositoryInterface->save($customer);
 
             }
@@ -93,7 +99,7 @@ class UpdateCustomer implements ObserverInterface
             $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
         }
 
-        $this->_helperData->unsSessionGroupName();
+        $this->_helperData->unsSessionDivaltoData();
         
     }
 

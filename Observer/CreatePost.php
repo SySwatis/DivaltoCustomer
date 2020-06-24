@@ -84,15 +84,35 @@ class CreatePost implements ObserverInterface
             return;
         }
 
+        // Divalo Store Id (Numero_Dossier)
+
+        $divaltoStoreId = $this->_helperData->getGeneralConfig('divalto_store_id');
+        
+        // Get all post parameters
+
+        $requestParams = $this->_request->getParams();
+
+        if(!isset($requestParams['email'])) return;
+
+        $postData = [
+            "Numero_Dossier"=>$divaltoStoreId,
+            "Email_Client"=>"",
+            "Raison_Sociale"=>"",
+            "Titre"=>"",
+            "Telephone"=>"",
+            "Numero_Siret"=>"",
+            "Code_APE"=>"",
+            "Numero_TVA"=>"",
+            "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+            "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+            "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$requestParams['email'],"Fonction"=>"")
+        ];
+
         try {
-
-            // Get all post parameters
-
-            $requestParams = $this->_request->getParams();
 
             // Get group name (code_Client Divalto "users")
 
-            $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($requestParams);
+            $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($postData,'CreerClient');
 
             // Default (log)
 
