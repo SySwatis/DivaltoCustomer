@@ -61,7 +61,7 @@ class Debug extends \Magento\Framework\App\Action\Action
      */
     public function dispatch(RequestInterface $request)
     {
-        if (!$this->_customerSession->authenticate()) {
+        if ( !$this->_customerSession->authenticate() && $this->_helperData->getDebugConfig()==1 ) {
             $this->_actionFlag->set('', 'no-dispatch', true);
         }
         return parent::dispatch($request);
