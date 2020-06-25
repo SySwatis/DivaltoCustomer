@@ -20,6 +20,7 @@
     <module name="Divalto_Customer" setup_version="1.0.0">
         <sequence>
             <module name="Magento_Customer"/>
+            <module name="Magento_Sales"/>
             <module name="Magento_Eav"/>
             <module name="Magento_Config"/>
         </sequence>

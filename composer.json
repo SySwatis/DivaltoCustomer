@@ -1,0 +1,15 @@
+{
+  "name": "divalto/customer",
+  "version": "1.0.0",
+  "description": "this module manage customer and order (Api,WS)",
+  "type": "magento2-module",
+  "license": "OSL-3.0",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Divalto\\ExtraPrice\\": ""
+    }
+  }
+}
