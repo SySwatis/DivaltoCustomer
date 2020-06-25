@@ -11,8 +11,10 @@
  * @category   Divalto
  * @package    Divalto_Customer
  * @subpackage Observer
+ * @author SySwatis (Stéphane JIMENEZ)
+ * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
-
+ 
 namespace Divalto\Customer\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
@@ -20,43 +22,67 @@ use Magento\Framework\Exception\LocalizedException;
 
 class UpdateOrder implements ObserverInterface
 {
-	protected $_logger;
-
-	protected $_comment;
+	protected $_log;
 
 	protected $_helperData;
 
+	protected $_helperRequester;
+
+	protected $_comment;
+
 	/**
-	* @param \Psr\Log\LoggerInterface $_logger
+	* @param \Psr\Log\LoggerInterface $_log
     */
 
 	public function __construct(
-        \Psr\Log\LoggerInterface $_logger,
-        \Divalto\Customer\Model\Comment $_comment,
-        \Divalto\Customer\Helper\Data $_helperData
+        \Psr\Log\LoggerInterface $_log,
+        \Divalto\Customer\Helper\Data $_helperData,
+        \Divalto\Customer\Helper\Requester $_helperRequester,
+        \Divalto\Customer\Model\Comment $_comment
     ){
-        $this->_logger = $_logger;
-        $this->_comment = $_comment;
+        $this->_log = $_log;
         $this->_helperData = $_helperData;
+        $this->_helperRequester = $_helperRequester;
+        $this->_comment = $_comment;
     }
 
 	public function execute(\Magento\Framework\Event\Observer $observer)
 	{
-		
-		if(!$this->_helperData->isEnabled()) {
-            return;
-        }
-
 		$order = $observer->getEvent()->getOrder();
+		$payment = $order->getPayment();
+		$method = $payment->getMethodInstance();
+		$methodTitle = $method->getTitle();
+		$methodCode = $method->getCode();
 
-		        // $divaltoTvaIdDefault = $this->_helperData->getGeneralConfig('divalto_tva_id_default');
+		// Divalo Store Id (Numero_Dossier)
 
-		// if ... no comment ?
-
-		$this->_comment->addCommentToOrder($order->getId()); // + status
+        $divaltoStoreId = $this->_helperData->getGeneralConfig('divalto_store_id');
 		
-		$this->_logger->debug('update order id : '.$order->getId().' status : '.$order->getStatus());
-		//var_dump($order->getData());
-		//exit;
+		// Allowed (inline)
+
+		$methodCodeAllowed = array('purshaseorder');
+		$orderStatusAllowed = array('pending','holded');
+
+		
+
+		if( in_array($methodCode, $methodCodeAllowed) || in_array($order->getStatus(), $orderStatusAllowed) ) {
+			
+			
+			$response = $order->getStatus().' : test';
+
+			// send response requester to dataSessionDivalto or register a comment
+			$postData = array();
+
+			try {
+				// requester
+			} catch (StateException $e) {
+            	$this->_log->critical($e->getMessage());
+            	$this->_messageManager->addExceptionMessage($e, __('We can\'t save the order.'));
+        	}
+			
+			$this->_comment->addCommentToOrder($order->getId(),$response);
+
+			$this->_log->debug('Oberser Event UpdateOrder order id : '.$order->getId().' status : '.$order->getStatus().' / method : '.$methodCode );
+		}
 	}
 }

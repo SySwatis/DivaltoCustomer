@@ -11,6 +11,8 @@
  * @category   Divalto
  * @package    Divalto_Customer
  * @subpackage Controller
+ * @author SySwatis (Stéphane JIMENEZ)
+ * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
 
 namespace Divalto\Customer\Controller\Account;
@@ -38,17 +40,20 @@ class Debug extends \Magento\Framework\App\Action\Action
 
     protected $_helperData;
 
+    protected $_orderRepository;
 
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
 		\Magento\Customer\Model\Session $customerSession,
 		\Magento\Framework\View\Result\PageFactory $pageFactory,
+        \Magento\Sales\Model\OrderRepository $orderRepository,
         \Divalto\Customer\Helper\Requester $helperRequester,
         \Divalto\Customer\Helper\data $helperData
 	) {
 		parent::__construct($context);
 		$this->_customerSession = $customerSession;
 		$this->_pageFactory = $pageFactory;
+        $this->_orderRepository = $orderRepository;
         $this->_helperRequester = $helperRequester;
         $this->_helperData = $helperData;
 	}
@@ -111,7 +116,7 @@ class Debug extends \Magento\Framework\App\Action\Action
                      $postData = [
                         'Numero_Dossier'=>'1',
                         'Numero_Commande_Magento'=>'000001',
-                        'Email_Client_Cde'=>'',
+                        'Email_Client_Cde'=>'muratk21@hotmail.com',
                         'Code_Client_Divalto'=>'C0000043',
                         'Code_Adresse_Livraison'=>'',
                         'Adresse_Livraison_Manuelle'=>array('Rue'=>'37 RUE MARYSE BASTIE','Ville'=>'LYON','Code_Postal'=>'69008'),

@@ -11,7 +11,10 @@
  * @category   Divalto
  * @package    Divalto_Customer
  * @subpackage Block
+ * @author SySwatis (Stéphane JIMENEZ)
+ * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
+
 
 namespace Divalto\Customer\Block;
 

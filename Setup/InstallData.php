@@ -11,8 +11,10 @@
  * @category   Divalto
  * @package    Divalto_Customer
  * @subpackage Setup
+ * @author SySwatis (Stéphane JIMENEZ)
+ * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
-
+ 
 namespace Divalto\Customer\Setup;
 
 use Magento\Eav\Setup\EavSetup;

@@ -12,9 +12,8 @@
  * @category   Divalto
  * @package    Divalto_Customer
  * @subpackage etc
- * @author     
- * @copyright  
- * @link       
+ * @author SySwatis (Stéphane JIMENEZ)
+ * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">

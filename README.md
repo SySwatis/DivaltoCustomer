@@ -1,5 +1,7 @@
-# DivaltoCustomer
-WIP !!!
-- Module magento 2
-- Manage customer
+# Divalto_Customer
 
+- Module for magento 2
+- Manage customer WS communication
+
+## Installation
+## Contribute

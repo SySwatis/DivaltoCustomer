@@ -12,10 +12,10 @@
  * @category   Divalto
  * @package    Divalto_Customer
  * @subpackage etc
- * @author     
- * @copyright  
- * @link       
+ * @author SySwatis (Stéphane JIMENEZ)
+ * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
+
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
@@ -63,12 +63,20 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Url Test</comment>
                 </field>
-                <field id="legal_form" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="payment_method" translate="label" type="multiselect" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Payment Method</label>        
+                   <source_model>Divalto\Customer\Model\Config\Source\ListPaymentMethod</source_model>
+                   <comment>Select all authorized payment methods for sending orders without status restrictions</comment>
+                </field>
+                <field id="order_status" translate="label" type="multiselect" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                  <label>Order Status</label>
+                  <source_model>Magento\Sales\Model\ResourceModel\Order\Status\Collection</source_model>
+                </field>
+                <field id="legal_form" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Legal Form</label>
                     <frontend_model>Divalto\Customer\Block\Adminhtml\Form\Field\LegalFormRanges</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>
-                
             </group>
         </section>
     </system>
