@@ -125,6 +125,12 @@ class Requester extends AbstractHelper
 
         if ( is_array($data) ) {
 
+            // Ping
+
+            if($action == 'ping') {
+                return $data;
+            }
+
             // CreerClient
 
             if($action == 'CreerClient') {
