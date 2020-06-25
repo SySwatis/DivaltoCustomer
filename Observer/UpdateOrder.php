@@ -24,16 +24,20 @@ class UpdateOrder implements ObserverInterface
 
 	protected $_comment;
 
+	protected $_helperData;
+
 	/**
 	* @param \Psr\Log\LoggerInterface $_logger
     */
 
 	public function __construct(
         \Psr\Log\LoggerInterface $_logger,
-        \Divalto\Customer\Model\Comment $_comment
+        \Divalto\Customer\Model\Comment $_comment,
+        \Divalto\Customer\Helper\Data $_helperData
     ){
         $this->_logger = $_logger;
         $this->_comment = $_comment;
+        $this->_helperData = $_helperData;
     }
 
 	public function execute(\Magento\Framework\Event\Observer $observer)

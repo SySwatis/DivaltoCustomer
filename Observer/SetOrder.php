@@ -20,16 +20,28 @@ use Magento\Framework\Exception\LocalizedException;
 
 class SetOrder implements ObserverInterface
 {
-	protected $_logger;
+	protected $_log;
+
+	protected $_helperData;
+
+	protected $_helperRequester;
+
+	protected $_comment;
 
 	/**
-	* @param \Psr\Log\LoggerInterface $_logger
+	* @param \Psr\Log\LoggerInterface $_log
     */
 
 	public function __construct(
-        \Psr\Log\LoggerInterface $_logger
+        \Psr\Log\LoggerInterface $_log,
+        \Divalto\Customer\Helper\Data $_helperData,
+        \Divalto\Customer\Helper\Requester $_helperRequester,
+        \Divalto\Customer\Model\Comment $_comment
     ){
-        $this->_logger = $_logger;
+        $this->_log = $_log;
+        $this->_helperData = $_helperData;
+        $this->_helperRequester = $_helperRequester;
+        $this->_comment = $_comment;
     }
 
 	public function execute(\Magento\Framework\Event\Observer $observer)
@@ -39,13 +51,19 @@ class SetOrder implements ObserverInterface
 		$method = $payment->getMethodInstance();
 		$methodTitle = $method->getTitle();
 		$methodCode = $method->getCode();
+		
+		// Allowed (inline)
 
-		// Requester Divalto
+		$methodCodeAllowed = array('purshaseorder');
+		$orderStatusAllowed = array('pending','holded');
 
-		// send Session ?
+		if( in_array($methodCode, $methodCodeAllowed) || in_array($order->getStatus(), $orderStatusAllowed) ) {
+			
+			// requester
 
-		$this->_logger->debug('set order id : '.$order->getId().' status : '.$order->getStatus().' / method : '.$methodCode );
-		//var_dump($order->getData());
-		//exit;
+			// send response requester to dataSessionDivalto or register a comment
+
+			$this->_log->debug('set order id : '.$order->getId().' status : '.$order->getStatus().' / method : '.$methodCode );
+		}
 	}
 }
