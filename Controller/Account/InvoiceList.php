@@ -15,7 +15,6 @@
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
 
-
 namespace Divalto\Customer\Controller\Account;
 
 use Magento\Framework\App\RequestInterface;

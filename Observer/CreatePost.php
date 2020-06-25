@@ -10,7 +10,7 @@
 /**
  * @category   Divalto
  * @package    Divalto_Customer
- * @subpackage Model
+ * @subpackage Observer
  * @author SySwatis (Stéphane JIMENEZ)
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
