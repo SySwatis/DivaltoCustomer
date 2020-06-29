@@ -4,6 +4,11 @@
   "description": "this module manage customer and order (Api,WS)",
   "type": "magento2-module",
   "license": "OSL-3.0",
+  "authors": [
+    {
+        "name": "Stéphane JIMENEZ"
+    }
+  ],
   "autoload": {
     "files": [
       "registration.php"
