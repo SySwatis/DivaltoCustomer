@@ -24,9 +24,10 @@ use Psr\Log\LoggerInterface;
 class OrderMap
 {
 	
+    const INCL_TAX_RULE_ORDER = 'INCL_TAX';
 
-	const TAX_RULE_ORDER = 'HT';
-
+	const EXCL_TAX_RULE_ORDER = 'EXCL_TAX';
+   
 	/** @var LoggerInterface */
     private $_log;
 
@@ -55,13 +56,13 @@ class OrderMap
         }
     }
 
-    function create($orderId) {
+    function create($orderId,$orderStatus = 'processing') {
 
         // Config
 
         $divaltoStoreId = $this->_helperData->getGeneralConfig('divalto_store_id');
 		$divaltoTaxRuleOrder = $this->_helperData->getGeneralConfig('divalto_tax_rule_order');
-        $priceTaxConfig = $divaltoTaxRuleOrder ?? self::TAX_RULE_ORDER;
+        $priceTaxConfig = $divaltoTaxRuleOrder ?? self::EXCL_TAX_RULE_ORDER;
 
         // Get Order
 
@@ -104,8 +105,8 @@ class OrderMap
             if($item->getProductType()==="simple") {
 
                 $itemPrice = $item->getPrice();
-                $itemPriceTaxInc =  $priceTaxConfig == 'HT' ? $item->getPrice() : '';
-                $itemPriceTaxExc =  $priceTaxConfig == 'TTC'? $item->getPrice() : '';
+                $itemPriceTaxInc =  $priceTaxConfig == self::INCL_TAX_RULE_ORDER ? $item->getPrice() : '';
+                $itemPriceTaxExc =  $priceTaxConfig == self::EXCL_TAX_RULE_ORDER ? $item->getPrice() : '';
                 
                 $orderDataItems[$i]['SKU']=$item->getSku();
                 $orderDataItems[$i]['Quantite_Commandee']=$item->getQtyOrdered();
@@ -131,7 +132,7 @@ class OrderMap
             'Code_Adresse_Livraison'=>'',
             'Adresse_Livraison_Manuelle'=>$shippingAddressData,
             'Code_Adresse_Facturation'=>'',
-            'Paiement'=>'processing',
+            'Paiement'=>$orderStatus,
             'liste_detail_ligne'=>$orderDataItems,
             'Client_Particulier'=>array(
                 'Email_Client'=>'',

@@ -22,6 +22,9 @@ use Magento\Framework\Exception\LocalizedException;
 
 class UpdateOrder implements ObserverInterface
 {
+	
+	const HEADING_COMMENT = '#Divalto | ';
+
 	protected $_log;
 
 	protected $_helperData;
@@ -93,8 +96,8 @@ class UpdateOrder implements ObserverInterface
 				$postData = $this->_orderMap->create($order->getId());
 
 				// Request to api Divalto
-
-				$response = $this->_helperRequester->getDivaltoCustomerData($postData, 'CreerCommande');
+				$response = self::HEADING_COMMENT;
+				$response .= $this->_helperRequester->getDivaltoCustomerData($postData, 'CreerCommande');
 
 			} catch (StateException $e) {
             	$this->_log->critical($e->getMessage());
