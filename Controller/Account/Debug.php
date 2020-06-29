@@ -90,9 +90,9 @@ class Debug extends \Magento\Framework\App\Action\Action
         if( $this->_helperData->getDebugConfig()==1 ) {
             
             $action = 'ping';
-            $postData = array();
             $allActions = array('ping','CreerClient','CreerCommande');
-            $response = array('Response ini');
+            $postData = array('ini'=>'Post Data Empty');
+            $response = array('ini'=>'Response Empty');
 
             $html =     '<div style="font-family:Gill Sans, sans-serif;padding:30px;"/>';
             $html .=    '<h1>Divalto Customer : Debug</h1>';
@@ -147,8 +147,6 @@ class Debug extends \Magento\Framework\App\Action\Action
                     if( isset($_GET['OrderId']) && is_numeric($_GET['OrderId']) ) {
                         $postData = $this->_orderMap->create($_GET['OrderId']);
                     }
-                    // print_r($postData);
-                    // die('OrderMap');
 
                 }
 
@@ -160,6 +158,7 @@ class Debug extends \Magento\Framework\App\Action\Action
             
             if( isset($_GET['printJson'])) {
                 echo $html;
+                echo '<h2>Post Data (Json) :</h2>';
                 echo '<pre style="overflow:scroll">';
                 echo json_encode($postData);
                 echo '</pre>';
@@ -170,7 +169,8 @@ class Debug extends \Magento\Framework\App\Action\Action
                 
                 echo $html;
                 $html .='<p>error response</p>';
-                echo '<br><br><pre>';
+                echo '<pre>';
+                echo '<h2>Post Data :</h2>';
                 print_r($postData);
                 echo '</pre>';
               
@@ -178,10 +178,11 @@ class Debug extends \Magento\Framework\App\Action\Action
                
                 $html .='<h2>Response :</h2>';
                 echo $html;
-                echo '<pre"/>';
-                print_r($response);
-                echo '<br><br></pre>';
                 echo '<pre>';
+                print_r($response);
+                echo '</pre>';
+                echo '<h2>Post Data :</h2>';
+                echo '<pre style="overflow:scroll">';
                 print_r($postData);
                 echo '</pre>';
             }

@@ -70,21 +70,22 @@ class UpdateOrder implements ObserverInterface
 
         $divaltoStoreId = $this->_helperData->getGeneralConfig('divalto_store_id');
 
-        // Status Allowed (default: processing)
+        // Status Allowed (Default: processing)
 		
 		$orderStatusAllowed = explode(",",$this->_helperData->getGeneralConfig('order_status'));
 
-		// Payment method Allowed (default: purchaseorder)
+		// Payment method Allowed (Default: purchaseorder)
 
 		$orderPaymentMethodAllowed = explode(",",$this->_helperData->getGeneralConfig('payment_method'));
 
-		// Update Order
+		// Allows Checking
 
 		if( in_array($methodCode, $orderPaymentMethodAllowed) || in_array($order->getStatus(), $orderStatusAllowed) ) {
 			
 			$response = $order->getStatus().' - ERP query fail';
 
-			// send response requester to dataSessionDivalto or register a comment
+			// Send Data Order
+
 			$postData = array();
 
 			try {
@@ -107,7 +108,7 @@ class UpdateOrder implements ObserverInterface
 			
 			$this->_comment->addCommentToOrder($order->getId(),$response);
 
-			$this->_log->debug('Oberser Event Update Order order id : '.$order->getId().' status : '.$order->getStatus().' / method : '.$methodCode );
+			$this->_log->debug('Oberser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode );
 		}
 	}
 }
