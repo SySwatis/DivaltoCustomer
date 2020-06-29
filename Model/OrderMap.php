@@ -79,23 +79,27 @@ class OrderMap
 
         $orderItems = $order->getAllItems();
 
+        // Get Billig Address
+
+        $billingAddress = $order->getBillingAddress();
+
         // Get Shippigng Address
 
-        $shippingAdress = $order->getShippingAddress();
-        $shippingAdressStreets = $shippingAdress->getStreet();
+        $shippingAddress = $order->getShippingAddress();
+        $shippingAddressStreets = $shippingAddress->getStreet();
         $shippingStreet = '';
         $shippingStreetSeparator = '';
         
-        foreach ($shippingAdressStreets as $street) {
+        foreach ($shippingAddressStreets as $street) {
             $shippingStreet .= $shippingStreetSeparator.$street;
             $shippingStreetSeparator = ', ';
         }
 
-        $shippingAdressData = array(
+        $shippingAddressData = array(
             	'Rue'=>$shippingStreet,
-            	'Ville'=>$shippingAdress->getCity(),
-            	'Code_Postal'=>$shippingAdress->getPostcode(),
-            	'Pays'=>$shippingAdress->getCountryId());
+            	'Ville'=>$shippingAddress->getCity(),
+            	'Code_Postal'=>$shippingAddress->getPostcode(),
+            	'Pays'=>$shippingAddress->getCountryId());
 
         // Order Items
 
@@ -133,7 +137,7 @@ class OrderMap
             'Email_Client_Cde'=>$order->getCustomerEmail(),
             'Code_Client_Divalto'=>$groupCode,
             'Code_Adresse_Livraison'=>'',
-            'Adresse_Livraison_Manuelle'=>$shippingAdressData,
+            'Adresse_Livraison_Manuelle'=>$shippingAddressData,
             'Code_Adresse_Facturation'=>'',
             'Paiement'=>$orderStatus,
             'liste_detail_ligne'=>$orderDataItems,
@@ -141,13 +145,13 @@ class OrderMap
                 'Email_Client'=>'',
                 'Raison_Sociale'=>$this->getCustomerAttributeValue($customerOrder,'company_name'),
                 'Titre'=>$this->getCustomerAttributeValue($customerOrder,'legal_form'),
-                'Telephone'=>$shippingAdress->getTelephone(),
+                'Telephone'=>$shippingAddress->getTelephone(),
                 'Contact'=>array(
-                    'Nom'=>'',
-                    'Prenom'=>'',
-                    'Telephone'=>'',
-                    'Email'=>'',
-                    'Fonction'=>''
+                    'Nom'=>$order->getCustomerLastname(),
+                    'Prenom'=>$order->getCustomerFirstname(),
+                    'Telephone'=>$billingAddress->getTelephone(),
+                    'Email'=>$order->getCustomerEmail(),
+                    'Fonction'=>$order->getCustomerPrefix()
                 )
             )
         ];
