@@ -5,3 +5,6 @@
 
 ## Installation
 ## Contribute
+## Documentation
+
+- Debug (customer account : { website.com }/divalto/account/debug)

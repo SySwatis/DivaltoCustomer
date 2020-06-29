@@ -23,6 +23,7 @@ use Magento\Framework\Filesystem\Driver\File;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\GroupFactory;
 use Magento\Customer\Model\Session;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Api\GroupRepositoryInterface;
@@ -59,6 +60,11 @@ class Data extends AbstractHelper
     /**
      * @var
      */
+    protected $_customerRepository;
+
+    /**
+     * @var
+     */
     protected $_log;
 
     /**
@@ -77,6 +83,7 @@ class Data extends AbstractHelper
         StoreManagerInterface $storeManager,
         GroupFactory $groupFactory,
         Session $customerSession,
+        CustomerRepositoryInterface $customerRepository,
         LoggerInterface $logger,
         GroupRepositoryInterface $groupRepository,
         SessionManagerInterface $coreSession,
@@ -87,6 +94,7 @@ class Data extends AbstractHelper
         $this->_storeManager = $storeManager;
 		$this->_groupFactory = $groupFactory;
         $this->_customerSession = $customerSession;
+        $this->_customerRepository = $customerRepository;
         $this->_log = $logger;
         $this->_groupRepository = $groupRepository;
         $this->_coreSession = $coreSession;
@@ -102,6 +110,10 @@ class Data extends AbstractHelper
     public function getGroupCode() 
     {
         return  $this->_groupRepository->getById($this->_customerSession->getCustomer()->getGroupId())->getCode();
+    }
+    public function getGroupById($groupId) 
+    {
+        return  $this->_groupRepository->getById($groupId)->getCode();
     }
 
     public function getDivaltoInvoiceDir($groupName) 
@@ -160,12 +172,9 @@ class Data extends AbstractHelper
        ->getId();
     }
 
-    public function getCustomerGroupIdByTaxvat($taxvat)
+    public function getCustomerById($customerId)
     {
-       return $this->_groupFactory->create()->getCollection()
-       ->addFieldToFilter("taxvat", array("eq" => $taxvat))
-       ->getFirstItem()
-       ->getId();
+       return $this->_customerRepository->getById($customerId);
     }
 
     public function createDirectoryGroupName($groupName) 

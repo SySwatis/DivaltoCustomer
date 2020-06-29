@@ -73,8 +73,7 @@ class Requester extends AbstractHelper
         // Add Action to url
 
         $url .= $action;
-
-
+        
         // Check Api Key
 
         if(!$apiKey) {

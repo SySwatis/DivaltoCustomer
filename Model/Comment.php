@@ -71,4 +71,24 @@ class Comment
         }
         return $orderHistory;
     }
+
+    public function getListCommentOrder ($orderId)
+    {
+        $order= $this->orderRepository->get($orderId);
+        return $order->getStatusHistoryCollection();
+    }
+
+    public function getCommentDivalto($orderId,$value) 
+    {
+        $orderCommentCollection = $this->getListCommentOrder($orderId);
+        $orderComment = [];
+        foreach ( $orderCommentCollection as $status) {
+            if ($status->getComment()) {
+                $orderComment[] = $status->getComment();
+            }
+        }
+        if($index = array_search($value, $orderComment))
+        return $orderComment[$index]; // $key = 2;$orderComment;
+    }
+
 }
