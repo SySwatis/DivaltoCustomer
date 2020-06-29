@@ -65,8 +65,6 @@ class UpdateOrder implements ObserverInterface
 		$methodCode = $method->getCode();
 
 		$stateDefault = \Magento\Sales\Model\Order::STATE_PROCESSING;
-		
-		$forceStateDefault = true;
 
 		// Divalo Store Id (Numero_Dossier)
 
@@ -95,7 +93,8 @@ class UpdateOrder implements ObserverInterface
 				
 				$postData = $this->_orderMap->create($order->getId());
 
-				// Request to api Divalto
+				// Get response from api Divalto
+
 				$response = self::HEADING_COMMENT;
 				$response .= $this->_helperRequester->getDivaltoCustomerData($postData, 'CreerCommande');
 
@@ -108,7 +107,7 @@ class UpdateOrder implements ObserverInterface
 			
 			$this->_comment->addCommentToOrder($order->getId(),$response);
 
-			$this->_log->debug('Oberser Event UpdateOrder order id : '.$order->getId().' status : '.$order->getStatus().' / method : '.$methodCode );
+			$this->_log->debug('Oberser Event Update Order order id : '.$order->getId().' status : '.$order->getStatus().' / method : '.$methodCode );
 		}
 	}
 }

@@ -18,6 +18,7 @@
 namespace Divalto\Customer\Model;
 
 use Magento\Sales\Model\OrderRepository;
+use Magento\Sales\Model\Order;
 use \Magento\Tax\Model\Config;
 use Psr\Log\LoggerInterface;
 
@@ -27,6 +28,8 @@ class OrderMap
     const INCL_TAX_RULE_ORDER = 'INCL_TAX';
 
 	const EXCL_TAX_RULE_ORDER = 'EXCL_TAX';
+
+    const DIVALTO_STATE_PROCESSING =  Order::STATE_PROCESSING;
    
 	/** @var LoggerInterface */
     private $_log;
@@ -56,7 +59,7 @@ class OrderMap
         }
     }
 
-    function create($orderId,$orderStatus = 'processing') {
+    function create($orderId,$orderStatus=self::DIVALTO_STATE_PROCESSING) {
 
         // Config
 
@@ -78,21 +81,21 @@ class OrderMap
 
         // Get Shippigng Address
 
-        $shippingaddress = $order->getShippingAddress();
-        $shippingaddressStreets = $shippingaddress->getStreet();
+        $shippingAdress = $order->getShippingAddress();
+        $shippingAdressStreets = $shippingAdress->getStreet();
         $shippingStreet = '';
         $shippingStreetSeparator = '';
         
-        foreach ($shippingaddressStreets as $street) {
+        foreach ($shippingAdressStreets as $street) {
             $shippingStreet .= $shippingStreetSeparator.$street;
             $shippingStreetSeparator = ', ';
         }
 
-        $shippingAddressData = array(
+        $shippingAdressData = array(
             	'Rue'=>$shippingStreet,
-            	'Ville'=>$shippingaddress->getCity(),
-            	'Code_Postal'=>$shippingaddress->getPostcode(),
-            	'Pays'=>$shippingaddress->getCountryId());
+            	'Ville'=>$shippingAdress->getCity(),
+            	'Code_Postal'=>$shippingAdress->getPostcode(),
+            	'Pays'=>$shippingAdress->getCountryId());
 
         // Order Items
 
@@ -130,7 +133,7 @@ class OrderMap
             'Email_Client_Cde'=>$order->getCustomerEmail(),
             'Code_Client_Divalto'=>$groupCode,
             'Code_Adresse_Livraison'=>'',
-            'Adresse_Livraison_Manuelle'=>$shippingAddressData,
+            'Adresse_Livraison_Manuelle'=>$shippingAdressData,
             'Code_Adresse_Facturation'=>'',
             'Paiement'=>$orderStatus,
             'liste_detail_ligne'=>$orderDataItems,
@@ -138,7 +141,7 @@ class OrderMap
                 'Email_Client'=>'',
                 'Raison_Sociale'=>$this->getCustomerAttributeValue($customerOrder,'company_name'),
                 'Titre'=>$this->getCustomerAttributeValue($customerOrder,'legal_form'),
-                'Telephone'=>$shippingaddress->getTelephone(),
+                'Telephone'=>$shippingAdress->getTelephone(),
                 'Contact'=>array(
                     'Nom'=>'',
                     'Prenom'=>'',

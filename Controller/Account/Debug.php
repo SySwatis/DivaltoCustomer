@@ -144,16 +144,14 @@ class Debug extends \Magento\Framework\App\Action\Action
                         ];
                     }
 
-
-
                     if( isset($_GET['OrderId']) && is_numeric($_GET['OrderId']) ) {
-
-                        // $postData = $this->_orderMap->create($_GET['OrderId'],'CreerCommande');
-                         $postData['comment'] = $this->_comment->getCommentDivalto($_GET['OrderId'],'test');  
+                        $postData = $this->_orderMap->create($_GET['OrderId']);
                     }
 
 
                 }
+
+                $response = $this->_helperRequester->getDivaltoCustomerData($postData, $action);
 
             }
 
@@ -166,15 +164,6 @@ class Debug extends \Magento\Framework\App\Action\Action
                 echo '</pre>';
                 die('<b>Die : printJson</b>');
             }
-
-            // echo '<pre>';
-            // print_r($postData['liste_detail_ligne']);
-            // echo "</pre>";
-            // die();
-
-            //  $response = $this->_helperRequester->getDivaltoCustomerData($postData, $action);
-
-            
 
             if( !is_array($response) || !$response || count($response)==0 ) {
                 
