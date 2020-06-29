@@ -147,8 +147,8 @@ class Debug extends \Magento\Framework\App\Action\Action
                     if( isset($_GET['OrderId']) && is_numeric($_GET['OrderId']) ) {
                         $postData = $this->_orderMap->create($_GET['OrderId']);
                     }
-                    print_r($postData);
-                    die('OrderMap');
+                    // print_r($postData);
+                    // die('OrderMap');
 
                 }
 
