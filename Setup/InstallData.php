@@ -318,7 +318,7 @@ class InstallData implements InstallDataInterface
                 'system'       => 0,
             ]
         );
-        $customerAttribute_9 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
+        $customerAttribute_8 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttributeToSet(
             CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
@@ -327,11 +327,11 @@ class InstallData implements InstallDataInterface
             $attributeCode);
 
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
-        $customerAttribute_9->setData(
+        $customerAttribute_8->setData(
             'used_in_forms',
             ['adminhtml_customer']
         );
-        $customerAttribute_9->save();
+        $customerAttribute_8->save();
 
 
 
@@ -354,7 +354,7 @@ class InstallData implements InstallDataInterface
                 'system'       => 0,
             ]
         );
-        $customerAttribute_8 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
+        $customerAttribute_9 = $this->eavConfig->getAttribute(Customer::ENTITY, $attributeCode);
 
         $eavSetup->addAttributeToSet(
             CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER,
@@ -363,11 +363,11 @@ class InstallData implements InstallDataInterface
             $attributeCode);
 
         // more used_in_forms ['adminhtml_checkout','adminhtml_customer','adminhtml_customer_address','customer_account_edit','customer_address_edit','customer_register_address']
-        $customerAttribute_8->setData(
+        $customerAttribute_9->setData(
             'used_in_forms',
             ['adminhtml_customer']
         );
-        $customerAttribute_8->save();
+        $customerAttribute_9->save();
 
     }
 }
