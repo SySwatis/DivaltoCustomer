@@ -51,7 +51,7 @@ class Index extends Action
             $postData = array('ini'=>'Post Data Empty');
             $response = array('ini'=>'Response Empty');
 
-            $emailTest = "muratk21@hotmail.com";
+            $emailTest = "contact@pachadistribution.com";
 
             $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? _('Yes') : _('No');
 
@@ -73,7 +73,7 @@ class Index extends Action
                 if($action === 'CreerClient') {
                 
                     $postData = [
-                        "Numero_Dossier"=>"1",
+                        "Numero_Dossier"=>"2",
                         "Email_Client"=>"",
                         "Raison_Sociale"=>"",
                         "Titre"=>"",
