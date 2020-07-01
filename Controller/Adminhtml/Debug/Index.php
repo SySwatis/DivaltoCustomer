@@ -46,18 +46,23 @@ class Index extends Action
        
         if( $this->_helperData->getDebugConfig()==1 ) {
             
+            $action = 'No action';
             $allActions = array('CreerClient','CreerCommande');
             $postData = array('ini'=>'Post Data Empty');
             $response = array('ini'=>'Response Empty');
+
+            $emailTest = "muratk21@hotmail.com";
 
             $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? _('Yes') : _('No');
 
 
             $html =     '<div style="font-family:Gill Sans, sans-serif;padding:30px;"/>';
             $html .=    '<h1>Divalto Customer : Debug</h1>';
-            $html .=    '<p>SSL Cert. Verfify Peer: '.$sslVerifypeer.'</p>';
+            $html .=    '<p><b>SSL Cert. Verfify Peer:</b> '.$sslVerifypeer.'</p>';
+            $html .=    '<p><b>Email test: </b> '.$emailTest.'</p>';
+            $html .=    '<p><b>Api Url Test (Debug):</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p>';
             $html .=    '<ul style="list-style:none;margin:0;padding:0;">';
-            $html .=    '<li><a href="?action=CreerClient">CreerClient</a></li>';
+            $html .=    '<li><a href="?action=CreerClient">CreerClient (Email test)</a></li>';
             $html .=    '<li><a href="?action=CreerCommande&OrderId=demo">CreerCommande Demo</a></li>';
             $html .=    '</ul>';
 
@@ -78,7 +83,7 @@ class Index extends Action
                         "Numero_TVA"=>"",
                         "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
                         "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-                        "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>"muratk21@hotmail.com","Fonction"=>"")
+                        "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
                     ];
 
                 }
