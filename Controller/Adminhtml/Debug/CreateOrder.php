@@ -24,11 +24,11 @@ use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Ping
+ * Class CreateOrder
  */
-class Ping extends Action implements HttpGetActionInterface
+class CreateOrder extends Action implements HttpGetActionInterface
 {
-    const MENU_ID = 'Divalto_Customer::ping';
+    const MENU_ID = 'Divalto_Customer::CreateOrder';
 
     /**
      * @var PageFactory
@@ -51,7 +51,7 @@ class Ping extends Action implements HttpGetActionInterface
     }
 
     /**
-     * Load the page defined in : view/adminhtml/layout/customer_debug_ping
+     * Load the page defined in : view/adminhtml/layout/customer_debug_create_customer
      * ------------------------------------------------[modulename]_[controller_name]_[controller_name_action].xml
      *
      * @return Page
@@ -60,7 +60,7 @@ class Ping extends Action implements HttpGetActionInterface
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu(static::MENU_ID);
-        $resultPage->getConfig()->getTitle()->prepend(__('Divalto Ping'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Divalto Create Order'));
 
 
         return $resultPage;

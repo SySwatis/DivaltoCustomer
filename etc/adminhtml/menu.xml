@@ -19,7 +19,9 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
      <add id="Divalto_Customer::menu" title="Divalto" module="Divalto_Customer" sortOrder="10" resource="Divalto_Customer::menu"/>
-     <add id="Divalto_Customer::debug" title="Debug" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/debug/index" resource="Divalto_Customer::debug"/>
+     <add id="Divalto_Customer::index" title="Debug" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/debug/index" resource="Divalto_Customer::index"/>
      <add id="Divalto_Customer::ping" title="Ping" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/debug/ping" resource="Divalto_Customer::ping"/>
+     <add id="Divalto_Customer::CreateCustomer" title="Create Customer" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/debug/CreateCustomer" resource="Divalto_Customer::CreateCustomer"/>
+     <add id="Divalto_Customer::CreateOrder" title="Create Order" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/debug/CreateOrder" resource="Divalto_Customer::CreateOrder"/>
     </menu>
 </config>
