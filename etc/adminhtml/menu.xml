@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ */
+
+/**
+ * @category   Divalto
+ * @package    Divalto_Customer
+ * @subpackage etc
+ * @author SySwatis (Stéphane JIMENEZ)
+ * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+     <add id="Divalto_Customer::menu" title="Divalto" module="Divalto_Customer" sortOrder="10" resource="Divalto_Customer::menu"/>
+     <add id="Divalto_Customer::debug" title="Debug" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/debug/index" resource="Divalto_Customer::debug"/>
+     <add id="Divalto_Customer::ping" title="Ping" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/debug/ping" resource="Divalto_Customer::ping"/>
+    </menu>
+</config>

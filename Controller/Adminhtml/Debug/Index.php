@@ -15,89 +15,48 @@
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
 
-namespace Divalto\Customer\Controller\Account;
+namespace Divalto\Customer\Controller\Adminhtml\Debug;
 
-use Magento\Framework\App\RequestInterface;
+use Magento\Backend\App\Action;
 
-class Debug extends \Magento\Framework\App\Action\Action
+class Index extends Action
 {
-	
-	/**
-     * Customer session
-     *
-     * @var \Magento\Customer\Model\Session
-     */
-    protected $_customerSession;
-
-	/**
-     * Framework pageFactory
-     *
-     * @var \Magento\Framework\View\Result\PageFactory
-     */
-	protected $_pageFactory;
-
-    protected $_helperRequester;
 
     protected $_helperData;
 
-    protected $_orderRepository;
-
-    protected $_orderItem;
+    protected $_helperRequester;
 
     protected $_orderMap;
 
-    protected $_comment;
-
-	public function __construct(
-		\Magento\Framework\App\Action\Context $context,
-		\Magento\Customer\Model\Session $customerSession,
-		\Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Magento\Sales\Model\OrderRepository $orderRepository,
-        \Magento\Sales\Model\Order\Item $orderItem,
-        \Divalto\Customer\Helper\Requester $helperRequester,
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
         \Divalto\Customer\Helper\Data $helperData,
-        \Divalto\Customer\Model\OrderMap $orderMap,
-        \Divalto\Customer\Model\Comment $_comment
-	) {
-		parent::__construct($context);
-		$this->_customerSession = $customerSession;
-		$this->_pageFactory = $pageFactory;
-        $this->_orderRepository = $orderRepository;
-        $this->_orderItem = $orderItem;
-        $this->_helperRequester = $helperRequester;
-        $this->_helperData = $helperData;
-        $this->_orderMap = $orderMap;
-        $this->_comment = $_comment;
-	}
-
-    /**
-     * Check customer authentication for some actions
-     *
-     * @param RequestInterface $request
-     * @return \Magento\Framework\App\ResponseInterface
-     */
-    public function dispatch(RequestInterface $request)
+        \Divalto\Customer\Helper\Requester $helperRequester,
+        \Divalto\Customer\Model\OrderMap $orderMap
+    )
     {
-        if ( !$this->_customerSession->authenticate() && $this->_helperData->getDebugConfig()==1 ) {
-            $this->_actionFlag->set('', 'no-dispatch', true);
-        }
-        return parent::dispatch($request);
+        parent::__construct($context);
+        $this->_helperData = $helperData;
+        $this->_helperRequester = $helperRequester;
+        $this->_orderMap = $orderMap;
     }
-    
+
     public function execute()
     {
        
         if( $this->_helperData->getDebugConfig()==1 ) {
             
-            $action = 'ping';
-            $allActions = array('ping','CreerClient','CreerCommande');
+            $allActions = array('CreerClient','CreerCommande');
             $postData = array('ini'=>'Post Data Empty');
             $response = array('ini'=>'Response Empty');
 
+            $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? _('Yes') : _('No');
+
+
             $html =     '<div style="font-family:Gill Sans, sans-serif;padding:30px;"/>';
             $html .=    '<h1>Divalto Customer : Debug</h1>';
+            $html .=    '<p>SSL Cert. Verfify Peer: '.$sslVerifypeer.'</p>';
             $html .=    '<ul style="list-style:none;margin:0;padding:0;">';
-            $html .=    '<li><a href="?action=ping">Ping</a></li>';
             $html .=    '<li><a href="?action=CreerClient">CreerClient</a></li>';
             $html .=    '<li><a href="?action=CreerCommande&OrderId=demo">CreerCommande Demo</a></li>';
             $html .=    '</ul>';
@@ -150,7 +109,9 @@ class Debug extends \Magento\Framework\App\Action\Action
 
                 }
 
-                $response = $this->_helperRequester->getDivaltoCustomerData($postData, $action);
+                // Param 3, debug url
+
+                $response = $this->_helperRequester->getDivaltoCustomerData($postData, $action, true);
 
             }
 
@@ -189,8 +150,9 @@ class Debug extends \Magento\Framework\App\Action\Action
 
             echo '</div>';
 
+        } else {
+            echo "debug disable";
         }
         
     }
-
 }

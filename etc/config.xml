@@ -29,6 +29,7 @@
                 <api_url>https://magento.foodcentergroup.com/DivaltoMagento/</api_url>
                 <api_url_test>https://magento.foodcentergroup.com/DivaltoMagento-Test/</api_url_test>
                 <test_mode>1</test_mode>
+                <ssl_verifypeer>0</ssl_verifypeer>
             </general>
         </divalto_customer>
     </default>

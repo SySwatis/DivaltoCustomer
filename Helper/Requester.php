@@ -57,19 +57,20 @@ class Requester extends AbstractHelper
     //     });
     // }
 
-    public function getDivaltoCustomerData($postData, $action='ping')
+    public function getDivaltoCustomerData($postData, $action='ping', $debug = false)
     {
 
         $apiKey = $this->_helperData->getGeneralConfig('api_key');
 
         // Config Api Url
         
-        $url = $this->_helperData->getGeneralConfig('test_mode') == 1 ? $this->_helperData->getGeneralConfig('api_url_test') : $this->_helperData->getGeneralConfig('api_url');
+        $url = $this->_helperData->getGeneralConfig('test_mode') == 1 && $debug == true ? $this->_helperData->getGeneralConfig('api_url_test') : $this->_helperData->getGeneralConfig('api_url');
+       
+        // Check End Slash
 
-        // Check Operator action
-        // ... ( / or ? )
-        // 
-
+        if(substr($url , -1)!='/'){
+            $url .= '/';
+        }
         // Add Action to url
 
         $url .= $action;
@@ -101,10 +102,13 @@ class Requester extends AbstractHelper
 
         // Curl Options
 
+        $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? true : false;
+
         $options = [
             CURLOPT_CUSTOMREQUEST=>"POST",
             CURLOPT_POSTFIELDS=>$dataJson,
-            CURLOPT_RETURNTRANSFER=>true
+            CURLOPT_RETURNTRANSFER=>true,
+            CURLOPT_SSL_VERIFYPEER=>$sslVerifypeer
         ];
 
         $this->_curl->setHeaders($headers);
