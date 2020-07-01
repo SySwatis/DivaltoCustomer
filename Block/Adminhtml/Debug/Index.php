@@ -62,7 +62,7 @@ class Index extends \Magento\Backend\Block\Template
         } else {
             $html = "Debug disable";
         }
-        $html .=    '<p><b>Author :</b> SySwatis | https://github.com/SySwatis/DivaltoCustomer</p>';
+        $html .=    '<p><b>Author :</b> SySwatis : <a href="https://github.com/SySwatis/DivaltoCustomer">github.com DivaltoCustomer</a></p>';
         return $html;
     }
 }
