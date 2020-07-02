@@ -51,11 +51,11 @@ class CreateCustomer extends \Magento\Backend\Block\Template
             "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
             "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
         ];
-        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, 'CreerClient', true));
+        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER, true));
     }
     
     function responseUrlProd() {
         $postData = array();
-        return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, 'CreerClient'));
+        return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER));
     }
 }

@@ -50,19 +50,19 @@ class Index extends \Magento\Backend\Block\Template
 
             $emailTest = "contact@pachadistribution.com";
 
-            $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? _('Yes') : _('No');
+            $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? 'Yes' : 'No';
 
 
 
-            $html =     '<p><b>SSL Cert. Verfify Peer:</b> '.$sslVerifypeer.'</p>';
-            $html .=    '<p><b>Email test: </b> '.$emailTest.'</p>';
-            $html .=    '<p><b>Api Url Test (Debug):</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p>';
+            $html =     '<p><b>'.__('SSL Cert. Verfify Peer:').'</b> '.__($sslVerifypeer).'</p>';
+            $html .=    '<p><b>'.__('Email test:').'</b> '.$emailTest.'</p>';
+            $html .=    '<p><b>'.__('Api Url Test (Debug):').'</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p>';
             
 
         } else {
             $html = "Debug disable";
         }
-        $html .=    '<p><b>Author :</b> SySwatis : <a href="https://github.com/SySwatis/DivaltoCustomer">github.com DivaltoCustomer</a></p>';
+        $html .=    '<p><b>Author:</b> SySwatis Copyright© 2020 | <a href="https://github.com/SySwatis/DivaltoCustomer">github.com DivaltoCustomer</a> - ver. 0.1.0 (dev-master)</p>';
         return $html;
     }
 }

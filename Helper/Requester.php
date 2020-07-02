@@ -28,6 +28,12 @@ class Requester extends AbstractHelper
     
     const CUSTOMER_GROUP_DEFAULT_NAME = 'General';
 
+    const ACTION_CREATE_CUSTOMER = 'CreerClient';
+
+    const ACTION_CREATE_ORDER = 'CreerCommande';
+
+    const ACTION_PING = 'ping';
+
     protected $_curl;
 
     protected $_logger;
@@ -83,11 +89,11 @@ class Requester extends AbstractHelper
 
         // Check Data and Data key Email
 
-        if( !isset($postData) && !isset($postData['Contact']['Email']) && $action === 'CreerClient' ) {
+        if( !isset($postData) && !isset($postData['Contact']['Email']) && $action === self::ACTION_CREATE_CUSTOMER ) {
             return false;
         }
 
-        if( !isset($postData) && !isset($postData['Client_Particulier']['Contact']['Email']) && $action === 'CreerCommande' ) {
+        if( !isset($postData) && !isset($postData['Client_Particulier']['Contact']['Email']) && $action === self::ACTION_CREATE_ORDER ) {
             return false;
         }
 

@@ -63,8 +63,7 @@ class UpdateOrder implements ObserverInterface
 		$method = $payment->getMethodInstance();
 		$methodTitle = $method->getTitle();
 		$methodCode = $method->getCode();
-
-		$stateDefault = \Magento\Sales\Model\Order::STATE_PROCESSING;
+		$response = '';
 
 		// Divalo Store Id (Numero_Dossier)
 
@@ -81,8 +80,6 @@ class UpdateOrder implements ObserverInterface
 		// Allows Checking
 
 		if( in_array($methodCode, $orderPaymentMethodAllowed) || in_array($order->getStatus(), $orderStatusAllowed) ) {
-			
-			$response = $order->getStatus().' - ERP query fail';
 
 			// Send Data Order
 
@@ -97,9 +94,14 @@ class UpdateOrder implements ObserverInterface
 				// Get response from api Divalto
 
 				$response = self::HEADING_COMMENT;
-				$response .= $this->_helperRequester->getDivaltoCustomerData($postData, 'CreerCommande');
+				$response .= $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER);
 
 			} catch (StateException $e) {
+				
+				// Comment (Fail)
+			
+				$response = $order->getStatus().' - ERP query fail';
+
             	$this->_log->critical($e->getMessage());
             	$this->_messageManager->addExceptionMessage($e, __('We can\'t save the order.'));
         	}
@@ -107,6 +109,8 @@ class UpdateOrder implements ObserverInterface
         	// Add comment to order (Order Id(s) dvialto)
 			
 			$this->_comment->addCommentToOrder($order->getId(),$response);
+
+			// Add event to log
 
 			$this->_log->debug('Oberser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode );
 		}

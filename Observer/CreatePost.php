@@ -114,7 +114,7 @@ class CreatePost implements ObserverInterface
 
             // Get group name (code_Client Divalto "users")
 
-            $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($postData,'CreerClient');
+            $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($postData,$this->_helperRequester::ACTION_CREATE_CUSTOMER);
 
             // Default (log)
 

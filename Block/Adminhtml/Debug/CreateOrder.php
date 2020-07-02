@@ -56,7 +56,7 @@ class CreateOrder extends \Magento\Backend\Block\Template
         // if( isset($_GET['OrderId']) && is_numeric($_GET['OrderId']) ) {
         //     $postData = $this->_orderMap->create($_GET['OrderId']);
         // }
-        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, 'CreerCommande', true));
+        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true));
     }
     
     function responseUrlProd() {
