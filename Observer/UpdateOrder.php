@@ -92,9 +92,7 @@ class UpdateOrder implements ObserverInterface
 				$postData = $this->_orderMap->create($order->getId());
 
 				// Get response from api Divalto
-
-				$response = self::HEADING_COMMENT;
-				$response .= $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER);
+				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
 
 			} catch (StateException $e) {
 				
@@ -107,8 +105,10 @@ class UpdateOrder implements ObserverInterface
         	}
 
         	// Add comment to order (Order Id(s) dvialto)
-			
-			$this->_comment->addCommentToOrder($order->getId(),$response);
+
+			if($response!='')
+				
+			$this->_comment->addCommentToOrder($order->getId(),self::HEADING_COMMENT.$response['comment']);
 
 			// Add event to log
 

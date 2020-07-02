@@ -191,7 +191,7 @@ class Requester extends AbstractHelper
             if($action == 'CreerCommande') {
 
                 if( isset($data['numero_Commande_Divalto']) ) {
-                     return array('comment'=>$data['numero_Commande_Divalto']);
+                     return array('comment'=>$responseText.' | '.$data['numero_Commande_Divalto']);
                 }
 
                 if( isset($data['message']) ) {

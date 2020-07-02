@@ -21,10 +21,6 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
 class PaymentMethodDisable implements ObserverInterface {
-	/**
-	 * @var \Magento\Customer\Model\Session
-	 */
-	protected $_customerSession;
 
 	/** 
 	 * @var \Divalto\Customer\Helper\Data
@@ -36,10 +32,8 @@ class PaymentMethodDisable implements ObserverInterface {
 	 * @param \Divalto\Customer\Helper\Data $helperData
 	 */
 	public function __construct(
-		\Magento\Customer\Model\Session $customerSession,
 		\Divalto\Customer\Helper\Data $helperData
 	) {
-		$this->_customerSession = $customerSession;
 		$this->_helperData = $helperData;
 	}
 
@@ -56,19 +50,21 @@ class PaymentMethodDisable implements ObserverInterface {
 
 		$payment_method_code = $observer->getEvent()->getMethodInstance()->getCode();
 
-		// 0 = Pas de paiement autorisé
-		// 1 = CB uniquement
-		// 2 = CB + Bon de commande
+		// 0 = No payments (Pas de paiement autorisé)
+		// 1 = All except "purchaseorder" (CB uniquement)
+		// 2 = All (CB + Bon de commande)
+		// 3 = Custom rule config not avaible in this version
 
-		if ($this->_helperData->getOutstanding()) {
-			if($this->_helperData->getOutstandingValue()==1  && $payment_method_code === 'purchaseorder') {
-				$result = $observer->getEvent()->getResult();
-				$result->setData('is_available', false);
-			}
-		} else {
+		if( $this->_helperData->getOutstandingValue()==0 ) {
+			$result = $observer->getEvent()->getResult();
+			$result->setData('is_available', false);
+
+		}
+		if( $this->_helperData->getOutstandingValue()==1 && $payment_method_code === 'purchaseorder' ) {
 			$result = $observer->getEvent()->getResult();
 			$result->setData('is_available', false);
 		}
+
 	}
 	
 }

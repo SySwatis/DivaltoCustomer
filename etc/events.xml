@@ -26,7 +26,10 @@
     <event name="payment_method_is_active">
         <observer name="customer_payment_disable" instance="Divalto\Customer\Observer\PaymentMethodDisable" />
     </event>
-    <event name="sales_order_save_after">
+<!--     <event name="sales_order_save_after">
+        <observer name="divalto_customer_sales_order_save_after" instance="Divalto\Customer\Observer\UpdateOrder" />
+    </event> -->
+    <event name="checkout_onepage_controller_success_action">
         <observer name="divalto_customer_sales_order_save_after" instance="Divalto\Customer\Observer\UpdateOrder" />
     </event>
     

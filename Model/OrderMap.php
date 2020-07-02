@@ -130,7 +130,7 @@ class OrderMap
         $groupCode = $this->_helperData->getGroupById($customerOrder->getGroupId());
 
         // Order Data (Divalto Mapping)
-
+        
         $orderData = [
             'Numero_Dossier'=>$divaltoStoreId,
             'Numero_Commande_Magento'=>$order->getIncrementId(),
@@ -139,7 +139,7 @@ class OrderMap
             'Code_Adresse_Livraison'=>'',
             'Adresse_Livraison_Manuelle'=>$shippingAddressData,
             'Code_Adresse_Facturation'=>'',
-            'Paiement'=>$orderStatus,
+            'Paiement'=>'processing',
             'liste_detail_ligne'=>$orderDataItems,
             'Client_Particulier'=>array(
                 'Email_Client'=>'',

@@ -31,7 +31,7 @@ class OutstandingStatus extends \Magento\Eav\Model\Entity\Attribute\Source\Abstr
                 ['value' => '', 'label' => __('Please Select')],
                 ['value' => '0', 'label' => __('Not Allowed')],
                 ['value' => '1', 'label' => __('CB Only')],
-                ['value' => '2', 'label' => __('CB Or Purshase Order')],
+                ['value' => '2', 'label' => __('CB Or Purchase Order')],
                 ['value' => '3', 'label' => __('Custom Rules')]
             ];
         }

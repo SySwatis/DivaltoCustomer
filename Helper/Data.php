@@ -200,12 +200,6 @@ class Data extends AbstractHelper
         }
     }
 
-    public function getOutstanding()
-    {
-        $outstanding = $this->_customerSession->getCustomer()->getData('divalto_outstanding_status');
-        return $outstanding > 0  ? true : false;
-    }
-
     public function getOutstandingValue()
     {
         return $this->_customerSession->getCustomer()->getData('divalto_outstanding_status');

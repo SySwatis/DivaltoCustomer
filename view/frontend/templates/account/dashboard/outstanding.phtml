@@ -17,7 +17,7 @@
 ?>
 <div class="block">
 	<div class="block-title initial"><strong><?= __('Outstanding') ?></strong></div>
-<?php if($block->getOutstanding()) :  ?>
+<?php if($block->getOutstanding()>0) :  ?>
 	<p><?= __('You can order and pay online') ?></p>
 <?php else : ?>
 	<p><?= __('You can only order, payment online not authorized') ?></p>
