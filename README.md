@@ -7,4 +7,4 @@
 ## Contribute
 ## Documentation
 
-- Debug (customer account : { website.com }/divalto/account/debug)
+- Non disponible pour l'instant se module assure le flux d'échange entre Magento & Divalto sur la création de commande (processing) et la création de client (+groupe client).
