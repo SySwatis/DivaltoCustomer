@@ -36,11 +36,8 @@ class Ping extends \Magento\Backend\Block\Template
         parent::__construct($context);
     }
 
-	function responseUrlTest() {
-		return array('Ping url'=>$this->_helperData->getGeneralConfig('api_url_test'),$this->_helperRequester->getDivaltoCustomerData(array(), $this->_helperRequester::ACTION_PING, true));
+	function response() {
+		return array('Ping url'=>$this->_helperData->getGeneralConfig('api_url_test'),$this->_helperRequester->getDivaltoCustomerData(array(), $this->_helperRequester::ACTION_PING));
 	}
 	
-	function responseUrlProd() {
-		return array('Ping url'=>$this->_helperData->getGeneralConfig('api_url'),$this->_helperRequester->getDivaltoCustomerData(array(), $this->_helperRequester::ACTION_PING));
-	}
 }

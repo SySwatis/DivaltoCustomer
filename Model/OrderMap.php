@@ -59,7 +59,7 @@ class OrderMap
         }
     }
 
-    function create($orderId,$orderStatus=self::DIVALTO_STATE_PROCESSING) {
+    function create($orderIn,$orderStatus=self::DIVALTO_STATE_PROCESSING) {
 
         // Config
 
@@ -69,7 +69,7 @@ class OrderMap
 
         // Get Order
 
-		$order = $this->_orderRepository->get($orderId);
+		$order = $this->_orderRepository->get($orderIn->getId());
 
 		// Get Customer Order
 

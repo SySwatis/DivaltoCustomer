@@ -63,14 +63,14 @@ class Requester extends AbstractHelper
     //     });
     // }
 
-    public function getDivaltoCustomerData($postData, $action='ping', $debug = false)
+    public function getDivaltoCustomerData($postData, $action='ping')
     {
 
         $apiKey = $this->_helperData->getGeneralConfig('api_key');
 
         // Config Api Url
         
-        $url = $this->_helperData->getGeneralConfig('test_mode') == 1 && $debug == true ? $this->_helperData->getGeneralConfig('api_url_test') : $this->_helperData->getGeneralConfig('api_url');
+        $url = $this->_helperData->getGeneralConfig('test_mode') == 1 ? $this->_helperData->getGeneralConfig('api_url_test') : $this->_helperData->getGeneralConfig('api_url');
        
         // Check End Slash
 

@@ -56,7 +56,7 @@ class Index extends Action implements HttpGetActionInterface
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu(static::MENU_ID);
-        // $resultPage->getConfig()->getTitle()->prepend(__('Divalto'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Divalto'));
         return $resultPage;
     }
 }

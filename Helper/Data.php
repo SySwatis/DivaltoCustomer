@@ -102,6 +102,11 @@ class Data extends AbstractHelper
     }
 
 
+    public function getCustomer()
+    {
+        return $this->_customerSession->getCustomer();
+    }
+
     public function getGroupId() 
     {
         return $this->_customerSession->getCustomer()->getGroupId();

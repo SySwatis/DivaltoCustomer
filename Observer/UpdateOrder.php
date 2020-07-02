@@ -65,6 +65,13 @@ class UpdateOrder implements ObserverInterface
 		$methodCode = $method->getCode();
 		$response = '';
 
+
+		// Skip  Event frontend
+
+		if( $this->_helperData->getCustomer()->getId() && $observer->getEvent()->getName()=='sales_order_save_after' ) {
+			return;
+		}
+
 		// Divalo Store Id (Numero_Dossier)
 
         $divaltoStoreId = $this->_helperData->getGeneralConfig('divalto_store_id');
@@ -89,7 +96,7 @@ class UpdateOrder implements ObserverInterface
 				
 				// Order Mapping
 				
-				$postData = $this->_orderMap->create($order->getId());
+				$postData = $this->_orderMap->create($order);
 
 				// Get response from api Divalto
 				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
