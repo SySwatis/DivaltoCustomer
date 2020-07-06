@@ -99,6 +99,7 @@ class UpdateOrder implements ObserverInterface
 				$postData = $this->_orderMap->create($order);
 
 				// Get response from api Divalto
+				
 				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
 
 			} catch (StateException $e) {
