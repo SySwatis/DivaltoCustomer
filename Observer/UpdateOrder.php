@@ -19,6 +19,7 @@ namespace Divalto\Customer\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 
 class UpdateOrder implements ObserverInterface
 {
@@ -35,6 +36,8 @@ class UpdateOrder implements ObserverInterface
 
 	protected $_comment;
 
+    protected $_customerRepositoryInterface;
+
 	/**
 	* @param \Psr\Log\LoggerInterface $_log
     */
@@ -44,13 +47,15 @@ class UpdateOrder implements ObserverInterface
         \Divalto\Customer\Helper\Data $_helperData,
         \Divalto\Customer\Helper\Requester $_helperRequester,
         \Divalto\Customer\Model\OrderMap $_orderMap,
-        \Divalto\Customer\Model\Comment $_comment
+        \Divalto\Customer\Model\Comment $_comment,
+		CustomerRepositoryInterface $customerRepositoryInterface
     ){
         $this->_log = $_log;
         $this->_helperData = $_helperData;
         $this->_helperRequester = $_helperRequester;
         $this->_orderMap = $_orderMap;
         $this->_comment = $_comment;
+        $this->_customerRepositoryInterface = $customerRepositoryInterface;
     }
 
 	public function execute(\Magento\Framework\Event\Observer $observer)
@@ -100,7 +105,7 @@ class UpdateOrder implements ObserverInterface
 
 				// Get response from api Divalto
 				
-				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
+				// $response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
 
 			} catch (StateException $e) {
 				
@@ -118,9 +123,25 @@ class UpdateOrder implements ObserverInterface
 				
 			$this->_comment->addCommentToOrder($order->getId(),self::HEADING_COMMENT.$response['comment']);
 
+			// Update customer
+
+			$customer = $this->_helperData->getCustomerById($order->getCustomerId());
+            if($customer){
+            	
+            	// Vat Number
+            	
+				$taxVat = $postData['Client_Particulier']['Numero_TVA'];
+				$customer->setTaxvat($taxVat);
+				
+				// Customer Group
+				// ...
+
+				$this->_customerRepositoryInterface->save($customer);
+			}
+
 			// Add event to log
 
-			$this->_log->debug('Oberser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode );
+			$this->_log->debug('Oberser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode.' | Taxvat : '.$postData['Client_Particulier']['Numero_TVA']);
 		}
 	}
 }

@@ -59,6 +59,11 @@ class OrderMap
         }
     }
 
+    function generateVatNumber($customer, $country) 
+    {
+        return $this->_helperData->siretToVatNumber($this->getCustomerAttributeValue($customer,'siret'),$country);
+    }
+
     function create($orderIn,$orderStatus=self::DIVALTO_STATE_PROCESSING) {
 
         // Config
@@ -129,6 +134,10 @@ class OrderMap
 
         $groupCode = $this->_helperData->getGroupById($customerOrder->getGroupId());
 
+        // Vat Number
+
+        $vatNumber = $this->generateVatNumber($customerOrder,$billingAddress->getCountryId());
+
         // Order Data (Divalto Mapping)
         
         $orderData = [
@@ -142,6 +151,7 @@ class OrderMap
             'Paiement'=>'processing',
             'liste_detail_ligne'=>$orderDataItems,
             'Client_Particulier'=>array(
+                'Numero_TVA'=>$vatNumber,
                 'Email_Client'=>'',
                 'Raison_Sociale'=>$this->getCustomerAttributeValue($customerOrder,'company_name'),
                 'Titre'=>$this->getCustomerAttributeValue($customerOrder,'legal_form'),
