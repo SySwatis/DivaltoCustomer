@@ -19,7 +19,6 @@ namespace Divalto\Customer\Model;
 
 use Magento\Sales\Model\OrderRepository;
 use Magento\Sales\Model\Order;
-use \Magento\Tax\Model\Config;
 use Psr\Log\LoggerInterface;
 
 class OrderMap
@@ -42,13 +41,11 @@ class OrderMap
 
     public function __construct(
     	OrderRepository $orderRepository,
-    	Config $configTax,
     	LoggerInterface $log,
     	\Divalto\Customer\Helper\data $helperData
     ) {
     	$this->_log = $log;
     	$this->_orderRepository = $orderRepository;
-    	$this->_configTax = $configTax;
     	$this->_helperData = $helperData;
     }
 
@@ -57,11 +54,6 @@ class OrderMap
         if($customerOrder->getCustomAttribute($attibuteCode)) {
             return $customerOrder->getCustomAttribute($attibuteCode)->getValue();
         }
-    }
-
-    function generateVatNumber($customer, $country) 
-    {
-        return $this->_helperData->siretToVatNumber($this->getCustomerAttributeValue($customer,'siret'),$country);
     }
 
     function create($orderIn,$orderStatus=self::DIVALTO_STATE_PROCESSING) {
@@ -134,10 +126,6 @@ class OrderMap
 
         $groupCode = $this->_helperData->getGroupById($customerOrder->getGroupId());
 
-        // Vat Number
-
-        $vatNumber = $this->generateVatNumber($customerOrder,$billingAddress->getCountryId());
-
         // Order Data (Divalto Mapping)
         
         $orderData = [
@@ -151,7 +139,8 @@ class OrderMap
             'Paiement'=>'processing',
             'liste_detail_ligne'=>$orderDataItems,
             'Client_Particulier'=>array(
-                'Numero_TVA'=>$vatNumber,
+                'Numero_TVA'=>$customerOrder->getTaxvat(),
+                'Code_Ape'=>$this->getCustomerAttributeValue($customerOrder,'ape'),
                 'Email_Client'=>'',
                 'Raison_Sociale'=>$this->getCustomerAttributeValue($customerOrder,'company_name'),
                 'Titre'=>$this->getCustomerAttributeValue($customerOrder,'legal_form'),

@@ -63,21 +63,37 @@ class UpdateCustomer implements ObserverInterface
             return;
         }
 
-        // Get session Divalto Data (response)
+        // Default 
 
-        $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
-        $outStandingStatus = $sessionDivaltoData['outstanding_status'];
-        $response = $sessionDivaltoData['divalto_response'];
-        $extrafield_1 = $sessionDivaltoData['divalto_extrafield_1'];
-        $extrafield_2 = $sessionDivaltoData['divalto_extrafield_2'];
+        $outStandingStatus = 1; // CB Only - Divalto/Customer/Model/Config/Source/OutstandingStatus.php
+        $groupName = '';
+        $response = '';
+        $extrafield_1 = '';
+        $extrafield_2 = '';
 
-        if( isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
+        // Get Customer
 
-            $groupName = $sessionDivaltoData['group_name'];
-            $groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
+        $customer = $observer->getEvent()->getCustomer();
 
-            $customer = $observer->getEvent()->getCustomer();
-            if($customer){
+        if($customer){
+
+            // Get session Divalto Data (response)
+
+            $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
+
+            if( $sessionDivaltoData && isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
+                $groupName = $sessionDivaltoData['group_name'];
+                $outStandingStatus = $sessionDivaltoData['outstanding_status'];
+                $response = $sessionDivaltoData['divalto_response'];
+                $extrafield_1 = $sessionDivaltoData['divalto_extrafield_1'];
+                $extrafield_2 = $sessionDivaltoData['divalto_extrafield_2'];
+            }
+
+            // GroupId
+
+            if($groupName!='') {
+
+                $groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
 
                 if($groupId) {
                     if ($customer->getGroupId() == self::CUSTOMER_GROUP_DEFAULT_ID) {
@@ -85,24 +101,27 @@ class UpdateCustomer implements ObserverInterface
                         $this->_log->debug('Observer UpdateCustomer Group Id : '.$groupId);
                     }
                 }
-
-                $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
-                $customer->setCustomAttribute('divalto_account_id',$groupName);
-                $customer->setCustomAttribute('divalto_response',$response);
-                $customer->setCustomAttribute('divalto_extrafield_1',$extrafield_1);
-                $customer->setCustomAttribute('divalto_extrafield_2',$extrafield_2);
-                $this->_customerRepositoryInterface->save($customer);
-
             }
 
-        } else {
+            // Set Atttributes
 
+            $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
+            $customer->setCustomAttribute('divalto_account_id',$groupName);
+            $customer->setCustomAttribute('divalto_response',$response);
+            $customer->setCustomAttribute('divalto_extrafield_1',$extrafield_1);
+            $customer->setCustomAttribute('divalto_extrafield_2',$extrafield_2);
+
+            $this->_customerRepositoryInterface->save($customer);
+
+            //
+
+            $this->_helperData->unsSessionDivaltoData();
+
+        } else {
             // Add Warning message
             $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
-        }
-
-        $this->_helperData->unsSessionDivaltoData();
-        
+        }    
     }
+
 
 }

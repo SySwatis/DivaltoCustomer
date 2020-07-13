@@ -55,6 +55,11 @@ class Data extends AbstractHelper
     /**
      * @var
      */
+    protected $_vatModel;
+
+    /**
+     * @var
+     */
     protected $_customerSession;
 
     /**
@@ -218,22 +223,6 @@ class Data extends AbstractHelper
     public function getDebugConfig()
     {
         return $this->getGeneralConfig('debug')==1 ? true : false;
-    }
-
-    // https://fr.wikipedia.org/wiki/Code_Insee
-
-    public function siretToVatNumber($siret,$country='FR')
-    {
-        if(!is_numeric($siret)) return;
-        $siren = substr($siret,-9);
-        $key = 12+(3*($siren%97));
-        return $country.$key.$siren;
-    }
-
-    public function checkVat($siret,$country)
-    {
-        $vatNumber = $this->siretToVatNumber($siret,$country);
-        return;
     }
     
 }

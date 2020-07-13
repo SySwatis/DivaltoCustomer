@@ -26,20 +26,28 @@
         </select>
     </div>
 </div>
-<div class="field company-name required">
-    <label class="label" for="company-name">
+<div class="field company_name required">
+    <label class="label" for="company_name">
       <span><?= $block->escapeHtml(__('Company Name')) ?></span>
     </label>
     <div class="control">
-       <input type="text" name="company-name" id="company_name" value="" title="<?= $block->escapeHtmlAttr(__('Company Name')) ?>" class="input-text" data-validate="{required:true, company-name:true}">
+       <input type="text" name="company_name" id="company_name" value="" title="<?= $block->escapeHtmlAttr(__('Company Name')) ?>" class="input-text" data-validate="{required:true}">
     </div>
 </div>
-<div class="field siret required">
+<!-- <div class="field siret required">
     <label class="label" for="siret">
       <span><?= $block->escapeHtml(__('Siret')) ?></span>
     </label>
     <div class="control">
-       <input type="text" name="siret" id="siret" value="" title="<?= $block->escapeHtmlAttr(__('Siret')) ?>" class="input-text" data-validate="{required:true, siret:true}">
+       <input type="text" name="siret" id="siret" value="" title="<?= $block->escapeHtmlAttr(__('Siret')) ?>" class="input-text" data-validate="{required:true, siret:true,'remote':'<?php echo $this->getUrl('divalto/validate/siretbyvat', ['_secure' => true]); ?>'}">
+    </div>
+</div> -->
+<div class="field siret required">
+    <label class="label" for="taxvat">
+      <span><?= $block->escapeHtml(__('VAT number')) ?></span>
+    </label>
+    <div class="control">
+       <input type="text" name="taxvat" id="taxvat" value="" title="<?= $block->escapeHtmlAttr(__('VAT number')) ?>" class="input-text" data-validate="{required:true,'remote':'<?php echo $this->getUrl('divalto/validate/vat', ['_secure' => true]); ?>'}">
     </div>
 </div>
 <div class="field ape required">

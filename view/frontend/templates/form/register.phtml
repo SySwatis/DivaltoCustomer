@@ -40,10 +40,10 @@
             <?= $_dob->setDate($block->getFormData()->getDob())->toHtml() ?>
         <?php endif ?>
 
-        <?php $_taxvat = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Taxvat::class) ?>
+       <!--  <?php $_taxvat = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Taxvat::class) ?>
         <?php if ($_taxvat->isEnabled()) : ?>
             <?= $_taxvat->setTaxvat($block->getFormData()->getTaxvat())->toHtml() ?>
-        <?php endif ?>
+        <?php endif ?> -->
 
         <?php $_gender = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Gender::class) ?>
         <?php if ($_gender->isEnabled()) : ?>
@@ -147,7 +147,7 @@
         <div class="field required">
             <label for="email_address" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
             <div class="control">
-                <input type="email" name="email" autocomplete="email" id="email_address" value="<?= $block->escapeHtmlAttr($block->getFormData()->getEmail()) ?>" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" class="input-text" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-email':true}">
+                <input type="email" name="email" autocomplete="email" id="email_address" value="<?= $block->escapeHtmlAttr($block->getFormData()->getEmail()) ?>" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" class="input-text" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-email':true, 'remote':'<?php echo $this->getUrl('divalto/validate/email', ['_secure' => true]); ?>'}">
             </div>
         </div>
         <div class="field password required">

@@ -105,7 +105,7 @@ class UpdateOrder implements ObserverInterface
 
 				// Get response from api Divalto
 				
-				// $response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
+				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
 
 			} catch (StateException $e) {
 				
@@ -126,17 +126,22 @@ class UpdateOrder implements ObserverInterface
 			// Update customer
 
 			$customer = $this->_helperData->getCustomerById($order->getCustomerId());
+
             if($customer){
             	
             	// Vat Number
             	
-				$taxVat = $postData['Client_Particulier']['Numero_TVA'];
-				$customer->setTaxvat($taxVat);
+				// $taxVat = $postData['Client_Particulier']['Numero_TVA'];
+				// $customer->setTaxvat($taxVat);
 				
-				// Customer Group
-				// ...
+				// Customer Group Name (create by helperRequester)
+				// $groupName = $response['group_name'];
+				// $customer->setCustomAttribute('divalto_account_id',$groupName);
+				// $groupId = $this->_helperData()->getCustomerGroupIdByName($groupName);
+				// if($groupId)
+				// $customer->setGroupId($groupId);
 
-				$this->_customerRepositoryInterface->save($customer);
+				// $this->_customerRepositoryInterface->save($customer);
 			}
 
 			// Add event to log

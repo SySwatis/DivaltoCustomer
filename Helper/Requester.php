@@ -191,7 +191,15 @@ class Requester extends AbstractHelper
             if($action == 'CreerCommande') {
 
                 if( isset($data['numero_Commande_Divalto']) ) {
-                     return array('comment'=>$responseText.' | '.$data['numero_Commande_Divalto']);
+
+                    $groupName = self::CUSTOMER_GROUP_DEFAULT_NAME;
+
+                    if( isset($data['code_Client']) ) {
+                        $groupName = $data['code_Client'];
+                        $this->_helperData->groupCreate($groupName);
+                    }
+
+                    return array('group_name'=>$groupName,'comment'=>$responseText.' | '.$data['numero_Commande_Divalto']);
                 }
 
                 if( isset($data['message']) ) {
