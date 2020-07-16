@@ -10,27 +10,24 @@
 /**
  * @category   Divalto
  * @package    Divalto_Customer
- * @subpackage Helper
+ * @subpackage Model
  * @author SySwatis (Stéphane JIMENEZ)
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
  
-namespace Divalto\Customer\Helper;
+namespace Divalto\Customer\Model;
 
-use Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Helper\Context;
 use Magento\Sales\Model\OrderRepository;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Psr\Log\LoggerInterface;
    
-class Order extends AbstractHelper
+class Order
 { 
     protected $orderRepository;
   
     protected $searchCriteriaBuilder;
     
     public function __construct(
-        Context $context, 
         OrderRepository $orderRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder
     ) {

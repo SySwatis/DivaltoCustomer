@@ -44,7 +44,7 @@ class SiretByVat extends Action
      public function __construct(
           \Magento\Framework\App\Action\Context $context,
           \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-          \Divalto\Customer\Helper\Vat $vatCustomer
+          \Divalto\Customer\Model\Vat $vatCustomer
      ) {
           $this->_resultJsonFactory = $resultJsonFactory;
           $this->_vatCustomer = $vatCustomer;

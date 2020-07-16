@@ -37,7 +37,7 @@ class CreateCustomer extends \Magento\Backend\Block\Template
     }
 
     function responseUrlTest() {
-       $emailTest = "contact@pachadistribution.com";
+       $emailTest = "muratk21@hotmail.com";
        $postData = [
             "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
             "Email_Client"=>"",
@@ -51,7 +51,7 @@ class CreateCustomer extends \Magento\Backend\Block\Template
             "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
             "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
         ];
-        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER, true));
+        return array('Email Test'=>$emailTest, 'Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER, true));
     }
     
     function responseUrlProd() {

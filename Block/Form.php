@@ -18,7 +18,7 @@
 
 namespace Divalto\Customer\Block;
 
-class LegalForm extends \Magento\Framework\View\Element\Template
+class Form  extends \Magento\Framework\View\Element\Template
 {
 
     /**

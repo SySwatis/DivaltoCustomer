@@ -33,9 +33,9 @@ class CreatePost implements ObserverInterface
     protected $_messageManager;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var \Divalto\Customer\Logger\Logger
      */
-    protected $_log;
+    protected $_logger;
 
     /**
      * @var \Divalto\Customer\Helper\Data
@@ -66,14 +66,14 @@ class CreatePost implements ObserverInterface
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Message\ManagerInterface $messageManager,
-        \Psr\Log\LoggerInterface $logger,
+        \Divalto\Customer\Logger\Logger $logger,
         \Divalto\Customer\Helper\Data $helperData,
         \Divalto\Customer\Helper\Requester $helperRequester,
         \Magento\Customer\Model\Vat $vatCustomer
     ) {
         $this->_request = $request;
         $this->_messageManager = $messageManager;
-        $this->_log = $logger;
+        $this->_logger = $logger;
         $this->_helperData = $helperData;
         $this->_helperRequester = $helperRequester;
         $this->_vatCustomer = $vatCustomer;
@@ -81,6 +81,9 @@ class CreatePost implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+
+        return;
+
 
         if(!$this->_helperData->isEnabled()) {
             return;
@@ -130,10 +133,10 @@ class CreatePost implements ObserverInterface
 
             // Add comment to log file
 
-            $this->_log->debug('Observer CreatePost group name : '.$groupName);
+            $this->_logger->info('Observer CreatePost group name : '.$groupName);
 
         } catch (StateException $e) {
-            $this->_log->critical($e->getMessage());
+            $this->_logger->info($e->getMessage());
             $this->_messageManager->addExceptionMessage($e, __('We can\'t save the customer code.'));
         }
 

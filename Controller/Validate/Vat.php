@@ -40,10 +40,9 @@ class Vat extends Action
      public function __construct(
           Context $context,
           JsonFactory $resultJsonFactory,
-          \Divalto\Customer\Helper\Vat $vatCustomer
+          \Divalto\Customer\Model\Vat $vatCustomer
      ) {
           $this->_resultJsonFactory = $resultJsonFactory;
-          $this->_messageManager = $messageManager;
           $this->_vatCustomer =  $vatCustomer;
           parent::__construct($context);
      }
@@ -60,8 +59,6 @@ class Vat extends Action
           } else {
                $resultJson->setData('true');
           }
-
-          
          
           return $resultJson;
      }

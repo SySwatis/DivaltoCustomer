@@ -10,33 +10,34 @@
 /**
  * @category   Divalto
  * @package    Divalto_Customer
- * @subpackage Helper
+ * @subpackage Model
  * @author SySwatis (Stéphane JIMENEZ)
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
 
-    // Bug 2.3.4
-    // https://support.magento.com/hc/en-us/articles/360043471592-Unable-to-validate-VAT-number-Magento-Commerce-Cloud
-    // vendor/magento/module-customer/Model/Vat.php
-    // https://devblog.lexik.fr/symfony/un-validator-tva-bien-pratique-1123
-    // https://fr.wikipedia.org/wiki/Code_Insee
+/**
+ * Notices :
+ * Report Bug 2.3.4
+ * https://support.magento.com/hc/en-us/articles/360043471592-Unable-to-validate-VAT-number-Magento-Commerce-Cloud
+ * vendor/magento/module-customer/Model/Vat.php
+ * https://devblog.lexik.fr/symfony/un-validator-tva-bien-pratique-1123
+ * https://fr.wikipedia.org/wiki/Code_Insee
+ * https://en.wikipedia.org/wiki/VAT_identification_number
+ */
 
-namespace Divalto\Customer\Helper;
+namespace Divalto\Customer\Model;
 
-use \Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\DataObject;
-use \Magento\Framework\App\Helper\Context;
 use \Magento\Framework\Webapi\Soap\ClientFactory;
 use Psr\Log\LoggerInterface as PsrLogger;
 
 /**
  * Class Vat
- * @package Divalto\Customer\Helper
+ * @package Divalto\Customer\Model
  */
-class Vat extends AbstractHelper
+class Vat
 {
 
-    
     /**
      * WSDL of VAT validation service
      *
@@ -55,13 +56,11 @@ class Vat extends AbstractHelper
 
     public function __construct (
         ClientFactory $soapClientFactory,
-        PsrLogger $log,
-        Context $context
+        PsrLogger $log
     )
     {
         $this->_soapClientFactory = $soapClientFactory;
         $this->_log = $log;
-        parent::__construct($context);
     }
 
     public function siretToVatNumber($siretIn,$country='FR')
@@ -99,7 +98,6 @@ class Vat extends AbstractHelper
         $vatNumber    = substr($vat_number, 2);
 
         // Check Country Code Format
-        // https://en.wikipedia.org/wiki/VAT_identification_number
 
         if (strlen($vatNumber) < 5 || strlen($countryCode) != 2 || is_numeric(substr($countryCode, 0, 1)) || is_numeric(substr($countryCode, 1, 2))) {
             $response->setIsValid(false);
