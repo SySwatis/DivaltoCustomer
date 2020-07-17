@@ -17,7 +17,10 @@
  
 namespace Divalto\Customer\Observer;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Event\Observer;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\GroupFactory;
 use Magento\Customer\Model\CustomerFactory;
@@ -45,7 +48,7 @@ class UpdateCustomer implements ObserverInterface
         GroupFactory $groupFactory,
         CustomerFactory $customerFactory,
         ManagerInterface $messageManager,
-        \Psr\Log\LoggerInterface $logger,
+        PsrLoggerInterface $logger,
         \Divalto\Customer\Helper\Data $helperData
     ) {
         $this->_customerRepositoryInterface = $customerRepositoryInterface;
@@ -56,7 +59,7 @@ class UpdateCustomer implements ObserverInterface
         $this->_helperData = $helperData;
     }
 
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
 
         if(!$this->_helperData->isEnabled()) {

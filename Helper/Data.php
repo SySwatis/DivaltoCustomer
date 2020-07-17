@@ -17,6 +17,9 @@
 
 namespace Divalto\Customer\Helper;
 
+
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Filesystem\Driver\File;
@@ -27,7 +30,6 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Api\GroupRepositoryInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class Data
@@ -89,7 +91,7 @@ class Data extends AbstractHelper
         GroupFactory $groupFactory,
         Session $customerSession,
         CustomerRepositoryInterface $customerRepository,
-        LoggerInterface $logger,
+        PsrLoggerInterface $logger,
         GroupRepositoryInterface $groupRepository,
         SessionManagerInterface $coreSession,
 		Context $context
@@ -195,17 +197,18 @@ class Data extends AbstractHelper
         }
     }
     
-    public function groupCreate($groupName) 
+    public function groupCreate($groupName, $taxClassId=null) 
     {
+        $taxClassId ?? self::TAX_CLASS_DEFAULT_ID;
         try{
             if(!$this->getCustomerGroupIdByName($groupName)) { 
                 $group = $this->_groupFactory->create();
                 $group->setCode($groupName)
-                ->setTaxClassId(self::TAX_CLASS_DEFAULT_ID) // Core installers (Db) : 3 
+                ->setTaxClassId($taxClassId) // Core installers (Db) : 3 
                 ->save();
             }
             $this->createDirectoryGroupName($groupName); // Create path users to invoice dir
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->_log->critical($e->getGroupName());
         }
     }

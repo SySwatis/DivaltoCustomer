@@ -24,12 +24,15 @@
         <observer name="customer_resgister_observer" instance="Divalto\Customer\Observer\UpdateCustomer"/>
     </event>
     <event name="payment_method_is_active">
-        <observer name="customer_payment_disable" instance="Divalto\Customer\Observer\PaymentMethodDisable" />
+        <observer name="customer_payment_disable" instance="Divalto\Customer\Observer\PaymentMethodDisable"/>
     </event>
     <event name="sales_order_save_after">
-        <observer name="divalto_customer_sales_order_save_after" instance="Divalto\Customer\Observer\UpdateOrder" />
+        <observer name="divalto_customer_sales_order_save_after" instance="Divalto\Customer\Observer\UpdateOrder"/>
     </event>
-     <event name="checkout_submit_all_after">
-        <observer name="divalto_customer_checkout_submit_all_after" instance="Divalto\Customer\Observer\UpdateOrder" />
-    </event>   
+    <event name="checkout_submit_all_after">
+        <observer name="divalto_customer_checkout_submit_all_after" instance="Divalto\Customer\Observer\UpdateOrder"/>
+    </event>
+     <event name="layout_render_before">
+        <observer name="customer_account_create_post_test" instance="Divalto\Customer\Observer\CreatePost"/>
+    </event>
 </config>

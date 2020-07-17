@@ -14,9 +14,25 @@
  * @author SySwatis (Stéphane JIMENEZ)
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
+namespace Divalto\Customer\Logger\Handler;
 
-namespace Divalto\Customer\Logger;
+use Magento\Framework\Logger\Handler\Base as BaseHandler;
+use Monolog\Logger as MonologLogger;
 
-class Logger extends \Monolog\Logger
+class Debug extends BaseHandler
 {
+    
+	 /**
+     * Logging level
+     *
+     * @var int
+     */
+    protected $loggerType = MonologLogger::DEBUG;
+
+	/**
+     * File name
+     *
+     * @var string
+     */
+    protected $fileName = '/var/log/divalto/customer/debug.log';
 }

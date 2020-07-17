@@ -14,13 +14,25 @@
  * @author SySwatis (Stéphane JIMENEZ)
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
-namespace Divalto\Customer\Logger;
+namespace Divalto\Customer\Logger\Handler;
 
-use Monolog\Logger;
+use Magento\Framework\Logger\Handler\Base as BaseHandler;
+use Monolog\Logger as MonologLogger;
 
-class Handler extends \Magento\Framework\Logger\Handler\Base
+class Error extends BaseHandler
 {
-    protected $loggerType = Logger::INFO;
+    
+	 /**
+     * Logging level
+     *
+     * @var int
+     */
+    protected $loggerType = MonologLogger::ERROR;
 
-    protected $fileName = '/var/log/divalto/customer_info.log';
+	/**
+     * File name
+     *
+     * @var string
+     */
+    protected $fileName = '/var/log/divalto/customer/error.log';
 }

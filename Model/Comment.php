@@ -17,11 +17,12 @@
  
 namespace Divalto\Customer\Model;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\Data\OrderStatusHistoryInterface;
 use Magento\Sales\Api\OrderStatusHistoryRepositoryInterface;
-use Psr\Log\LoggerInterface;
 
 class Comment
 {
@@ -37,11 +38,11 @@ class Comment
     public function __construct(
         OrderStatusHistoryRepositoryInterface $orderStatusRepository,
         OrderRepositoryInterface $orderRepository,
-        LoggerInterface $logger
+        PsrLoggerInterface $logger
     ) {
         $this->orderStatusRepository = $orderStatusRepository;
         $this->orderRepository = $orderRepository;
-        $this->logger = $logger;
+        $this->_log = $logger;
     }
 
     /**
@@ -56,7 +57,7 @@ class Comment
         try {
             $order = $this->orderRepository->get($orderId);
         } catch (NoSuchEntityException $exception) {
-            $this->logger->error($exception->getMessage());
+            $this->_log->error($exception->getMessage());
         }
         $orderHistory = null;
         if ($order) {
@@ -65,8 +66,8 @@ class Comment
             );
             try {
                 $orderHistory = $this->orderStatusRepository->save($comment);
-            } catch (\Exception $exception) {
-                $this->logger->critical($exception->getMessage());
+            } catch (Exception $e) {
+                $this->_log->critical($e->getMessage());
             }
         }
         return $orderHistory;

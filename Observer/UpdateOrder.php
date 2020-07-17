@@ -17,7 +17,10 @@
  
 namespace Divalto\Customer\Observer;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Event\Observer;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 
@@ -26,6 +29,9 @@ class UpdateOrder implements ObserverInterface
 	
 	const HEADING_COMMENT = '#Divalto | ';
 
+	/**
+     * @var PsrLoggerInterface
+     */
 	protected $_log;
 
 	protected $_helperData;
@@ -43,12 +49,12 @@ class UpdateOrder implements ObserverInterface
     */
 
 	public function __construct(
-        \Psr\Log\LoggerInterface $_log,
-        \Divalto\Customer\Helper\Data $_helperData,
+        PsrLoggerInterface $_log,
+		CustomerRepositoryInterface $customerRepositoryInterface,
+		\Divalto\Customer\Helper\Data $_helperData,
         \Divalto\Customer\Helper\Requester $_helperRequester,
         \Divalto\Customer\Model\OrderMap $_orderMap,
-        \Divalto\Customer\Model\Comment $_comment,
-		CustomerRepositoryInterface $customerRepositoryInterface
+        \Divalto\Customer\Model\Comment $_comment
     ){
         $this->_log = $_log;
         $this->_helperData = $_helperData;
@@ -58,7 +64,7 @@ class UpdateOrder implements ObserverInterface
         $this->_customerRepositoryInterface = $customerRepositoryInterface;
     }
 
-	public function execute(\Magento\Framework\Event\Observer $observer)
+	public function execute(Observer $observer)
 	{
 		
 		// Order
@@ -107,7 +113,7 @@ class UpdateOrder implements ObserverInterface
 				
 				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
 
-			} catch (StateException $e) {
+			} catch (Exception $e) {
 				
 				// Comment (Fail)
 			
@@ -128,11 +134,6 @@ class UpdateOrder implements ObserverInterface
 			$customer = $this->_helperData->getCustomerById($order->getCustomerId());
 
             if($customer){
-            	
-            	// Vat Number
-            	
-				// $taxVat = $postData['Client_Particulier']['Numero_TVA'];
-				// $customer->setTaxvat($taxVat);
 				
 				// Customer Group Name (create by helperRequester)
 				// $groupName = $response['group_name'];

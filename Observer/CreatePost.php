@@ -17,8 +17,13 @@
 
 namespace Divalto\Customer\Observer;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Event\Observer;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Message\ManagerInterface;
 
 class CreatePost implements ObserverInterface
 {
@@ -33,9 +38,9 @@ class CreatePost implements ObserverInterface
     protected $_messageManager;
 
     /**
-     * @var \Divalto\Customer\Logger\Logger
+     * @var PsrLoggerInterface
      */
-    protected $_logger;
+    private $_log;
 
     /**
      * @var \Divalto\Customer\Helper\Data
@@ -61,29 +66,23 @@ class CreatePost implements ObserverInterface
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Divalto\Customer\Helper\Data $helperData
      * @param \Divalto\Customer\Helper\Requester $helperRequester
-     * @param \Magento\Customer\Model\Vat $vatCustomer
      */
     public function __construct(
-        \Magento\Framework\App\RequestInterface $request,
-        \Magento\Framework\Message\ManagerInterface $messageManager,
-        \Divalto\Customer\Logger\Logger $logger,
+        RequestInterface $request,
+        ManagerInterface $messageManager,
+        PsrLoggerInterface $logger,
         \Divalto\Customer\Helper\Data $helperData,
-        \Divalto\Customer\Helper\Requester $helperRequester,
-        \Magento\Customer\Model\Vat $vatCustomer
+        \Divalto\Customer\Helper\Requester $helperRequester
     ) {
         $this->_request = $request;
         $this->_messageManager = $messageManager;
-        $this->_logger = $logger;
+        $this->_log = $logger;
         $this->_helperData = $helperData;
         $this->_helperRequester = $helperRequester;
-        $this->_vatCustomer = $vatCustomer;
     }
 
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
-
-        return;
-
 
         if(!$this->_helperData->isEnabled()) {
             return;
@@ -133,13 +132,13 @@ class CreatePost implements ObserverInterface
 
             // Add comment to log file
 
-            $this->_logger->info('Observer CreatePost group name : '.$groupName);
+            $this->_log->info('Observer CreatePost group name : '.$groupName);
 
-        } catch (StateException $e) {
-            $this->_logger->info($e->getMessage());
+        } catch (Exception $e) {
+            $this->_log->critical($e->getMessage());
             $this->_messageManager->addExceptionMessage($e, __('We can\'t save the customer code.'));
         }
-
+       
         return $observer;
     }  
 

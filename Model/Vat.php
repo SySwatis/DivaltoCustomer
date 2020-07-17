@@ -27,9 +27,10 @@
 
 namespace Divalto\Customer\Model;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
 use Magento\Framework\DataObject;
 use \Magento\Framework\Webapi\Soap\ClientFactory;
-use Psr\Log\LoggerInterface as PsrLogger;
 
 /**
  * Class Vat
@@ -56,7 +57,7 @@ class Vat
 
     public function __construct (
         ClientFactory $soapClientFactory,
-        PsrLogger $log
+        PsrLoggerInterface $log
     )
     {
         $this->_soapClientFactory = $soapClientFactory;
@@ -132,8 +133,8 @@ class Vat
                 $response->setMessage(__('This account was validate with this VAT Number:'));
             }
 
-        } catch (\Exception $exception) {
-            return  $response;
+        } catch (Exception $e) {
+            $this->_log->critical($e->getMessage());
         }
 
         return  $response;
