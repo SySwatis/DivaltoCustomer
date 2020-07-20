@@ -6,9 +6,12 @@
 ## Installation
 ## Contribute
 ## Description
-Ce assure le flux d'échange entre Magento 2 & Divalto ERP (solution adapté pour FoodCenter gpe).
-Il assure la création de client & la création de commande.
-Une clé API sécurise la transmission des données.
+Ce module assure le flux d'échange de Magento 2 (CMS e-commerce) vers Divalto (ERP solution).
+Clients & commandes sont poussés selon un montage spécifique et adpaté pour le compte de "Food Center Group".
+Il agit en deux temps : 1) gestion du client, 2) gestion de la commande.
+
+## WS Divalto
+Une clé API sécurise la transmission des données. Elle est administrable dans la partie configuration du module Magento 2
 
 ## Description
 En cours d'élaboration, cette description sera prochainement complétée et approfondie.
