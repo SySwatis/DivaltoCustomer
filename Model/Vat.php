@@ -53,7 +53,7 @@ class Vat
     /**
      * @var PsrLogger
      */
-    protected $_log;
+    protected $_logger;
 
     public function __construct (
         ClientFactory $soapClientFactory,
@@ -61,7 +61,7 @@ class Vat
     )
     {
         $this->_soapClientFactory = $soapClientFactory;
-        $this->_log = $log;
+        $this->_logger = $log;
     }
 
     public function siretToVatNumber($siretIn,$country='FR')
@@ -82,7 +82,7 @@ class Vat
         $response = new DataObject([ 'is_valid' => false, 'message'=>__('Invalid VAT Number, error unknown') ]);
             
         if (!extension_loaded('soap')) {
-            $this->_log->critical(new LocalizedException(__('PHP SOAP extension is required.')));
+            $this->_logger->critical(new LocalizedException(__('PHP SOAP extension is required.')));
             return $response;
         }
 
@@ -134,7 +134,7 @@ class Vat
             }
 
         } catch (Exception $e) {
-            $this->_log->critical($e->getMessage());
+            $this->_logger->critical($e->getMessage());
         }
 
         return  $response;

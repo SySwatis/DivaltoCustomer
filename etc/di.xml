@@ -25,12 +25,22 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="Divalto\Customer\Observer\CreatePost">
+    <type name="Divalto\Customer\Helper\Data">
+        <arguments>
+            <argument name="logger" xsi:type="object">DivatloCustomerLogger</argument>
+        </arguments>
+    </type>
+    <type name="Divalto\Customer\Helper\Requester">
         <arguments>
             <argument name="logger" xsi:type="object">DivatloCustomerLogger</argument>
         </arguments>
     </type>
     <type name="Divalto\Customer\Observer\CreatePost">
+        <arguments>
+            <argument name="logger" xsi:type="object">DivatloCustomerLogger</argument>
+        </arguments>
+    </type>
+    <type name="Divalto\Customer\Observer\UpdateCustomer">
         <arguments>
             <argument name="logger" xsi:type="object">DivatloCustomerLogger</argument>
         </arguments>

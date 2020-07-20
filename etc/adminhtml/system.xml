@@ -58,27 +58,32 @@
                     <validate>validate-url</validate>
                     <comment>Url End with Slash</comment>
                 </field>
-                <field id="ssl_verifypeer" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="email_test" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Test</label>
+                    <validate>validate-email</validate>
+                    <comment>Debug test "Creer un Client"</comment>
+                </field>
+                <field id="ssl_verifypeer" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>SSL Peer’s Certificate</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Url Test</comment>
                 </field>
-                <field id="test_mode" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="test_mode" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Test Mode</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Url Test</comment>
                 </field>
-                <field id="order_status" translate="label" type="multiselect" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="order_status" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                   <label>Order Status</label>
                   <source_model>Magento\Sales\Model\ResourceModel\Order\Status\Collection</source_model>
                   <comment>Select all authorized status for sending orders</comment>
                 </field>
-                <field id="payment_method" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="payment_method" translate="label" type="multiselect" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                    <label>Payment Method</label>        
                    <source_model>Divalto\Customer\Model\Config\Source\ListPaymentMethod</source_model>
                    <comment>Select all authorized payment methods for sending orders without status restrictions</comment>
                 </field>
-                <field id="legal_form" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="legal_form" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Legal Form</label>
                     <frontend_model>Divalto\Customer\Block\Adminhtml\Form\Field\LegalFormRanges</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>

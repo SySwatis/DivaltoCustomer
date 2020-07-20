@@ -72,7 +72,7 @@ class Data extends AbstractHelper
     /**
      * @var
      */
-    protected $_log;
+    protected $_logger;
 
     /**
      * @var  \Magento\Customer\Api\GroupRepositoryInterface
@@ -102,7 +102,7 @@ class Data extends AbstractHelper
 		$this->_groupFactory = $groupFactory;
         $this->_customerSession = $customerSession;
         $this->_customerRepository = $customerRepository;
-        $this->_log = $logger;
+        $this->_logger = $logger;
         $this->_groupRepository = $groupRepository;
         $this->_coreSession = $coreSession;
 		parent::__construct($context);
@@ -209,7 +209,7 @@ class Data extends AbstractHelper
             }
             $this->createDirectoryGroupName($groupName); // Create path users to invoice dir
         } catch (Exception $e) {
-            $this->_log->critical($e->getGroupName());
+            $this->_logger->critical($e->getGroupName());
         }
     }
 

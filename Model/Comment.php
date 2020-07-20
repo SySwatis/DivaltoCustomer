@@ -27,22 +27,22 @@ use Magento\Sales\Api\OrderStatusHistoryRepositoryInterface;
 class Comment
 {
     /** @var LoggerInterface */
-    private $logger;
+    private $_logger;
 
     /** @var OrderStatusHistoryRepositoryInterface */
-    private $orderStatusRepository;
+    private $_orderStatusRepository;
 
     /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private $_orderRepository;
 
     public function __construct(
         OrderStatusHistoryRepositoryInterface $orderStatusRepository,
         OrderRepositoryInterface $orderRepository,
         PsrLoggerInterface $logger
     ) {
-        $this->orderStatusRepository = $orderStatusRepository;
-        $this->orderRepository = $orderRepository;
-        $this->_log = $logger;
+        $this->_orderStatusRepository = $orderStatusRepository;
+        $this->_orderRepository = $orderRepository;
+        $this->_logger = $logger;
     }
 
     /**
@@ -55,9 +55,9 @@ class Comment
     {
         $order = null;
         try {
-            $order = $this->orderRepository->get($orderId);
+            $order = $this->_orderRepository->get($orderId);
         } catch (NoSuchEntityException $exception) {
-            $this->_log->error($exception->getMessage());
+            $this->_logger->error($exception->getMessage());
         }
         $orderHistory = null;
         if ($order) {
@@ -65,9 +65,9 @@ class Comment
                 $commentText
             );
             try {
-                $orderHistory = $this->orderStatusRepository->save($comment);
+                $orderHistory = $this->_orderStatusRepository->save($comment);
             } catch (Exception $e) {
-                $this->_log->critical($e->getMessage());
+                $this->_logger->critical($e->getMessage());
             }
         }
         return $orderHistory;
@@ -75,7 +75,7 @@ class Comment
 
     public function getListCommentOrder ($orderId)
     {
-        $order= $this->orderRepository->get($orderId);
+        $order= $this->_orderRepository->get($orderId);
         return $order->getStatusHistoryCollection();
     }
 

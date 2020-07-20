@@ -17,9 +17,10 @@
  
 namespace Divalto\Customer\Model;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
 use Magento\Sales\Model\OrderRepository;
 use Magento\Sales\Model\Order;
-use Psr\Log\LoggerInterface;
 
 class OrderMap
 {
@@ -31,7 +32,7 @@ class OrderMap
     const DIVALTO_STATE_PROCESSING =  Order::STATE_PROCESSING;
    
 	/** @var LoggerInterface */
-    private $_log;
+    private $_logger;
 
     /** @var */
     private $_orderRepository;
@@ -41,10 +42,10 @@ class OrderMap
 
     public function __construct(
     	OrderRepository $orderRepository,
-    	LoggerInterface $log,
+    	PsrLoggerInterface $logger,
     	\Divalto\Customer\Helper\data $helperData
     ) {
-    	$this->_log = $log;
+    	$this->_logger = $logger;
     	$this->_orderRepository = $orderRepository;
     	$this->_helperData = $helperData;
     }
@@ -56,7 +57,8 @@ class OrderMap
         }
     }
 
-    function create($orderIn,$orderStatus=self::DIVALTO_STATE_PROCESSING) {
+    function create($orderIn,$orderStatus=self::DIVALTO_STATE_PROCESSING)
+    {
 
         // Config
 
@@ -69,6 +71,8 @@ class OrderMap
 		$order = $this->_orderRepository->get($orderIn->getId());
 
 		// Get Customer Order
+
+       // if(!$order->getCustomerId()) return;
 
         $customerOrder = $this->_helperData->getCustomerById($order->getCustomerId());
 

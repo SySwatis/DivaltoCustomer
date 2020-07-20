@@ -19,35 +19,34 @@ namespace Divalto\Customer\Model;
 
 use Magento\Sales\Model\OrderRepository;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Psr\Log\LoggerInterface;
    
 class Order
 { 
-    protected $orderRepository;
+    protected $_orderRepository;
   
-    protected $searchCriteriaBuilder;
+    protected $_searchCriteriaBuilder;
     
     public function __construct(
         OrderRepository $orderRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->_orderRepository = $orderRepository;
+        $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         parent::__construct($context);
     }
     
     public function getOrderById($id) 
     {
-        return $this->orderRepository->get($id);
+        return $this->_orderRepository->get($id);
     }
     
     public function getOrderByIncrementId($incrementId) 
     {
         
-        $this->searchCriteriaBuilder->addFilter('increment_id', $incrementId);
+        $this->_searchCriteriaBuilder->addFilter('increment_id', $incrementId);
   
-        $order = $this->orderRepository->getList(
-            $this->searchCriteriaBuilder->create()
+        $order = $this->_orderRepository->getList(
+            $this->_searchCriteriaBuilder->create()
         )->getItems(); // FirstItem ???
   
         return $order;

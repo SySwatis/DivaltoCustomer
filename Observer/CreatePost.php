@@ -40,7 +40,7 @@ class CreatePost implements ObserverInterface
     /**
      * @var PsrLoggerInterface
      */
-    private $_log;
+    private $_logger;
 
     /**
      * @var \Divalto\Customer\Helper\Data
@@ -76,7 +76,7 @@ class CreatePost implements ObserverInterface
     ) {
         $this->_request = $request;
         $this->_messageManager = $messageManager;
-        $this->_log = $logger;
+        $this->_logger = $logger;
         $this->_helperData = $helperData;
         $this->_helperRequester = $helperRequester;
     }
@@ -132,10 +132,10 @@ class CreatePost implements ObserverInterface
 
             // Add comment to log file
 
-            $this->_log->info('Observer CreatePost group name : '.$groupName);
+            $this->_logger->info('Observer CreatePost group name : '.$groupName);
 
         } catch (Exception $e) {
-            $this->_log->critical($e->getMessage());
+            $this->_logger->critical($e->getMessage());
             $this->_messageManager->addExceptionMessage($e, __('We can\'t save the customer code.'));
         }
        

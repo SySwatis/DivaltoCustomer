@@ -30,7 +30,6 @@ class Ping extends \Magento\Backend\Block\Template
         Context $context
     )
     {
-       
         $this->_helperData = $helperData;
         $this->_helperRequester = $helperRequester;
         parent::__construct($context);

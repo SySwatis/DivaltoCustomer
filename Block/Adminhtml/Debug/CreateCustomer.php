@@ -30,14 +30,13 @@ class CreateCustomer extends \Magento\Backend\Block\Template
         Context $context
     )
     {
-       
         $this->_helperData = $helperData;
         $this->_helperRequester = $helperRequester;
         parent::__construct($context);
     }
 
     function responseUrlTest() {
-       $emailTest = "muratk21@hotmail.com";
+       $emailTest = $this->_helperData->getGeneralConfig('email_test');
        $postData = [
             "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
             "Email_Client"=>"",

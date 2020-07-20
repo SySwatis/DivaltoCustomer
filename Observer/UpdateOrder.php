@@ -32,7 +32,7 @@ class UpdateOrder implements ObserverInterface
 	/**
      * @var PsrLoggerInterface
      */
-	protected $_log;
+	protected $_logger;
 
 	protected $_helperData;
 
@@ -45,18 +45,18 @@ class UpdateOrder implements ObserverInterface
     protected $_customerRepositoryInterface;
 
 	/**
-	* @param \Psr\Log\LoggerInterface $_log
+	* @param \Psr\Log\LoggerInterface $_logger
     */
 
 	public function __construct(
-        PsrLoggerInterface $_log,
+        PsrLoggerInterface $_logger,
 		CustomerRepositoryInterface $customerRepositoryInterface,
 		\Divalto\Customer\Helper\Data $_helperData,
         \Divalto\Customer\Helper\Requester $_helperRequester,
         \Divalto\Customer\Model\OrderMap $_orderMap,
         \Divalto\Customer\Model\Comment $_comment
     ){
-        $this->_log = $_log;
+        $this->_logger = $_logger;
         $this->_helperData = $_helperData;
         $this->_helperRequester = $_helperRequester;
         $this->_orderMap = $_orderMap;
@@ -74,8 +74,11 @@ class UpdateOrder implements ObserverInterface
 		$method = $payment->getMethodInstance();
 		$methodTitle = $method->getTitle();
 		$methodCode = $method->getCode();
-		$response = '';
+		$response = array();
 
+		// Check if order has customer (not deleted)
+
+		if(!$order->getCustomerId()) return;
 
 		// Skip  Event frontend
 
@@ -111,7 +114,7 @@ class UpdateOrder implements ObserverInterface
 
 				// Get response from api Divalto
 				
-				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true);
+				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER);
 
 			} catch (Exception $e) {
 				
@@ -119,35 +122,40 @@ class UpdateOrder implements ObserverInterface
 			
 				$response = $order->getStatus().' - ERP query fail';
 
-            	$this->_log->critical($e->getMessage());
+            	$this->_logger->critical($e->getMessage());
             	$this->_messageManager->addExceptionMessage($e, __('We can\'t save the order.'));
         	}
 
         	// Add comment to order (Order Id(s) dvialto)
 
-			if($response!='')
-				
-			$this->_comment->addCommentToOrder($order->getId(),self::HEADING_COMMENT.$response['comment']);
+			if( is_array($response) && !empty($response) ){					
+				$this->_comment->addCommentToOrder($order->getId(),self::HEADING_COMMENT.$response['comment']);
+			}
 
 			// Update customer
 
 			$customer = $this->_helperData->getCustomerById($order->getCustomerId());
 
-            if($customer){
+            if( $customer && isset($response['group_name']) ){
 				
 				// Customer Group Name (create by helperRequester)
-				// $groupName = $response['group_name'];
-				// $customer->setCustomAttribute('divalto_account_id',$groupName);
-				// $groupId = $this->_helperData()->getCustomerGroupIdByName($groupName);
-				// if($groupId)
-				// $customer->setGroupId($groupId);
-
-				// $this->_customerRepositoryInterface->save($customer);
+				$groupName = $response['group_name'];
+				$groupId = $this->_helperData()->getCustomerGroupIdByName($groupName);
+				try {
+					if($groupId){
+						$customer->setCustomAttribute('divalto_account_id',$groupName);
+						$customer->setGroupId($groupId);
+						$this->_customerRepositoryInterface->save($customer);
+					}
+				} catch (Exception $e) {
+					$this->_logger->critical($e->getMessage());
+            		$this->_messageManager->addExceptionMessage($e, __('We can\'t save the customer.'));
+				}
 			}
 
 			// Add event to log
 
-			$this->_log->debug('Oberser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode.' | Taxvat : '.$postData['Client_Particulier']['Numero_TVA']);
+			$this->_logger->debug('Oberser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode.' | Taxvat : '.$postData['Client_Particulier']['Numero_TVA']);
 		}
 	}
 }

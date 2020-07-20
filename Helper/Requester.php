@@ -17,11 +17,12 @@
 
 namespace Divalto\Customer\Helper;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Exception;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\HTTP\Client\Curl;
-use Psr\Log\LoggerInterface;
 
 class Requester extends AbstractHelper
 {
@@ -41,10 +42,10 @@ class Requester extends AbstractHelper
     protected $_helperData;
 
     public function __construct(
-        \Divalto\Customer\Helper\Data $helperData,
-        LoggerInterface $logger,
+        PsrLoggerInterface $logger,
+        Context $context,
         Curl $curl,
-        Context $context
+        \Divalto\Customer\Helper\Data $helperData
     ) {
         $this->_helperData = $helperData;
         $this->_curl = $curl;

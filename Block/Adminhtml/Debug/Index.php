@@ -29,33 +29,22 @@ class Index extends \Magento\Backend\Block\Template
         \Divalto\Customer\Helper\Requester $helperRequester,
         Context $context
     )
-    {
-       
+    {  
         $this->_helperData = $helperData;
         $this->_helperRequester = $helperRequester;
         parent::__construct($context);
     }
 
-	// function responseUrlTest() {
-	// 	return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData(array(), 'ping', true));
-	// }
-	
-	// function responseUrlProd() {
-	// 	return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData(array(), 'ping'));
-	// }
-
     function getContent()
     {
         if( $this->_helperData->getDebugConfig()==1 ) {
-
-            $emailTest = "contact@pachadistribution.com";
 
             $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? 'Yes' : 'No';
 
 
 
             $html =     '<p><b>'.__('SSL Cert. Verfify Peer:').'</b> '.__($sslVerifypeer).'</p>';
-            $html .=    '<p><b>'.__('Email test:').'</b> '.$emailTest.'</p>';
+            $html .=    '<p><b>'.__('Email test:').'</b> '.$this->_helperData->getGeneralConfig('email_test').'</p>';
             $html .=    '<p><b>'.__('Api Url Test (Debug):').'</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p>';
             
 

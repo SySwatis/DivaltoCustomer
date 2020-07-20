@@ -36,7 +36,7 @@ class UpdateCustomer implements ObserverInterface
 
     protected $_customerFactory;
 
-    protected $_log;
+    protected $_logger;
 
     protected $_messageManager;
 
@@ -54,7 +54,7 @@ class UpdateCustomer implements ObserverInterface
         $this->_customerRepositoryInterface = $customerRepositoryInterface;
         $this->_groupFactory = $groupFactory;
         $this->_customerFactory = $customerFactory;
-        $this->_log = $logger;
+        $this->_logger = $logger;
         $this->_messageManager = $messageManager;
         $this->_helperData = $helperData;
     }
@@ -80,45 +80,53 @@ class UpdateCustomer implements ObserverInterface
 
         if($customer){
 
-            // Get session Divalto Data (response)
+            try {
 
-            $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
+                // Get session Divalto Data (response)
 
-            if( $sessionDivaltoData && isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
-                $groupName = $sessionDivaltoData['group_name'];
-                $outStandingStatus = $sessionDivaltoData['outstanding_status'];
-                $response = $sessionDivaltoData['divalto_response'];
-                $extrafield_1 = $sessionDivaltoData['divalto_extrafield_1'];
-                $extrafield_2 = $sessionDivaltoData['divalto_extrafield_2'];
-            }
+                $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
 
-            // GroupId
+                if( $sessionDivaltoData && isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
+                    $groupName = $sessionDivaltoData['group_name'];
+                    $outStandingStatus = $sessionDivaltoData['outstanding_status'];
+                    $response = $sessionDivaltoData['divalto_response'];
+                    $extrafield_1 = $sessionDivaltoData['divalto_extrafield_1'];
+                    $extrafield_2 = $sessionDivaltoData['divalto_extrafield_2'];
+                }
 
-            if($groupName!='') {
+                // GroupId
 
-                $groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
+                if($groupName!='') {
 
-                if($groupId) {
-                    if ($customer->getGroupId() == self::CUSTOMER_GROUP_DEFAULT_ID) {
-                        $customer->setGroupId($groupId);
-                        $this->_log->debug('Observer UpdateCustomer Group Id : '.$groupId);
+                    $groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
+
+                    if($groupId) {
+                        if ($customer->getGroupId() == self::CUSTOMER_GROUP_DEFAULT_ID) {
+                            $customer->setGroupId($groupId);
+                            $this->_logger->info('Observer UpdateCustomer Group Id : '.$groupId);
+                        }
                     }
                 }
+
+                // Set Atttributes
+
+                $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
+                $customer->setCustomAttribute('divalto_account_id',$groupName);
+                $customer->setCustomAttribute('divalto_response',$response);
+                $customer->setCustomAttribute('divalto_extrafield_1',$extrafield_1);
+                $customer->setCustomAttribute('divalto_extrafield_2',$extrafield_2);
+
+                $this->_customerRepositoryInterface->save($customer);
+
+                //
+
+                $this->_helperData->unsSessionDivaltoData();
+
+            } catch (Exception $e) {
+                // Add Warning message
+                $this->_messageManager->addWarning( __('Account creation not valid, please contact us') );
+                $this->_logger->critical($e->getMessage());
             }
-
-            // Set Atttributes
-
-            $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
-            $customer->setCustomAttribute('divalto_account_id',$groupName);
-            $customer->setCustomAttribute('divalto_response',$response);
-            $customer->setCustomAttribute('divalto_extrafield_1',$extrafield_1);
-            $customer->setCustomAttribute('divalto_extrafield_2',$extrafield_2);
-
-            $this->_customerRepositoryInterface->save($customer);
-
-            //
-
-            $this->_helperData->unsSessionDivaltoData();
 
         } else {
             // Add Warning message
