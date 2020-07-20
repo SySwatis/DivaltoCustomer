@@ -17,11 +17,11 @@ Il agit en deux temps :
 ## WS Divalto
 Une clé API sécurise la transmission des données. Elle est administrable dans la partie configuration du module Magento 2
 
-## Description
+## Description MVC
 En cours d'élaboration, cette description sera prochainement complétée et approfondie.
 
 	- Block
-	- Controller
+	- Controller => Urls : admin, customer, validation
 	- etc
 	- Helper
 	- i18n
@@ -30,6 +30,8 @@ En cours d'élaboration, cette description sera prochainement complétée et app
 	- Observer
 	- Setup
 	- view
+
+### Fonctionnalités
 
 
 ## Admin
