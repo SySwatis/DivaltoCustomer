@@ -64,23 +64,26 @@
                     <label>Divalto Tax Rule Order</label>
                     <source_model>Divalto\Customer\Model\Config\Source\TaxRuleOrder</source_model>
                 </field>
-               
                 <field id="email_test" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Email Test</label>
                     <validate>validate-email</validate>
                     <comment>Debug test "Créer Client" et "Créer Commande"</comment>
                 </field>
-                <field id="order_status" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="code_test" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Code Test</label>
+                    <comment>Debug test "Créer Commande"</comment>
+                </field>
+                <field id="order_status" translate="label" type="multiselect" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                   <label>Order Status</label>
                   <source_model>Magento\Sales\Model\ResourceModel\Order\Status\Collection</source_model>
                   <comment>Select all authorized status for sending orders</comment>
                 </field>
-                <field id="payment_method" translate="label" type="multiselect" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="payment_method" translate="label" type="multiselect" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                    <label>Payment Method</label>        
                    <source_model>Divalto\Customer\Model\Config\Source\ListPaymentMethod</source_model>
                    <comment>Select all authorized payment methods for sending orders without status restrictions</comment>
                 </field>
-                <field id="legal_form" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="legal_form" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Legal Form</label>
                     <frontend_model>Divalto\Customer\Block\Adminhtml\Form\Field\LegalFormRanges</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>

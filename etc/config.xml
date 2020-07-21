@@ -29,6 +29,7 @@
                 <api_url>https://magento.foodcentergroup.com/DivaltoMagento/</api_url>
                 <api_url_test>https://magento.foodcentergroup.com/DivaltoMagento-Test/</api_url_test>
                 <email_test>muratk21@hotmail.com</email_test>
+                <code_test>C0000043</code_test>
                 <test_mode>1</test_mode>
                 <ssl_verifypeer>0</ssl_verifypeer>
             </general>

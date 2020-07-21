@@ -37,11 +37,12 @@ class CreateOrder extends \Magento\Backend\Block\Template
 
     function responseUrlTest() {
         $emailTest = $this->_helperData->getGeneralConfig('email_test');
+        $codeTest = $this->_helperData->getGeneralConfig('code_test');
         $postData = [
             'Numero_Dossier'=>'1',
             'Numero_Commande_Magento'=>'000001',
             'Email_Client_Cde'=>$emailTest,
-            'Code_Client_Divalto'=>'C0000043',
+            'Code_Client_Divalto'=>$codeTest,
             'Code_Adresse_Livraison'=>'',
             'Adresse_Livraison_Manuelle'=>array('Rue'=>'37 RUE MARYSE BASTIE','Ville'=>'LYON','Code_Postal'=>'69008','Pays'=>'FR'),
             'Code_Adresse_Facturation'=>'',

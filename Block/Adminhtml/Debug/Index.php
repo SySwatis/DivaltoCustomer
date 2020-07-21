@@ -37,20 +37,13 @@ class Index extends \Magento\Backend\Block\Template
 
     function getContent()
     {
-        if( $this->_helperData->getDebugConfig()==1 ) {
 
-            $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? 'Yes' : 'No';
+        $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? 'Yes' : 'No';
 
-
-
-            $html =     '<p><b>'.__('SSL Cert. Verfify Peer:').'</b> '.__($sslVerifypeer).'</p>';
-            $html .=    '<p><b>'.__('Email test:').'</b> '.$this->_helperData->getGeneralConfig('email_test').'</p>';
-            $html .=    '<p><b>'.__('Api Url Test (Debug):').'</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p>';
-            
-
-        } else {
-            $html = "Debug disable";
-        }
+        $html =     '<p><b>'.__('SSL Cert. Verfify Peer:').'</b> '.__($sslVerifypeer).'</p>';
+        $html .=    '<p><b>'.__('Email test:').'</b> '.$this->_helperData->getGeneralConfig('email_test').'</p>';
+        $html .=    '<p><b>'.__('Code test:').'</b> '.$this->_helperData->getGeneralConfig('code_test').'</p>';
+        $html .=    '<p><b>'.__('Api Url Test (Debug):').'</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p>';      
         $html .=    '<p><b>Author:</b> SySwatis Copyright© 2020 | <a href="https://github.com/SySwatis/DivaltoCustomer">github.com DivaltoCustomer</a> - ver. 0.1.0 (dev-master)</p>';
         return $html;
     }
