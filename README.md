@@ -5,7 +5,7 @@
 
 ## Installation
 
-composer require divalto/customer -dev-master
+composer require divalto/customer:dev-master
 
 ## Contribute
 ## Description
@@ -55,4 +55,4 @@ La création des commandes en direction de l'ERP s'effectue uniqument via le sta
 - Activer le dbug (Oui/Non) | Active ou desactive les evenements de l'observer en relation avec Divalto
 - Clé Api | Clé de validation d'échange avec Divato (serveur)
 - Dossier magasin | dig. 1, 2, 3, ... Identifiant du magasin associé au flux
-- Validation commandes (Taxe) 
+- Validation commandes (Taxe) (HT/TTC) | Régle de validation des totaux des lignes de commandes
