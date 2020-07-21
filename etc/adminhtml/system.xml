@@ -35,42 +35,40 @@
                     <label>Enable Debug</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="api_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="test_mode" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Api Key</label>
                     <validate>required-entry validate-data</validate>
                 </field>
-                <field id="divalto_store_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                 <field id="api_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Api Url</label>
+                    <validate>required-entry validate-url</validate>
+                </field>
+                <field id="api_url_test" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Api Url Test</label>
+                    <validate>validate-url</validate>
+                    <comment translate="comment">Enable Test Mode</comment>
+                </field>
+                <field id="ssl_verifypeer" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SSL Peer’s Certificate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="divalto_store_id" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Divalto Store Id</label>
                     <validate>required-entry validate-digits</validate>
                 </field>
-                <field id="divalto_tax_rule_order" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="divalto_tax_rule_order" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Divalto Tax Rule Order</label>
                     <source_model>Divalto\Customer\Model\Config\Source\TaxRuleOrder</source_model>
                 </field>
-                <field id="api_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Api Url</label>
-                    <validate>required-entry validate-url</validate>
-                    <comment>Url End with Slash</comment>
-                </field>
-                <field id="api_url_test" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Api Url Test</label>
-                    <validate>validate-url</validate>
-                    <comment>Url End with Slash</comment>
-                </field>
-                <field id="email_test" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+               
+                <field id="email_test" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Email Test</label>
                     <validate>validate-email</validate>
-                    <comment>Debug test "Creer un Client"</comment>
-                </field>
-                <field id="ssl_verifypeer" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>SSL Peer’s Certificate</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Url Test</comment>
-                </field>
-                <field id="test_mode" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Test Mode</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Url Test</comment>
+                    <comment>Debug test "Créer Client" et "Créer Commande"</comment>
                 </field>
                 <field id="order_status" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                   <label>Order Status</label>
