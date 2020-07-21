@@ -4,6 +4,9 @@
 - Version 0.1.0
 
 ## Installation
+
+composer require divalto/customer -dev-master
+
 ## Contribute
 ## Description
 Ce module assure le flux d'échange de Magento 2 (CMS e-commerce) vers Divalto (ERP solution).
@@ -22,16 +25,18 @@ En cours d'élaboration, cette description sera prochainement complétée et app
 
 	- Block
 	- Controller => Urls : admin, customer, validation
-	- etc
-	- Helper
-	- i18n
-	- Logger
-	- Model
-	- Observer
-	- Setup
-	- view
+	- etc => Config : menu, url, module, admin config, events
+	- Helper => Fonctionnalités générales
+	- i18n => Traductions (csv)
+	- Logger => Générateur des logs
+	- Model => Fonctionnalités spécifiques
+	- Observer => Fonctionnalités 
+	- Setup => Installateur (attributs, upgrade)
+	- view => Frontend (user & admin) : pHtml, js, layout
 
-### Fonctionnalités
+### Fonctionnalités détaillées
+
+
 
 
 ## Admin
@@ -44,4 +49,10 @@ Le Numéro de TVA
 ## Création de commandes
 La création des commandes en direction de l'ERP s'effectue uniqument via le status "processing".
 
+## Configuration (Admin)
 
+- Activer le module (Oui/Non) | Active ou desactive les evenements de l'observer en relation avec Divalto
+- Activer le dbug (Oui/Non) | Active ou desactive les evenements de l'observer en relation avec Divalto
+- Clé Api | Clé de validation d'échange avec Divato (serveur)
+- Dossier magasin | dig. 1, 2, 3, ... Identifiant du magasin associé au flux
+- Validation commandes (Taxe) 

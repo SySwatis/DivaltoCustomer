@@ -66,7 +66,11 @@ class UpdateOrder implements ObserverInterface
 
 	public function execute(Observer $observer)
 	{
-		
+
+		if(!$this->_helperData->isEnabled()) {
+            return;
+        }
+
 		// Order
 
 		$order = $observer->getEvent()->getOrder();
