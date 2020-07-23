@@ -59,11 +59,11 @@
                 <field id="email_test" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Email Test</label>
                     <validate>validate-email</validate>
-                    <comment>Debug test "Créer Client" et "Créer Commande"</comment>
+                    <comment>Test "Créer Client" et "Créer Commande"</comment>
                 </field>
                 <field id="code_test" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Code Test</label>
-                    <comment>Debug test "Créer Commande"</comment>
+                    <comment>Test "Créer Commande"</comment>
                 </field>
                 <field id="order_status" translate="label" type="multiselect" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                   <label>Order Status</label>

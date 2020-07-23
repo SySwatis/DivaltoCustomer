@@ -51,8 +51,7 @@ La création des commandes en direction de l'ERP s'effectue uniqument via le sta
 
 ## Configuration (Admin)
 
-- Activer le module (Oui/Non) | Active ou desactive les evenements de l'observer en relation avec Divalto
-- Activer le dbug (Oui/Non) | Active ou desactive les evenements de l'observer en relation avec Divalto
+- Activer le module (Oui/Non) | Active ou desactive les evenements de l'observer en relation avec Divalto (ne desactive pas le mode test)
 - Clé Api | Clé de validation d'échange avec Divato (serveur)
 - Dossier magasin | dig. 1, 2, 3, ... Identifiant du magasin associé au flux
 - Validation commandes (Taxe) (HT/TTC) | Régle de validation des totaux des lignes de commandes
