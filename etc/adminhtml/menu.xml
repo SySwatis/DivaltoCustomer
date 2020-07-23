@@ -20,6 +20,6 @@
     <menu>
      <add id="Divalto_Customer::menu" title="Divalto" module="Divalto_Customer" sortOrder="10" resource="Divalto_Customer::menu"/>
      <add id="Divalto_Customer::index" title="Test Mode" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/test/index" resource="Divalto_Customer::index"/>
-	<add id="Divalto_Customer::customer_configuration" title="Configuration" module="Divalto_Customer" sortOrder="99" parent="Divalto_Customer::menu" action="adminhtml/system_config/edit/section/divalto_customer" resource="Divalto_Customer::customer_configuration"/>
+	<add id="Divalto_Customer::customer_configuration" title="Configuration" module="Divalto_Customer" sortOrder="20" parent="Divalto_Customer::menu" action="adminhtml/system_config/edit/section/divalto_customer" resource="Divalto_Customer::customer_configuration"/>
     </menu>
 </config>
