@@ -32,7 +32,10 @@
     <event name="checkout_submit_all_after">
         <observer name="divalto_customer_checkout_submit_all_after" instance="Divalto\Customer\Observer\UpdateOrder"/>
     </event>
-     <event name="layout_render_before">
+<!--
+/** debug
+-->
+    <!-- <event name="layout_render_before">
         <observer name="customer_account_create_post_test" instance="Divalto\Customer\Observer\CreatePost"/>
-    </event>
+    </event> -->
 </config>
