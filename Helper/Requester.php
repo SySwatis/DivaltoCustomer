@@ -197,7 +197,6 @@ class Requester extends AbstractHelper
 
                     if( isset($data['code_Client']) ) {
                         $groupName = $data['code_Client'];
-                        $this->_helperData->groupCreate($groupName);
                     }
 
                     return array('group_name'=>$groupName,'comment'=>$responseText.' | '.$data['numero_Commande_Divalto']);

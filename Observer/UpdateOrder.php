@@ -120,6 +120,10 @@ class UpdateOrder implements ObserverInterface
 				
 				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER);
 
+				// Create group Name and path folder if no exist
+
+				$this->_helperData->groupCreate($groupName);      
+
 			} catch (Exception $e) {
 				
 				// Comment (Fail)
@@ -142,9 +146,8 @@ class UpdateOrder implements ObserverInterface
 
             if( $customer && isset($response['group_name']) ){
 				
-				// Customer Group Name (create by helperRequester)
 				$groupName = $response['group_name'];
-				$groupId = $this->_helperData()->getCustomerGroupIdByName($groupName);
+				$groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
 				try {
 					if($groupId){
 						$customer->setCustomAttribute('divalto_account_id',$groupName);
