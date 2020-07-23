@@ -10,7 +10,7 @@ composer require divalto/customer:dev-master
 ## Contribute
 ## Description
 Ce module assure le flux d'échange de Magento 2 (CMS e-commerce) vers Divalto (ERP solution).
-Clients & commandes sont poussés selon un montage spécifique et adpaté pour le compte de "Food Center Group".
+Clients & commandes sont poussés selon un montage spécifique et adapté pour le compte de "Food Center Group".
 
 Il agit en deux temps :
 
@@ -40,18 +40,19 @@ En cours d'élaboration, cette description sera prochainement complétée et app
 
 
 ## Admin
-Le menu "Divalto > Mode test" dans l'admin permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques.
+Le menu "Divalto > Mode test" permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques.
+- Ping : Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 
 ## Création de Clients
 Les attributs
 Le Numéro de TVA
 
 ## Création de commandes
-La création des commandes en direction de l'ERP s'effectue uniqument via le status "processing".
+La création des commandes en direction de l'ERP s'effectue uniquement via le status "processing".
 
 ## Configuration (Admin)
 
-- Activer le module (Oui/Non) | Active ou desactive les evenements de l'observer en relation avec Divalto (ne desactive pas le mode test)
+- Activer le module (Oui/Non) | Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
 - Clé Api | Clé de validation d'échange avec Divato (serveur)
 - Dossier magasin | dig. 1, 2, 3, ... Identifiant du magasin associé au flux
-- Validation commandes (Taxe) (HT/TTC) | Régle de validation des totaux des lignes de commandes
+- Validation commandes (Taxe) (HT/TTC) | Règle de validation des totaux des lignes de commandes
