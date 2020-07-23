@@ -222,10 +222,5 @@ class Data extends AbstractHelper
     {
         return $this->getGeneralConfig('enabled')==1 ? true : false;
     }
-
-    public function getDebugConfig()
-    {
-        return $this->getGeneralConfig('debug')==1 ? true : false;
-    }
     
 }
