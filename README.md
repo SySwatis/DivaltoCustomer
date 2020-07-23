@@ -40,7 +40,7 @@ En cours d'élaboration, cette description sera prochainement complétée et app
 
 
 ## Admin
-Le menu "Divalto" dans l'admin permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques.
+Le menu "Divalto > Mode test" dans l'admin permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques.
 
 ## Création de Clients
 Les attributs
