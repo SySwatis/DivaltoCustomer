@@ -35,7 +35,8 @@ class CreateOrder extends \Magento\Backend\Block\Template
         parent::__construct($context);
     }
 
-    function responseUrlTest() {
+    function responseUrlTest() 
+    {
         $emailTest = $this->_helperData->getGeneralConfig('email_test');
         $codeTest = $this->_helperData->getGeneralConfig('code_test');
         $postData = [
@@ -53,14 +54,7 @@ class CreateOrder extends \Magento\Backend\Block\Template
                     'Contact'=>array('Nom'=>'','Prenom'=>'','Telephone'=>'','Email'=>'muratk21@hotmail.com','Fonction'=>'')
                 )
         ];
-        // if( isset($_GET['OrderId']) && is_numeric($_GET['OrderId']) ) {
-        //     $postData = $this->_orderMap->create($_GET['OrderId']);
-        // }
-        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER, true));
+        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER));
     }
     
-    function responseUrlProd() {
-        // $postData = array();
-        // return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, 'CreerCommande'));
-    }
 }

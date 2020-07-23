@@ -35,7 +35,8 @@ class CreateCustomer extends \Magento\Backend\Block\Template
         parent::__construct($context);
     }
 
-    function responseUrlTest() {
+    function responseUrlTest() 
+    {
        $emailTest = $this->_helperData->getGeneralConfig('email_test');
        $postData = [
             "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
@@ -53,8 +54,10 @@ class CreateCustomer extends \Magento\Backend\Block\Template
         return array('Email Test'=>$emailTest, 'Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER, true));
     }
     
-    function responseUrlProd() {
+    function responseUrlProd()
+    {
         $postData = array();
         return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER));
     }
+    
 }

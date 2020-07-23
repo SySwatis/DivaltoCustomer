@@ -52,4 +52,5 @@ class Index extends \Magento\Backend\Block\Template
         $html .=    '<div class="footer-legal-system"><small><b>Author:</b> SySwatis Copyright© 2020 | <a href="https://github.com/SySwatis/DivaltoCustomer">github.com DivaltoCustomer</a> - ver. 0.1.0 (dev-master)</small></div>';
         return $html;
     }
+    
 }

@@ -35,7 +35,8 @@ class Ping extends \Magento\Backend\Block\Template
         parent::__construct($context);
     }
 
-	function response() {
+	function response() 
+    {
 		return array('Ping'=>$this->_helperRequester->getDivaltoCustomerData(array(), $this->_helperRequester::ACTION_PING));
 	}
 	
