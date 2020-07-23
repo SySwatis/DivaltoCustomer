@@ -20,8 +20,6 @@
     <menu>
      <add id="Divalto_Customer::menu" title="Divalto" module="Divalto_Customer" sortOrder="10" resource="Divalto_Customer::menu"/>
      <add id="Divalto_Customer::index" title="Test Mode" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/test/index" resource="Divalto_Customer::index"/>
-    <!--  <add id="Divalto_Customer::ping" title="Ping" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/test/ping" resource="Divalto_Customer::ping"/>
-     <add id="Divalto_Customer::CreateCustomer" title="Create Customer" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/test/CreateCustomer" resource="Divalto_Customer::CreateCustomer"/>
-     <add id="Divalto_Customer::CreateOrder" title="Create Order" module="Divalto_Customer" sortOrder="10" parent="Divalto_Customer::menu" action="customer/test/CreateOrder" resource="Divalto_Customer::CreateOrder"/> -->
+	<add id="Divalto_Customer::customer_configuration" title="Configuration" module="Divalto_Customer" sortOrder="99" parent="Divalto_Customer::menu" action="adminhtml/system_config/edit/section/divalto_customer" resource="Divalto_Customer::customer_configuration"/>
     </menu>
 </config>
