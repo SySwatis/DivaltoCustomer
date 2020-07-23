@@ -7,7 +7,7 @@
     </referenceBlock>
     <body>
         <referenceContainer name="content">
-            <block class="Divalto\Customer\Block\Adminhtml\Debug\CreateOrder" template="Divalto_Customer::debug/create_order.phtml"/>
+            <block class="Divalto\Customer\Block\Adminhtml\Test\CreateOrder" template="Divalto_Customer::test/create_order.phtml"/>
         </referenceContainer>
     </body>
 </page>

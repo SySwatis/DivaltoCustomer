@@ -15,7 +15,7 @@
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
 
-namespace Divalto\Customer\Controller\Adminhtml\Debug;
+namespace Divalto\Customer\Controller\Adminhtml\Test;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;

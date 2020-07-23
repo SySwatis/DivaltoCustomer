@@ -14,7 +14,7 @@
  * @author SySwatis (Stéphane JIMENEZ)
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
-namespace Divalto\Customer\Block\Adminhtml\Debug;
+namespace Divalto\Customer\Block\Adminhtml\Test;
 
 use Magento\Backend\Block\Template\Context;
 

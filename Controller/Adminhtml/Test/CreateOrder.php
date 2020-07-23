@@ -15,7 +15,7 @@
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
 
-namespace Divalto\Customer\Controller\Adminhtml\Debug;
+namespace Divalto\Customer\Controller\Adminhtml\Test;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -24,39 +24,45 @@ use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Index
+ * Class CreateOrder
  */
-class Index extends Action implements HttpGetActionInterface
+class CreateOrder extends Action implements HttpGetActionInterface
 {
-    const MENU_ID = 'Divalto_Customer::index';
+    const MENU_ID = 'Divalto_Customer::CreateOrder';
 
     /**
      * @var PageFactory
      */
     protected $resultPageFactory;
 
-    protected $_helperData;
-
-    protected $_helperRequester;
-
+    /**
+     * Index constructor.
+     *
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
     public function __construct(
         Context $context,
-        PageFactory $resultPageFactory,
-        \Divalto\Customer\Helper\Data $helperData,
-        \Divalto\Customer\Helper\Requester $helperRequester
-    )
-    {
+        PageFactory $resultPageFactory
+    ) {
         parent::__construct($context);
+
         $this->resultPageFactory = $resultPageFactory;
-        $this->_helperData = $helperData;
-        $this->_helperRequester = $helperRequester;
     }
 
+    /**
+     * Load the page defined in : view/adminhtml/layout/customer_debug_create_customer
+     * ------------------------------------------------[modulename]_[controller_name]_[controller_name_action].xml
+     *
+     * @return Page
+     */
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu(static::MENU_ID);
-        $resultPage->getConfig()->getTitle()->prepend(__('Divalto'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Divalto Create Order'));
+
+
         return $resultPage;
     }
 }

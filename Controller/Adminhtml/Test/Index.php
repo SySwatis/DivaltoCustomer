@@ -15,7 +15,7 @@
  * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
  */
 
-namespace Divalto\Customer\Controller\Adminhtml\Debug;
+namespace Divalto\Customer\Controller\Adminhtml\Test;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -24,45 +24,39 @@ use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Ping
+ * Class Index
  */
-class Ping extends Action implements HttpGetActionInterface
+class Index extends Action implements HttpGetActionInterface
 {
-    const MENU_ID = 'Divalto_Customer::ping';
+    const MENU_ID = 'Divalto_Customer::index';
 
     /**
      * @var PageFactory
      */
     protected $resultPageFactory;
 
-    /**
-     * Index constructor.
-     *
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
-     */
+    protected $_helperData;
+
+    protected $_helperRequester;
+
     public function __construct(
         Context $context,
-        PageFactory $resultPageFactory
-    ) {
+        PageFactory $resultPageFactory,
+        \Divalto\Customer\Helper\Data $helperData,
+        \Divalto\Customer\Helper\Requester $helperRequester
+    )
+    {
         parent::__construct($context);
-
         $this->resultPageFactory = $resultPageFactory;
+        $this->_helperData = $helperData;
+        $this->_helperRequester = $helperRequester;
     }
 
-    /**
-     * Load the page defined in : view/adminhtml/layout/customer_debug_ping
-     * ------------------------------------------------[modulename]_[controller_name]_[controller_name_action].xml
-     *
-     * @return Page
-     */
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu(static::MENU_ID);
-        $resultPage->getConfig()->getTitle()->prepend(__('Divalto Ping'));
-
-
+        $resultPage->getConfig()->getTitle()->prepend(__('Divalto'));
         return $resultPage;
     }
 }

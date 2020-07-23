@@ -7,7 +7,7 @@
     </referenceBlock>
     <body>
         <referenceContainer name="content">
-            <block class="Divalto\Customer\Block\Adminhtml\Debug\Ping" template="Divalto_Customer::debug/ping.phtml"/>
+            <block class="Divalto\Customer\Block\Adminhtml\Test\Ping" template="Divalto_Customer::test/ping.phtml"/>
         </referenceContainer>
     </body>
 </page>

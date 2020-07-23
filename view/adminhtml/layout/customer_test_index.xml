@@ -7,7 +7,7 @@
     </referenceBlock>
     <body>
         <referenceContainer name="content">
-            <block class="Divalto\Customer\Block\Adminhtml\Debug\Index" template="Divalto_Customer::debug/index.phtml"/>
+            <block class="Divalto\Customer\Block\Adminhtml\Test\Index" template="Divalto_Customer::test/index.phtml"/>
         </referenceContainer>
     </body>
 </page>
