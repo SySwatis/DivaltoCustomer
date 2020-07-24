@@ -36,8 +36,9 @@ En cours d'élaboration, cette description sera prochainement complétée et app
 
 ### Fonctionnalités détaillées
 
-
-
+	Helper
+		- Data
+		- Requester
 
 ## Admin
 Le menu "Divalto > Mode test" permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques.
