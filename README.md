@@ -34,7 +34,7 @@ Clients & commandes sont poussés simultanément vers l'ERP selon un montage sp�
 
 ##### La demande du CDC
 
-Ce descriptif est à titre explicatif de la gestion globale. Il peut permettre une meilleure compréhension des fonctionnalités develloppées sur ce module.
+Ce descriptif (rédigé en collaboration entre agences & client) est à titre explicatif de la gestion globale. Il peut permettre une meilleure compréhension des fonctionnalités développées sur ce module.
 
 #### PRICE_APPLIED
 
