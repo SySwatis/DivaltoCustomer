@@ -45,8 +45,8 @@ Le menu "Divalto > Mode test" permet de vérifier la communication avec le serve
 - Ping : Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 
 ## Création de Clients
-Les attributs
-Le Numéro de TVA
+### Les attributs
+### Le Numéro de TVA
 
 ## Création de commandes
 La création des commandes en direction de l'ERP s'effectue uniquement via le status "processing".
