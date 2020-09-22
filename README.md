@@ -10,7 +10,7 @@ composer require divalto/customer:dev-master
 ## Contribute
 ## Description
 Ce module assure le flux d'échange de Magento 2 (CMS e-commerce) vers Divalto (ERP solution).
-Clients & commandes sont poussés selon un montage spécifique et adapté pour le compte de "Food Center Group".
+Clients & commandes sont poussés selon un montage spécifique et adapté pour le compte de "Stokhall" (ex Food Center).
 
 Il agit en deux temps :
 
@@ -41,7 +41,8 @@ En cours d'élaboration, cette description sera prochainement complétée et app
 		- Requester
 
 ## Admin
-Le menu "Divalto > Mode test" permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques.
+### Le menu "Divalto 
+	Le mode "test" permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques.
 - Ping : Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 
 ## Création de Clients
