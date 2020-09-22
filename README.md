@@ -25,8 +25,8 @@ Clients & commandes sont poussés simultanément vers l'ERP selon un montage sp�
 	- Autorisation de paiements
 	- N° de commande
 - ##### 3) Mise à jour des données Magento :
-	- Status serveur -> Divalto Response (customer attr)
 	- Messages d'erreurs -> Session client (front) + Divalto Response (customer attr.)
+	- Status serveur -> Divalto Response (customer attr)
 	- Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)
 	- Autorisation de paiements -> Divalto Outstanding Status (customer attr.)
 	- N° de commande -> Historique de commentaires
