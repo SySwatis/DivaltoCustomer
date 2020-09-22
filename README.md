@@ -16,10 +16,10 @@ Clients & commandes sont poussés selon un montage spécifique et adapté pour l
 
 ### Gestions des données
 
+Une clé API sécurise la transmission des données. Elle est administrable dans la partie configuration du module Magento 2.
+
 - 1) Gestion du client : ajout uniquement
 - 2) Gestion de la commande : ajout uniquement
-
-Une clé API sécurise la transmission des données. Elle est administrable dans la partie configuration du module Magento 2.
 
 ## Description du module Magento Divalto
 
