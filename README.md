@@ -12,18 +12,20 @@ composer require divalto/customer:dev-master
 Ce module assure le flux d'échange de Magento 2 (CMS e-commerce) vers Divalto (ERP solution).
 Clients & commandes sont poussés selon un montage spécifique et adapté pour le compte de "Stokhall" (ex Food Center).
 
+## Web Service Divalto (Serveur)
+
 ### Gestions des données
 
 - 1) Gestion du client : ajout uniquement
 - 2) Gestion de la commande : ajout uniquement
 
-## WS Divalto
+Une clé API sécurise la transmission des données. Elle est administrable dans la partie configuration du module Magento 2.
 
-Une clé API sécurise la transmission des données. Elle est administrable dans la partie configuration du module Magento 2
-
-## Description MVC
+## Description du module Magento Divalto
 
 En cours d'élaboration, cette description sera prochainement complétée et approfondie.
+
+### Le MVC
 
 	- Block
 	- Controller => Urls : admin, customer, validation
