@@ -16,15 +16,15 @@ Clients & commandes sont poussés simultanément vers l'ERP selon un montage sp�
 
 ##### Résumés des étapes Client/Server
 
-- ###### 1 Session Client Magento
-- ###### 2 Retour réponses : 
+- ##### 1) Session Client Magento
+- ##### 2) Retour réponses : 
 	- Api Key check
 	- Messages d'erreurs
 	- Status serveur
 	- Code Sociéte
 	- Autorisation de paiements
 	- N° de commande
-- ###### 3 Mise à jour des données Magento :
+- ##### 3) Mise à jour des données Magento :
 	- Status serveur -> Divalto Response (customer attr)
 	- Messages d'erreurs -> Session client (front) + Divalto Response (customer attr.)
 	- Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)
