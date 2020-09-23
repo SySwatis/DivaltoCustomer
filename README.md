@@ -102,7 +102,7 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 
 ## Administration Magento
 
-### Le menu "Divalto
+### Le menu "Divalto"
 
 #### Mode test
 
@@ -121,12 +121,29 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 
 ### Configuration
 
-- Activer le module (Oui/Non) | Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
-- Api Url
-- Api Url Test
-- SSL Peer’s Certificate
-- Clé Api | Clé de validation d'échange avec Divato (serveur)
-- Dossier magasin | dig. 1, 2, 3, ... Identifiant du magasin associé au flux
-- Validation commandes (Taxe)| Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC) 
+- ##### Activer le module (Oui/Non)
+<br>Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
+- ##### Api Url
+<br> Addresse Url du Serveur Divalto de production
+- ##### Api Url Test
+<br> Addresse Url du Serveur Divalto de pre-production
+- ##### SSL Peer’s Certificate
+<br> Sécurité d'échange de données (curl option). Mettre oui ,si installé sur le serveur
+- ##### Clé Api
+<br>Clé de validation d'échange avec Divato (serveur)
+- ##### Dossier magasin
+<br>Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux
+- ##### Validation commandes (Taxe)
+<br>Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC)
+- ##### Email Test
+<br>
+- ##### Code Test
+<br> 
+- ##### Statut de la commande
+<br>
+- ##### Mode de paiement
+<br>
+- ##### Forme juridique
+<br>
 
 ## Contribute
