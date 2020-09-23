@@ -122,28 +122,28 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 ### Configuration
 
 - ##### Activer le module (Oui/Non)
-<br>Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
+	<br>Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
 - ##### Api Url
-<br> Addresse Url du Serveur Divalto de production
+	<br> Addresse Url du Serveur Divalto de production<br>
 - ##### Api Url Test
-<br> Addresse Url du Serveur Divalto de pre-production
+	<br> Addresse Url du Serveur Divalto de pre-production<br>
 - ##### SSL Peer’s Certificate
-<br> Sécurité d'échange de données (curl option). Mettre oui ,si installé sur le serveur
+	<br> Sécurité d'échange de données (curl option). Mettre oui ,si installé sur le serveur<br>
 - ##### Clé Api
-<br>Clé de validation d'échange avec Divato (serveur)
+	<br>Clé de validation d'échange avec Divato (serveur)<br>
 - ##### Dossier magasin
-<br>Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux
+	<br>Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux<br>
 - ##### Validation commandes (Taxe)
-<br>Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC)
+	<br>Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC)<br>
 - ##### Email Test
-<br>
+	<br><br>
 - ##### Code Test
-<br> 
+	<br><br> 
 - ##### Statut de la commande
-<br>
+	<br><br>
 - ##### Mode de paiement
-<br>
+	<br><br>
 - ##### Forme juridique
-<br>
+	<br><br>
 
 ## Contribute
