@@ -104,13 +104,18 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 
 ### Le menu "Divalto
 
-<b>Mode test</b> permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques :
+####Mode test
+
+Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons :
+
 - ##### Ping
 	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 - ##### Créer un Client
 - ##### Créer une Commande
 
-<b>Configuration</b> est un raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous).
+####Configuration
+
+Raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous).
 
 ###### *Administrable dans la partie configuration du module Magento
 
