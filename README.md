@@ -16,7 +16,7 @@ Clients & commandes sont poussés simultanément vers l'ERP selon un montage sp�
 
 ### Gestions des données
 
-Une clé API * sécurise la transmission des données.
+Une clé API * sécurise la transmission des données. L'essentiel de la gestion se fait
 
 - 1) Gestion du client : ajout uniquement
 - 2) Gestion de la commande : ajout uniquement
@@ -41,7 +41,6 @@ Une clé API * sécurise la transmission des données.
 	- Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)
 	- Autorisation de paiements -> Divalto Outstanding Status (customer attr.)
 	- N° de commande -> Historique de commentaires
-
 
 #### La demande du CDC
 
