@@ -104,7 +104,7 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 
 ### Le menu "Divalto
 
-####Mode test
+#### Mode test
 
 Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons :
 
@@ -113,7 +113,7 @@ Permet de vérifier la communication avec l'url* "Api Url Test" du serveur dista
 - ##### Créer un Client
 - ##### Créer une Commande
 
-####Configuration
+#### Configuration
 
 Raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous).
 
