@@ -12,9 +12,20 @@ composer require divalto/customer:dev-master
 Ce module assure le flux d'échange de Magento 2 (CMS e-commerce) vers Divalto (ERP solution).<br>
 Clients & commandes sont poussés simultanément vers l'ERP selon un montage spécifique et adapté pour le compte de "Stokhall" (ex Food Center).
 
+## Web Service Divalto (Serveur)
+
+### Gestions des données
+
+Une clé API * sécurise la transmission des données.
+
+- 1) Gestion du client : ajout uniquement
+- 2) Gestion de la commande : ajout uniquement
+
+*Administrable dans la partie configuration du module Magento 2
+
 ### WorkFlow
 
-##### Résumés des étapes Client/Server
+#### Résumés des étapes Client/Server
 
 - ##### 1) Session Client Magento
 - ##### 2) Retour réponses : 
@@ -32,44 +43,43 @@ Clients & commandes sont poussés simultanément vers l'ERP selon un montage sp�
 	- N° de commande -> Historique de commentaires
 
 
-##### La demande du CDC
+#### La demande du CDC
 
 Ce descriptif (rédigé en collaboration entre agences & client) est à titre explicatif de la gestion globale. Il peut permettre une meilleure compréhension des fonctionnalités développées sur ce module.
 
-#### PRICE_APPLIED
+###### PRICE_APPLIED
 
     L'intégration des clients par Divalto créera les groupes clients nécessaires aux group price.
     L'intégration des group Price se fera par Magento pour l'initialisation (import) puis par Divalto en webservices pour les mises à jour.
     Ainsi, un client créé dans Magento aura accès à ses group price, le cas échéant.
 
-#### OUTSTANDING_STATUS
+###### OUTSTANDING_STATUS
 
     A la creation d'un client, Magento attend la valeur du outstanding_status
     Sans reponse de Divalto, la valeur par défaut est "CB uniquement"
     L'attribut customer outstanding_status conditionnera les méthodes de paiement proposées au client.
     La portée de cet attribut est dans le client (contact) et non dans le groupe (société).
 
-#### ORDER_PLACED
+###### ORDER_PLACED
 
     Les webservices de commandes sont appelés à la mise à jour d'un statut (pending pour les bons de commande / processing pour CB)
     Toutes les informations de l'entête de commande (client, adresses, totaux ..etc) + les lignes de commandes (articles, quantité, prix ...etc) sont envoyés à Divalto
     La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera intégré sous forme de commentaires de commandes)
 
-   
+#### Les actions du modules
 
+##### Création de Clients
+##### Création de commandes
 
-## Web Service Divalto (Serveur)
+La création des commandes en direction de l'ERP s'effectue uniquement sur le status "processing".
 
-### Gestions des données
+#### Les attributs
 
-Une clé API sécurise la transmission des données. Elle est administrable dans la partie configuration du module Magento 2.
+//--
 
-- 1) Gestion du client : ajout uniquement
-- 2) Gestion de la commande : ajout uniquement
+#### Le Numéro de TVA
 
-## Description du module Magento Divalto
-
-En cours d'élaboration, cette description sera prochainement complétée et approfondie.
+//--
 
 ### Le MVC
 
@@ -90,22 +100,14 @@ En cours d'élaboration, cette description sera prochainement complétée et app
 		- Data
 		- Requester
 
-## Admin
+## Administration Magento
 
 ### Le menu "Divalto
 
 Le mode "test" permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques :
 - Ping : Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 
-## Création de Clients
-### Les attributs
-### Le Numéro de TVA
-
-## Création de commandes
-
-La création des commandes en direction de l'ERP s'effectue uniquement via le status "processing".
-
-## Configuration (Admin)
+### Configuration
 
 - Activer le module (Oui/Non) | Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
 - Clé Api | Clé de validation d'échange avec Divato (serveur)
