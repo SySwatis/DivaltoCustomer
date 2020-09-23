@@ -3,6 +3,8 @@
 - Module for magento 2
 - Manage customer WS communication
 - Version 0.1.0
+- @author SySwatis (Stéphane JIMENEZ)
+- @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
 
 ## Installation
 
