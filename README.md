@@ -164,8 +164,10 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 	Pas d'interactions, ni d'interfacages de mises à jour Serveur/Client. Cf. Gestions des données.
 ### Les factures
 	Le fonctionnement de base de magento de cette partie a été supprimé.
-	Elles sont donc déposées (en externe) et stockées au format PDF dans le répertoire identifié sur avec le code société Divalto.
-	L'utilisateur a accès à lecture de la liste des fichiers.<br>Leurs noms, hiérarchisations, limitations de dépots sont définis hors cadre module & CMS Magento.
+	Elles sont donc déposées (en externe) et stockées au format PDF 
+	dans le répertoire identifié sur avec le code société Divalto.
+	L'utilisateur a accès à lecture de la liste des fichiers.
+	Leurs noms, hiérarchisations, limitations de dépots sont définis hors cadre module & CMS Magento.
 
 ### Autorisation de paiments
 	L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
