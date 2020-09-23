@@ -23,7 +23,7 @@ Une clé API* sécurise la transmission des données :
 
 <b>Attention</b>, l'essentiel de la gestion se fait sur l'ajout, <b>pas de suppression, ni d'édition</b> de données dans cette première version.
 
-######**Administrable dans la partie configuration du module Magento
+###### *Administrable dans la partie configuration du module Magento
 
 ### WorkFlow
 
@@ -111,7 +111,7 @@ Le menu "Mode test" permet de vérifier la communication avec l'url* "Api Url Te
 
 Le menu "Configuration" est un raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous) 
 
-######*Administrable dans la partie configuration du module Magento<
+###### *Administrable dans la partie configuration du module Magento<
 
 ### Configuration
 
