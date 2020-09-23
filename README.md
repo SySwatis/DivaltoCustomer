@@ -161,7 +161,7 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 ### Gestion des adresses (Facturation & livraison)
 	Uniquement en lecture, l'utilisateur n'a pas accès à l'édition de ces données.
 	Un message et un accès au formulaire de contact permet de demander une mise à jour des données.
-	Pas d'interaction de mise à jour Serveur/Client. Cf. Gestions des données.
+	Pas d'interactions, ni d'interfacages de mises à jour Serveur/Client. Cf. Gestions des données.
 ### Les factures
 	Elle sont stockées dans le répertoire identifé sur avec le code société Divalto
 ### Autorisation de paiments
