@@ -73,7 +73,11 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 - ##### Création de Clients
 - ##### Création de commandes
 
-	La création des commandes en direction de l'ERP s'effectue uniquement sur le status "processing".
+	La création des commandes en appel serveur se fait <b>uniquement</b> sur le status magento "processing".
+	Ce paramètre est figé en constante "DIVALTO_STATE_PROCESSING".
+	La configuration du module permet l'appel du serveur selon mode de paiment ou le status d'une commande.
+	Ceci permet de gérer l'évènement d'un changement de status.
+	Dans le cas précis du Cdc, on autorisera le module "Purshase Order" (ou bon commande) & 
 
 #### Les attributs
 
@@ -97,8 +101,8 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 ### Fonctionnalités détaillées
 
 	Helper
-		- Data
-		- Requester
+	- Data
+	- Requester
 
 ## Administration Magento
 
@@ -140,14 +144,26 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 - ##### Validation commandes (Taxe)
 	Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC)
 - ##### Email Test
-	Email d'un client test
+	Email utilisé pour les modes test "Créer Client" & "Créer Commande"
 - ##### Code Test
-	
+	Code Société Divalto utilisé pour le mode test "Créer Commande"
 - ##### Statut de la commande
-	
+	Status autorisés à l'appel du serveur Divalto (Créer Commande)
 - ##### Mode de paiement
-	
+	Paiements autorisés à l'appel du serveur Divalto (Créer Commande)
 - ##### Forme juridique
 	
+
+## Frontend utlisateur
+
+### Gestion des adresses (Facturation & livraison)
+	Uniquement en lecture, l'utilisateur n'a pas accès à l'édition de ces données.
+	Un message et un accès au formulaire de contact permet de demander une mise à jour des données.
+	Pas d'interaction de mise à jour Serveur/Client. Cf. Gestions des données.
+### Les factures
+	Elle sont stockées dans le répertoire identifé sur avec le code société Divalto
+### Autorisation de paiments
+	L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
+### Messages d'erreurs
 
 ## Contribute
