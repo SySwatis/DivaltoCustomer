@@ -21,9 +21,9 @@ Une clé API* sécurise la transmission des données :
 - 1) Gestion du client : ajout uniquement
 - 2) Gestion de la commande : ajout uniquement
 
-Attention, l'essentiel de la gestion se fait l'ajout, pas de suppression, ni d'édition de données dans cette première version.
+<b>Attention</b>, l'essentiel de la gestion se fait sur l'ajout, <b>pas de suppression, ni d'édition</b> de données dans cette première version.
 
-<span style="font-size:11px;text-align: right">*Administrable dans la partie configuration du module Magento</span>
+######**Administrable dans la partie configuration du module Magento
 
 ### WorkFlow
 
@@ -72,7 +72,7 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 - ##### Création de Clients
 - ##### Création de commandes
 
-La création des commandes en direction de l'ERP s'effectue uniquement sur le status "processing".
+	La création des commandes en direction de l'ERP s'effectue uniquement sur le status "processing".
 
 #### Les attributs
 
@@ -103,13 +103,15 @@ La création des commandes en direction de l'ERP s'effectue uniquement sur le st
 
 ### Le menu "Divalto
 
-Le menu "Test" permet de vérifier la communication avec l'url* "Api Url Test" vdu serveur distant et de valider les actions sur la base de données statiques :
+Le menu "Mode test" permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques :
 - ##### Ping
 	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 - ##### Créer un Client
 - ##### Créer une Commande
 
-<span style="font-size:11px;text-align: right">*Administrable dans la partie configuration du module Magento</span>
+Le menu "Configuration" est un raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous) 
+
+######*Administrable dans la partie configuration du module Magento<
 
 ### Configuration
 
