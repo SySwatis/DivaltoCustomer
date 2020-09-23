@@ -23,7 +23,7 @@ Une clé API* sécurise la transmission des données :
 
 Attention, l'essentiel de la gestion se fait l'ajout, pas de suppression, ni d'édition de données dans cette première version.
 
-*Administrable dans la partie configuration du module Magento
+<small style="text-align: right">*Administrable dans la partie configuration du module Magento</small>
 
 ### WorkFlow
 
@@ -109,7 +109,7 @@ Le menu "Test" permet de vérifier la communication avec l'url* "Api Url Test" v
 - ##### Créer un Client
 - ##### Créer une Commande
 
-*Administrable dans la partie configuration du module Magento
+<small style="text-align: right">*Administrable dans la partie configuration du module Magento</small>
 
 ### Configuration
 
