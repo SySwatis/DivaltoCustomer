@@ -68,18 +68,16 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 
 #### Les actions du modules
 
-##### Création de Clients
-##### Création de commandes
+- ##### Création de Clients
+- ##### Création de commandes
 
 La création des commandes en direction de l'ERP s'effectue uniquement sur le status "processing".
 
 #### Les attributs
 
-//--
-
-#### Le Numéro de TVA
-
-//--
+- ##### Clients
+- ##### Commandes
+- ##### Le Numéro de TVA
 
 ### Le MVC
 
