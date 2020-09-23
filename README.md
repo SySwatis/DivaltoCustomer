@@ -109,9 +109,12 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons :
 
 - ##### Ping
-	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
+	Retourne le status 200 si succès
+	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant
 - ##### Créer un Client
+	Retourne le code client si succès
 - ##### Créer une Commande
+	Retourne le n° de commande Divalto si succès
 
 #### Configuration
 
@@ -128,7 +131,8 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 - ##### Api Url Test
 	Addresse Url du Serveur Divalto de pre-production
 - ##### SSL Peer’s Certificate
-	Sécurité d'échange de données (curl option). Mettre oui ,si installé sur le serveur
+	Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur<br>
+	Pris en compte également dans le mode test
 - ##### Clé Api
 	Clé de validation d'échange avec Divato (serveur)
 - ##### Dossier magasin
@@ -136,7 +140,7 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 - ##### Validation commandes (Taxe)
 	Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC)
 - ##### Email Test
-	
+	Email d'un client test
 - ##### Code Test
 	
 - ##### Statut de la commande
