@@ -21,7 +21,7 @@ Une clé API * sécurise la transmission des données. L'essentiel de la gestion
 - 1) Gestion du client : ajout uniquement
 - 2) Gestion de la commande : ajout uniquement
 
-*Administrable dans la partie configuration du module Magento 2
+*Administrable dans la partie configuration du module Magento
 
 ### WorkFlow
 
@@ -101,9 +101,13 @@ La création des commandes en direction de l'ERP s'effectue uniquement sur le st
 
 ### Le menu "Divalto
 
-Le menu "Test" permet de vérifier la communication avec le serveur distant et de valider les actions sur la base de données statiques :
+Le menu "Test" permet de vérifier la communication avec l'url* "Api Url Test" vdu serveur distant et de valider les actions sur la base de données statiques :
 - ##### Ping
 	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
+- ##### Créer un Client
+- ##### Créer une Commande
+
+*Administrable dans la partie configuration du module Magento
 
 ### Configuration
 
