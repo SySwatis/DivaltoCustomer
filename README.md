@@ -173,4 +173,7 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 	L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
 ### Messages d'erreurs
 
+#### Logs
+#### Frontend
+
 ## Contribute
