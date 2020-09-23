@@ -9,8 +9,8 @@ composer require divalto/customer:dev-master
 
 ## Description
 
-Ce module assure le flux d'échange de Magento 2 (CMS e-commerce) vers Divalto (ERP solution).<br>
-Clients & commandes sont poussés simultanément vers l'ERP selon un montage spécifique et adapté pour le compte de "Stokhall" (ex Food Center).
+Ce module assure le flux d'échange de donnée entre Magento 2 (CMS e-commerce) et Divalto (ERP solution).<br>
+Clients & commandes sont poussés simultanément vers l'ERP selon un montage spécifique et adapté pour le compte de <b>Stokhall</b> (ex Food Center).
 
 ## Web Service Divalto (Serveur)
 
