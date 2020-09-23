@@ -1,4 +1,5 @@
-# Divalto_Customer
+# Divalto Customer
+
 - Module for magento 2
 - Manage customer WS communication
 - Version 0.1.0
@@ -111,13 +112,16 @@ Le menu "Mode test" permet de vérifier la communication avec l'url* "Api Url Te
 
 Le menu "Configuration" est un raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous) 
 
-###### *Administrable dans la partie configuration du module Magento<
+###### *Administrable dans la partie configuration du module Magento
 
 ### Configuration
 
 - Activer le module (Oui/Non) | Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
+- Api Url
+- Api Url Test
+- SSL Peer’s Certificate
 - Clé Api | Clé de validation d'échange avec Divato (serveur)
 - Dossier magasin | dig. 1, 2, 3, ... Identifiant du magasin associé au flux
-- Validation commandes (Taxe) (HT/TTC) | Règle de validation des totaux des lignes de commandes
+- Validation commandes (Taxe)| Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC) 
 
 ## Contribute
