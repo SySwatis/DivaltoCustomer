@@ -74,6 +74,7 @@ La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera int
 #### Les actions du modules
 
 ##### Création de Clients
+Cf. Création de compte
 ##### Création de commandes
 
 La création des commandes en appel serveur se fait <b>uniquement</b> sur le status magento "processing".
@@ -84,8 +85,21 @@ Dans le cas précis du Cdc, on autorisera le module "Purshase Order" (ou bon com
 
 #### Les attributs
 
+Les attributs "customer" sont ajouté à l'installation du module.
+Pour ajouter un nouvel attribut, il faut upgrader la version de ce dernier
+
 ##### Clients
-divalto_account_id, divalto_outstanding_status, ape, siret, legal_form, company_name, divalto_response, divalto_extrafield_1, divalto_extrafield_2.
+
+	divalto_account_id,
+	divalto_outstanding_status
+	ape
+	siret
+	legal_form
+	company_name
+	divalto_response
+	divalto_extrafield_1
+	divalto_extrafield_2
+
 ##### Commandes
 Aucuns
 
