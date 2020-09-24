@@ -143,7 +143,7 @@ Une <b>latence trop importante</b> et/ou une erreur timeout (curl) est probablem
 
 **Créer un Client**
 
-Retourne le code client (test) si succès avec **"Numero_Dossier"* & "Contact.Email"****.
+Retourne le code client (test) si succès avec "Numero_Dossier"* & "Contact.Email"*.<br>
 Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php".
 
 
@@ -165,7 +165,7 @@ Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php"
 
 **Créer une Commande**
 
-Retourne le n° de commande Divalto si succès avec "Email_Client_Cde"* & Code_Client_Divalto"*.
+Retourne le n° de commande Divalto si succès avec "Email_Client_Cde"* & Code_Client_Divalto"*.<br>
 Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateOrder.php".
 
 
