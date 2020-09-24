@@ -135,6 +135,7 @@ Aucuns
 Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons "Ping","Créer un Client","Créer une Commande" (cf. configuration).
 
 **Ping**
+
 Retourne le status 200 si succès.
 Une <b>latence trop importante</b> et/ou une erreur timeout (curl) est probablement due à un <b>problème d'IP(s) non autorisées</b> sur le serveur distant.
 
