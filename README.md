@@ -19,10 +19,10 @@ Clients & commandes sont poussés simultanément vers l'ERP selon un montage sp�
 
 ### Gestions des données
 
-Une clé API* sécurise la transmission des données :
+Une <b>clé API</b>* sécurise la transmission des données :
 
-- 1) Gestion du client : ajout uniquement
-- 2) Gestion de la commande : ajout uniquement
+1. Gestion du client : ajout uniquement
+2. Gestion de la commande : ajout uniquement
 
 <b>Attention</b>, l'essentiel de la gestion se fait sur l'ajout, <b>pas de suppression, ni d'édition</b> de données dans cette première version.
 
