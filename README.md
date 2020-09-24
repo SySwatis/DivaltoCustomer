@@ -132,7 +132,7 @@ Permet de vérifier la communication avec l'url* "Api Url Test" du serveur dista
 
 ##### Ping
 Retourne le status 200 si succès.
-Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
+Une <b>latence trop importante</b> et/ou une erreur timeout (curl) est probablement due à un <b>problème d'IP(s) non autorisées</b> sur le serveur distant.
 ##### Créer un Client
 Retourne le code client si succès.
 ##### Créer une Commande
