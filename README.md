@@ -91,22 +91,22 @@ Aucuns
 
 ### Le MVC
 
-- Block
-- Controller => Urls : admin, customer, validation
-- etc => Config : menu, url, module, admin config, events
-- Helper => Fonctionnalités générales
-- i18n => Traductions (csv)
-- Logger => Générateur des logs
-- Model => Fonctionnalités spécifiques
-- Observer => Fonctionnalités 
-- Setup => Installateur (attributs, upgrade)
-- view => Frontend (user & admin) : pHtml, js, layout
+	- Block
+	- Controller => Urls : admin, customer, validation
+	- etc => Config : menu, url, module, admin config, events
+	- Helper => Fonctionnalités générales
+	- i18n => Traductions (csv)
+	- Logger => Générateur des logs
+	- Model => Fonctionnalités spécifiques
+	- Observer => Fonctionnalités 
+	- Setup => Installateur (attributs, upgrade)
+	- view => Frontend (user & admin) : pHtml, js, layout
 
 ### Fonctionnalités détaillées
 
-Helper
-- Data
-- Requester
+	Helper
+	- Data
+	- Requester
 
 ## Administration Magento
 
@@ -116,12 +116,12 @@ Helper
 
 Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons :
 
-- ##### Ping
+##### Ping
 Retourne le status 200 si succès.
 Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
-- ##### Créer un Client
+##### Créer un Client
 Retourne le code client si succès.
-- ##### Créer une Commande
+##### Créer une Commande
 Retourne le n° de commande Divalto si succès.
 
 #### Configuration
@@ -132,31 +132,31 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 
 ### Configuration
 
-- ##### Activer le module (Oui/Non)
+##### Activer le module (Oui/Non)
 Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test).
-- ##### Api Url
+##### Api Url
 Addresse Url du Serveur Divalto de production.
-- ##### Api Url Test
+##### Api Url Test
 Addresse Url du Serveur Divalto de pre-production.
-- ##### SSL Peer’s Certificate
+##### SSL Peer’s Certificate
 Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur.<br>
 Pris en compte également dans le mode test.
-- ##### Clé Api
+##### Clé Api
 Clé de validation d'échange avec Divato (serveur).
-- ##### Dossier magasin
+##### Dossier magasin
 Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux.
-- ##### Validation commandes (Taxe)
+##### Validation commandes (Taxe)
 Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC).
-- ##### Email Test
+##### Email Test
 Email utilisé pour les modes test "Créer Client" & "Créer Commande"
-- ##### Code Test
+##### Code Test
 Code Société Divalto utilisé pour le mode test "Créer Commande".
-- ##### Statut de la commande
+##### Statut de la commande
 Status autorisés à l'appel du serveur Divalto (Créer Commande).
-- ##### Mode de paiement
+##### Mode de paiement
 Paiements autorisés à l'appel du serveur Divalto (Créer Commande).
-- ##### Forme juridique
-
+##### Forme juridique
+Liste des formes juridiques entreprise (Titre - cf. Mapping).
 
 ## Compte client (utilisateur fontend)
 
@@ -194,11 +194,11 @@ Leurs noms, hiérarchisations, limitations de dépots sont définis hors cadre m
 #### Autorisation de paiements
 L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
 
-#### Echec
+## Commandes
 
-Lors de création de compte
+### Mapping
 
-#### Logs
+## Logs
 -/var/log/divalto/customer/debug.log
 -/var/log/debug.log
 -/var/log/system.log
