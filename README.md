@@ -32,21 +32,23 @@ Une clé API* sécurise la transmission des données :
 
 #### Résumés des étapes Client/Server
 
-##### 1) Session Client Magento
+##### 1) Session Client Magento :
 Connexion ou création de compte
+
 ##### 2) Retour réponses : 
 Api Key check<br>
 Messages d'erreurs<br>
 Status serveur<br>
 Code Sociéte<br>
 Autorisation de paiements<br>
-N° de commande<br>
+N° de commande
+
 ##### 3) Mise à jour des données Magento :
 Messages d'erreurs -> Session client (front) + Divalto Response (customer attr.)<br>
 Status serveur -> Divalto Response (customer attr)<br>
 Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)<br>
 Autorisation de paiements -> Divalto Outstanding Status (customer attr.)<br>
-N° de commande -> Historique de commentaires<br>
+N° de commande -> Historique de commentaires
 
 #### La demande du CDC
 
@@ -74,7 +76,9 @@ La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera int
 #### Les actions du modules
 
 ##### Création de Clients
+
 Cf. Création de compte
+
 ##### Création de commandes
 
 La création des commandes en appel serveur se fait <b>uniquement</b> sur le status magento "processing".
@@ -128,19 +132,41 @@ Aucuns
 
 #### Mode test
 
-Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons :
+Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons "Ping","Créer un Client","Créer une Commande" (cf. configuration).
 
 ##### Ping
 Retourne le status 200 si succès.
 Une <b>latence trop importante</b> et/ou une erreur timeout (curl) est probablement due à un <b>problème d'IP(s) non autorisées</b> sur le serveur distant.
+
 ##### Créer un Client
-Retourne le code client si succès.
+
+Retourne le code client (test) si succès avec "Numero_Dossier"* et "Contact.Email"*.
+Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php".
+
+
+	...		$postData = [
+	            "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
+	            "Email_Client"=>"",
+	            "Raison_Sociale"=>"",
+	            "Titre"=>"",
+	            "Telephone"=>"",
+	            "Numero_Siret"=>"",
+	            "Code_APE"=>"",
+	            "Numero_TVA"=>"",
+	            "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+	            "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+	            "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
+	        ];
+
+###### *Administrable dans la partie configuration du module Magento
+
 ##### Créer une Commande
+
 Retourne le n° de commande Divalto si succès.
 
 #### Configuration
 
-Raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous).
+Raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. "Configuration" ci-dessous).
 
 ###### *Administrable dans la partie configuration du module Magento
 
