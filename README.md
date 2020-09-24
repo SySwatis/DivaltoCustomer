@@ -33,6 +33,7 @@ Une clé API* sécurise la transmission des données :
 #### Résumés des étapes Client/Server
 
 - ##### 1) Session Client Magento
+	- Connexion ou création de compte
 - ##### 2) Retour réponses : 
 	- Api Key check
 	- Messages d'erreurs
@@ -66,9 +67,9 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 
 ###### ORDER_PLACED
 
-    Les webservices de commandes sont appelés à la mise à jour d'un statut (pending pour les bons de commande / processing pour CB)
+    Les webservices de commandes sont appelés à la mise à jour d'un statut (pending pour les bons de commande / processing pour CB).
     Toutes les informations de l'entête de commande (client, adresses, totaux ..etc) + les lignes de commandes (articles, quantité, prix ...etc) sont envoyés à Divalto
-    La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera intégré sous forme de commentaires de commandes)
+    La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera intégré sous forme de commentaires de commandes).
 
 #### Les actions du modules
 
@@ -84,8 +85,9 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 #### Les attributs
 
 - ##### Clients
+	divalto_account_id, divalto_outstanding_status, ape, siret, legal_form, company_name, divalto_response, divalto_extrafield_1, divalto_extrafield_2.
 - ##### Commandes
-- ##### Le Numéro de TVA
+	Aucuns
 
 ### Le MVC
 
@@ -115,12 +117,12 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons :
 
 - ##### Ping
-	Retourne le status 200 si succès
-	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant
+	Retourne le status 200 si succès.
+	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 - ##### Créer un Client
-	Retourne le code client si succès
+	Retourne le code client si succès.
 - ##### Créer une Commande
-	Retourne le n° de commande Divalto si succès
+	Retourne le n° de commande Divalto si succès.
 
 #### Configuration
 
@@ -131,49 +133,75 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 ### Configuration
 
 - ##### Activer le module (Oui/Non)
-	Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test)
+	Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test).
 - ##### Api Url
-	Addresse Url du Serveur Divalto de production
+	Addresse Url du Serveur Divalto de production.
 - ##### Api Url Test
-	Addresse Url du Serveur Divalto de pre-production
+	Addresse Url du Serveur Divalto de pre-production.
 - ##### SSL Peer’s Certificate
-	Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur<br>
-	Pris en compte également dans le mode test
+	Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur.<br>
+	Pris en compte également dans le mode test.
 - ##### Clé Api
-	Clé de validation d'échange avec Divato (serveur)
+	Clé de validation d'échange avec Divato (serveur).
 - ##### Dossier magasin
-	Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux
+	Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux.
 - ##### Validation commandes (Taxe)
-	Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC)
+	Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC).
 - ##### Email Test
 	Email utilisé pour les modes test "Créer Client" & "Créer Commande"
 - ##### Code Test
-	Code Société Divalto utilisé pour le mode test "Créer Commande"
+	Code Société Divalto utilisé pour le mode test "Créer Commande".
 - ##### Statut de la commande
-	Status autorisés à l'appel du serveur Divalto (Créer Commande)
+	Status autorisés à l'appel du serveur Divalto (Créer Commande).
 - ##### Mode de paiement
-	Paiements autorisés à l'appel du serveur Divalto (Créer Commande)
+	Paiements autorisés à l'appel du serveur Divalto (Créer Commande).
 - ##### Forme juridique
 	
 
-## Frontend utlisateur
+## Compte client (utilisateur fontend)
 
-### Gestion des adresses (Facturation & livraison)
+### Création de compte
+
+	L'accès à la création de compte est ouvert à tous les visiteurs. Son inscription est soumise à la validation du serveur Divalto. Si ce dernier n'a pas été reconnu (adresse email). Le compte est toutefois enregistré sur Magento, il cependant est averti par un message d'erreur "Compte client non validé, merci de nous contacter".
+
+#### Siret
+
+	Desactivé sur le formulaire au profit du VAT. Le champ pays est obligatoire pour établir la validation européenne en lien avec la TVA (cf. VAT).
+
+#### VAT
+
+	Validation effectuée à la création de compte par le format & à la validation du VAT  (http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl).
+
+#### Ape
+
+	Validation effectuée à la création de compte par le format.
+	
+
+### Gestion de compte
+
+#### Gestion des adresses (Facturation & livraison)
 	Uniquement en lecture, l'utilisateur n'a pas accès à l'édition de ces données.
 	Un message et un accès au formulaire de contact permet de demander une mise à jour des données.
 	Pas d'interactions, ni d'interfacages de mises à jour Serveur/Client. Cf. Gestions des données.
-### Les factures
+
+#### Factures
 	Le fonctionnement de base de magento de cette partie a été supprimé.
 	Elles sont donc déposées (en externe) et stockées au format PDF 
 	dans le répertoire identifié sur avec le code société Divalto.
 	L'utilisateur a accès à lecture de la liste des fichiers.
 	Leurs noms, hiérarchisations, limitations de dépots sont définis hors cadre module & CMS Magento.
 
-### Autorisation de paiments
+#### Autorisation de paiements
 	L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
-### Messages d'erreurs
+
+#### Echec
+
+	Lors de création de compte
 
 #### Logs
-#### Frontend
+	-/var/log/divalto/customer/debug.log
+	-/var/log/debug.log
+	-/var/log/system.log
+
 
 ## Contribute
