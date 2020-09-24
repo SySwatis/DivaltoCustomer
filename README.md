@@ -144,19 +144,19 @@ Retourne le code client (test) si succès avec "Numero_Dossier"* et "Contact.Ema
 Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php".
 
 
-	...		$postData = [
-	            "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
-	            "Email_Client"=>"",
-	            "Raison_Sociale"=>"",
-	            "Titre"=>"",
-	            "Telephone"=>"",
-	            "Numero_Siret"=>"",
-	            "Code_APE"=>"",
-	            "Numero_TVA"=>"",
-	            "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-	            "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-	            "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
-	        ];
+	$postData = [
+        "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
+        "Email_Client"=>"",
+        "Raison_Sociale"=>"",
+        "Titre"=>"",
+        "Telephone"=>"",
+        "Numero_Siret"=>"",
+        "Code_APE"=>"",
+        "Numero_TVA"=>"",
+        "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+        "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+        "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
+    ];
 
 ###### *Administrable dans la partie configuration du module Magento
 
