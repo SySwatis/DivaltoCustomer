@@ -40,9 +40,9 @@ class Index extends \Magento\Backend\Block\Template
 
         $sslVerifypeer =  $this->_helperData->getGeneralConfig('ssl_verifypeer') == 1 ? 'Yes' : 'No';
 
-
-
         $html =     '<header class="page-header row"><p><b>'.__('SSL Cert. Verfify Peer:').'</b> '.__($sslVerifypeer).'</p>';
+
+        $html .=    '<p><b>'.__('Divlato Store Id:').'</b> '.$this->_helperData->getGeneralConfig('divalto_store_id').'</p>';
         $html .=    '<p><b>'.__('Email test:').'</b> '.$this->_helperData->getGeneralConfig('email_test').'</p>';
         $html .=    '<p><b>'.__('Code test:').'</b> '.$this->_helperData->getGeneralConfig('code_test').'</p>';
         $html .=    '<p><b>'.__('Api Url Test:').'</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p></header>';     

@@ -40,7 +40,7 @@ class CreateOrder extends \Magento\Backend\Block\Template
         $emailTest = $this->_helperData->getGeneralConfig('email_test');
         $codeTest = $this->_helperData->getGeneralConfig('code_test');
         $postData = [
-            'Numero_Dossier'=>'1',
+            'Numero_Dossier'=>$this->_helperData->getGeneralConfig('divalto_store_id'),
             'Numero_Commande_Magento'=>'000001',
             'Email_Client_Cde'=>$emailTest,
             'Code_Client_Divalto'=>$codeTest,
