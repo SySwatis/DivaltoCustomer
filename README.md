@@ -136,12 +136,12 @@ Aucuns
 
 Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons "Ping","Créer un Client","Créer une Commande" (cf. configuration).
 
-**Ping**
+**Ping (test)**
 
 Retourne le status 200 si succès.
 Une <b>latence trop importante</b> et/ou une erreur timeout (curl) est probablement due à un <b>problème d'IP(s) non autorisées</b> sur le serveur distant.
 
-**Créer un Client**
+**Créer un Client (test)**
 
 Retourne le code client (test) si succès avec "Numero_Dossier"* & "Contact.Email"*.<br>
 Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php".
@@ -163,7 +163,7 @@ Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php"
 
 **Administrable dans la partie configuration du module Magento*
 
-**Créer une Commande**
+**Créer une Commande (test)**
 
 Retourne le n° de commande Divalto si succès avec "Email_Client_Cde"* & Code_Client_Divalto"*.<br>
 Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateOrder.php".
