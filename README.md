@@ -32,21 +32,21 @@ Une clé API* sécurise la transmission des données :
 
 #### Résumés des étapes Client/Server
 
-- ##### 1) Session Client Magento
-- Connexion ou création de compte
-- ##### 2) Retour réponses : 
-- Api Key check
-- Messages d'erreurs
-- Status serveur
-- Code Sociéte
-- Autorisation de paiements
-- N° de commande
-- ##### 3) Mise à jour des données Magento :
-- Messages d'erreurs -> Session client (front) + Divalto Response (customer attr.)
-- Status serveur -> Divalto Response (customer attr)
-- Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)
-- Autorisation de paiements -> Divalto Outstanding Status (customer attr.)
-- N° de commande -> Historique de commentaires
+##### 1) Session Client Magento
+Connexion ou création de compte
+##### 2) Retour réponses : 
+Api Key check
+Messages d'erreurs
+Status serveur
+Code Sociéte
+Autorisation de paiements
+N° de commande
+##### 3) Mise à jour des données Magento :
+Messages d'erreurs -> Session client (front) + Divalto Response (customer attr.)
+Status serveur -> Divalto Response (customer attr)
+Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)
+Autorisation de paiements -> Divalto Outstanding Status (customer attr.)
+N° de commande -> Historique de commentaires
 
 #### La demande du CDC
 
