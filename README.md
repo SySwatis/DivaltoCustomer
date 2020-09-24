@@ -54,20 +54,20 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 
 ###### PRICE_APPLIED
 
-L'intégration des clients par Divalto créera les groupes clients nécessaires aux group price.
+> L'intégration des clients par Divalto créera les groupes clients nécessaires aux group price.
 L'intégration des group Price se fera par Magento pour l'initialisation (import) puis par Divalto en webservices pour les mises à jour.
 Ainsi, un client créé dans Magento aura accès à ses group price, le cas échéant.
 
 ###### OUTSTANDING_STATUS
 
-A la creation d'un client, Magento attend la valeur du outstanding_status
+> A la creation d'un client, Magento attend la valeur du outstanding_status
 Sans reponse de Divalto, la valeur par défaut est "CB uniquement"
 L'attribut customer outstanding_status conditionnera les méthodes de paiement proposées au client.
 La portée de cet attribut est dans le client (contact) et non dans le groupe (société).
 
 ###### ORDER_PLACED
 
-Les webservices de commandes sont appelés à la mise à jour d'un statut (pending pour les bons de commande / processing pour CB).
+> Les webservices de commandes sont appelés à la mise à jour d'un statut (pending pour les bons de commande / processing pour CB).
 Toutes les informations de l'entête de commande (client, adresses, totaux ..etc) + les lignes de commandes (articles, quantité, prix ...etc) sont envoyés à Divalto
 La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera intégré sous forme de commentaires de commandes).
 
@@ -142,7 +142,7 @@ Retourne le n° de commande Divalto si succès.
 
 Raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. ci-dessous).
 
-![alt text]*Administrable dans la partie configuration du module Magento
+###### *Administrable dans la partie configuration du module Magento
 
 ### Configuration
 
@@ -246,4 +246,9 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
 	-/var/log/system.log
 
 
-## Contribute
+## Contribution
+
+
+## Todo
+
+Test subscription new client in checkout order
