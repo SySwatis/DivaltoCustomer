@@ -180,7 +180,7 @@ L'accès à la création de compte est ouvert à tous les visiteurs. Son inscrip
 
 #### Siret
 
-Desactivé sur le formulaire au profit du VAT. Le champ pays est obligatoire pour établir la validation européenne en lien avec la TVA (cf. VAT).
+Désactivé sur le formulaire au profit du VAT. Le champ pays est obligatoire pour établir la validation européenne en lien avec la TVA (cf. VAT).
 
 #### VAT
 
@@ -189,7 +189,6 @@ Validation effectuée à la création de compte par le format & à la validation
 #### Ape
 
 Validation effectuée à la création de compte par le format.
-
 
 ### Gestion de compte
 
@@ -212,10 +211,39 @@ L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
 
 ### Mapping
 
+Extrait source code : "Divalto/Customer/Model/OrderMap.php"
+
+	$orderData = [
+            'Numero_Dossier'=>$divaltoStoreId,
+            'Numero_Commande_Magento'=>$order->getIncrementId(),
+            'Email_Client_Cde'=>$order->getCustomerEmail(),
+            'Code_Client_Divalto'=>$groupCode,
+            'Code_Adresse_Livraison'=>'',
+            'Adresse_Livraison_Manuelle'=>$shippingAddressData,
+            'Code_Adresse_Facturation'=>'',
+            'Paiement'=>'processing',
+            'liste_detail_ligne'=>$orderDataItems,
+            'Client_Particulier'=>array(
+                'Numero_TVA'=>$customerOrder->getTaxvat(),
+                'Code_Ape'=>$this->getCustomerAttributeValue($customerOrder,'ape'),
+                'Email_Client'=>'',
+                'Raison_Sociale'=>$this->getCustomerAttributeValue($customerOrder,'company_name'),
+                'Titre'=>$this->getCustomerAttributeValue($customerOrder,'legal_form'),
+                'Telephone'=>$shippingAddress->getTelephone(),
+                'Contact'=>array(
+                    'Nom'=>$order->getCustomerLastname(),
+                    'Prenom'=>$order->getCustomerFirstname(),
+                    'Telephone'=>$billingAddress->getTelephone(),
+                    'Email'=>$order->getCustomerEmail(),
+                    'Fonction'=>$order->getCustomerPrefix()
+                )
+            )
+        ];
+
 ## Logs
--/var/log/divalto/customer/debug.log
--/var/log/debug.log
--/var/log/system.log
+	-/var/log/divalto/customer/debug.log
+	-/var/log/debug.log
+	-/var/log/system.log
 
 
 ## Contribute
