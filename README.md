@@ -33,20 +33,20 @@ Une clé API* sécurise la transmission des données :
 #### Résumés des étapes Client/Server
 
 - ##### 1) Session Client Magento
-	- Connexion ou création de compte
+- Connexion ou création de compte
 - ##### 2) Retour réponses : 
-	- Api Key check
-	- Messages d'erreurs
-	- Status serveur
-	- Code Sociéte
-	- Autorisation de paiements
-	- N° de commande
+- Api Key check
+- Messages d'erreurs
+- Status serveur
+- Code Sociéte
+- Autorisation de paiements
+- N° de commande
 - ##### 3) Mise à jour des données Magento :
-	- Messages d'erreurs -> Session client (front) + Divalto Response (customer attr.)
-	- Status serveur -> Divalto Response (customer attr)
-	- Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)
-	- Autorisation de paiements -> Divalto Outstanding Status (customer attr.)
-	- N° de commande -> Historique de commentaires
+- Messages d'erreurs -> Session client (front) + Divalto Response (customer attr.)
+- Status serveur -> Divalto Response (customer attr)
+- Code Sociéte -> Groupe Client + Divalto Account Id (customer attr.)
+- Autorisation de paiements -> Divalto Outstanding Status (customer attr.)
+- N° de commande -> Historique de commentaires
 
 #### La demande du CDC
 
@@ -54,59 +54,59 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 
 ###### PRICE_APPLIED
 
-    L'intégration des clients par Divalto créera les groupes clients nécessaires aux group price.
-    L'intégration des group Price se fera par Magento pour l'initialisation (import) puis par Divalto en webservices pour les mises à jour.
-    Ainsi, un client créé dans Magento aura accès à ses group price, le cas échéant.
+L'intégration des clients par Divalto créera les groupes clients nécessaires aux group price.
+L'intégration des group Price se fera par Magento pour l'initialisation (import) puis par Divalto en webservices pour les mises à jour.
+Ainsi, un client créé dans Magento aura accès à ses group price, le cas échéant.
 
 ###### OUTSTANDING_STATUS
 
-    A la creation d'un client, Magento attend la valeur du outstanding_status
-    Sans reponse de Divalto, la valeur par défaut est "CB uniquement"
-    L'attribut customer outstanding_status conditionnera les méthodes de paiement proposées au client.
-    La portée de cet attribut est dans le client (contact) et non dans le groupe (société).
+A la creation d'un client, Magento attend la valeur du outstanding_status
+Sans reponse de Divalto, la valeur par défaut est "CB uniquement"
+L'attribut customer outstanding_status conditionnera les méthodes de paiement proposées au client.
+La portée de cet attribut est dans le client (contact) et non dans le groupe (société).
 
 ###### ORDER_PLACED
 
-    Les webservices de commandes sont appelés à la mise à jour d'un statut (pending pour les bons de commande / processing pour CB).
-    Toutes les informations de l'entête de commande (client, adresses, totaux ..etc) + les lignes de commandes (articles, quantité, prix ...etc) sont envoyés à Divalto
-    La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera intégré sous forme de commentaires de commandes).
+Les webservices de commandes sont appelés à la mise à jour d'un statut (pending pour les bons de commande / processing pour CB).
+Toutes les informations de l'entête de commande (client, adresses, totaux ..etc) + les lignes de commandes (articles, quantité, prix ...etc) sont envoyés à Divalto
+La reponse attendue correspond au numero(s) de commande(s) Divalto (qui sera intégré sous forme de commentaires de commandes).
 
 #### Les actions du modules
 
 - ##### Création de Clients
 - ##### Création de commandes
 
-	La création des commandes en appel serveur se fait <b>uniquement</b> sur le status magento "processing".
-	Ce paramètre est figé en constante "DIVALTO_STATE_PROCESSING".
-	La configuration du module permet l'appel du serveur selon mode de paiment ou le status d'une commande.
-	Ceci permet de gérer l'évènement d'un changement de status.
-	Dans le cas précis du Cdc, on autorisera le module "Purshase Order" (ou bon commande) & 
+La création des commandes en appel serveur se fait <b>uniquement</b> sur le status magento "processing".
+Ce paramètre est figé en constante "DIVALTO_STATE_PROCESSING".
+La configuration du module permet l'appel du serveur selon mode de paiment ou le status d'une commande.
+Ceci permet de gérer l'évènement d'un changement de status.
+Dans le cas précis du Cdc, on autorisera le module "Purshase Order" (ou bon commande) & 
 
 #### Les attributs
 
 - ##### Clients
-	divalto_account_id, divalto_outstanding_status, ape, siret, legal_form, company_name, divalto_response, divalto_extrafield_1, divalto_extrafield_2.
+divalto_account_id, divalto_outstanding_status, ape, siret, legal_form, company_name, divalto_response, divalto_extrafield_1, divalto_extrafield_2.
 - ##### Commandes
-	Aucuns
+Aucuns
 
 ### Le MVC
 
-	- Block
-	- Controller => Urls : admin, customer, validation
-	- etc => Config : menu, url, module, admin config, events
-	- Helper => Fonctionnalités générales
-	- i18n => Traductions (csv)
-	- Logger => Générateur des logs
-	- Model => Fonctionnalités spécifiques
-	- Observer => Fonctionnalités 
-	- Setup => Installateur (attributs, upgrade)
-	- view => Frontend (user & admin) : pHtml, js, layout
+- Block
+- Controller => Urls : admin, customer, validation
+- etc => Config : menu, url, module, admin config, events
+- Helper => Fonctionnalités générales
+- i18n => Traductions (csv)
+- Logger => Générateur des logs
+- Model => Fonctionnalités spécifiques
+- Observer => Fonctionnalités 
+- Setup => Installateur (attributs, upgrade)
+- view => Frontend (user & admin) : pHtml, js, layout
 
 ### Fonctionnalités détaillées
 
-	Helper
-	- Data
-	- Requester
+Helper
+- Data
+- Requester
 
 ## Administration Magento
 
@@ -117,12 +117,12 @@ Ce descriptif (rédigé en collaboration entre agences & client) est à titre ex
 Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons :
 
 - ##### Ping
-	Retourne le status 200 si succès.
-	Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
+Retourne le status 200 si succès.
+Une latence trop importante et/ou une erreur timeout (curl) est probablement due à un problème d'IP(s) non reconnus sur le serveur distant.
 - ##### Créer un Client
-	Retourne le code client si succès.
+Retourne le code client si succès.
 - ##### Créer une Commande
-	Retourne le n° de commande Divalto si succès.
+Retourne le n° de commande Divalto si succès.
 
 #### Configuration
 
@@ -133,75 +133,75 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 ### Configuration
 
 - ##### Activer le module (Oui/Non)
-	Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test).
+Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test).
 - ##### Api Url
-	Addresse Url du Serveur Divalto de production.
+Addresse Url du Serveur Divalto de production.
 - ##### Api Url Test
-	Addresse Url du Serveur Divalto de pre-production.
+Addresse Url du Serveur Divalto de pre-production.
 - ##### SSL Peer’s Certificate
-	Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur.<br>
-	Pris en compte également dans le mode test.
+Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur.<br>
+Pris en compte également dans le mode test.
 - ##### Clé Api
-	Clé de validation d'échange avec Divato (serveur).
+Clé de validation d'échange avec Divato (serveur).
 - ##### Dossier magasin
-	Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux.
+Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux.
 - ##### Validation commandes (Taxe)
-	Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC).
+Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC).
 - ##### Email Test
-	Email utilisé pour les modes test "Créer Client" & "Créer Commande"
+Email utilisé pour les modes test "Créer Client" & "Créer Commande"
 - ##### Code Test
-	Code Société Divalto utilisé pour le mode test "Créer Commande".
+Code Société Divalto utilisé pour le mode test "Créer Commande".
 - ##### Statut de la commande
-	Status autorisés à l'appel du serveur Divalto (Créer Commande).
+Status autorisés à l'appel du serveur Divalto (Créer Commande).
 - ##### Mode de paiement
-	Paiements autorisés à l'appel du serveur Divalto (Créer Commande).
+Paiements autorisés à l'appel du serveur Divalto (Créer Commande).
 - ##### Forme juridique
-	
+
 
 ## Compte client (utilisateur fontend)
 
 ### Création de compte
 
-	L'accès à la création de compte est ouvert à tous les visiteurs. Son inscription est soumise à la validation du serveur Divalto. Si ce dernier n'a pas été reconnu (adresse email). Le compte est toutefois enregistré sur Magento, il cependant est averti par un message d'erreur "Compte client non validé, merci de nous contacter".
+L'accès à la création de compte est ouvert à tous les visiteurs. Son inscription est soumise à la validation du serveur Divalto. Si ce dernier n'a pas été reconnu (adresse email). Le compte est toutefois enregistré sur Magento, il cependant est averti par un message d'erreur "Compte client non validé, merci de nous contacter".
 
 #### Siret
 
-	Desactivé sur le formulaire au profit du VAT. Le champ pays est obligatoire pour établir la validation européenne en lien avec la TVA (cf. VAT).
+Desactivé sur le formulaire au profit du VAT. Le champ pays est obligatoire pour établir la validation européenne en lien avec la TVA (cf. VAT).
 
 #### VAT
 
-	Validation effectuée à la création de compte par le format & à la validation du VAT  (http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl).
+Validation effectuée à la création de compte par le format & à la validation du VAT  (http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl).
 
 #### Ape
 
-	Validation effectuée à la création de compte par le format.
-	
+Validation effectuée à la création de compte par le format.
+
 
 ### Gestion de compte
 
 #### Gestion des adresses (Facturation & livraison)
-	Uniquement en lecture, l'utilisateur n'a pas accès à l'édition de ces données.
-	Un message et un accès au formulaire de contact permet de demander une mise à jour des données.
-	Pas d'interactions, ni d'interfacages de mises à jour Serveur/Client. Cf. Gestions des données.
+Uniquement en lecture, l'utilisateur n'a pas accès à l'édition de ces données.
+Un message et un accès au formulaire de contact permet de demander une mise à jour des données.
+Pas d'interactions, ni d'interfacages de mises à jour Serveur/Client. Cf. Gestions des données.
 
 #### Factures
-	Le fonctionnement de base de magento de cette partie a été supprimé.
-	Elles sont donc déposées (en externe) et stockées au format PDF 
-	dans le répertoire identifié sur avec le code société Divalto.
-	L'utilisateur a accès à lecture de la liste des fichiers.
-	Leurs noms, hiérarchisations, limitations de dépots sont définis hors cadre module & CMS Magento.
+Le fonctionnement de base de magento de cette partie a été supprimé.
+Elles sont donc déposées (en externe) et stockées au format PDF 
+dans le répertoire identifié sur avec le code société Divalto.
+L'utilisateur a accès à lecture de la liste des fichiers.
+Leurs noms, hiérarchisations, limitations de dépots sont définis hors cadre module & CMS Magento.
 
 #### Autorisation de paiements
-	L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
+L'utilisateur peut voir ses autorisations de paiement dans la section "En cours"
 
 #### Echec
 
-	Lors de création de compte
+Lors de création de compte
 
 #### Logs
-	-/var/log/divalto/customer/debug.log
-	-/var/log/debug.log
-	-/var/log/system.log
+-/var/log/divalto/customer/debug.log
+-/var/log/debug.log
+-/var/log/system.log
 
 
 ## Contribute
