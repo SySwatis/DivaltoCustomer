@@ -26,7 +26,7 @@ Une clé API* sécurise la transmission des données :
 
 <b>Attention</b>, l'essentiel de la gestion se fait sur l'ajout, <b>pas de suppression, ni d'édition</b> de données dans cette première version.
 
-* **=>*Administrable dans la partie configuration du module Magento* *
+* ***Administrable dans la partie configuration du module Magento* *
 
 ### WorkFlow
 
@@ -159,7 +159,7 @@ Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php"
         "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
     ];
 
-*=>*Administrable dans la partie configuration du module Magento*
+**Administrable dans la partie configuration du module Magento*
 
 **Créer une Commande**
 
@@ -169,7 +169,7 @@ Retourne le n° de commande Divalto si succès.
 
 Raccourci vers la section "Divalo > Client" contenant tous les réglages du module (cf. "Configuration" ci-dessous).
 
-*=>*Administrable dans la partie configuration du module Magento*
+**Administrable dans la partie configuration du module Magento*
 
 ### Configuration
 
