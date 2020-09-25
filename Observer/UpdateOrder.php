@@ -121,8 +121,10 @@ class UpdateOrder implements ObserverInterface
 				$response = $this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER);
 
 				// Create group Name and path folder if no exist
-
-				$this->_helperData->groupCreate($groupName);      
+				
+				if(isset($response['group_name'])) {
+					$this->_helperData->groupCreate($response['group_name']);
+				}    
 
 			} catch (Exception $e) {
 				
@@ -162,7 +164,7 @@ class UpdateOrder implements ObserverInterface
 
 			// Add event to log
 
-			$this->_logger->debug('Oberser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode.' | Taxvat : '.$postData['Client_Particulier']['Numero_TVA']);
+			$this->_logger->debug('Obserser Event Update Order order id : '.$order->getId().' Status : '.$order->getStatus().' | Method : '.$methodCode.' | Taxvat : '.$postData['Client_Particulier']['Numero_TVA']);
 		}
 	}
 }
