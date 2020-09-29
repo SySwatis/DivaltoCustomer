@@ -311,6 +311,6 @@ Test subscription new client in checkout order
     b) Email inconnu et Société inconnue
 
 ### Notes
-    Au 29/09/2020 les données "codes" sont absentes en réponse "Creer Commande"
-    Les emails "Contact.Email" & "Email_Client_Cde" sont indentiques à l'envoie de la commande
+    Au 29/09/2020 les données "codes" sont absentes en réponse "Creer Commande".
+    Les emails "Contact.Email" & "Email_Client_Cde" sont indentiques à l'envoie de la commande.
     Le retour réponse serait un "code contact" dans le cas a) ?
