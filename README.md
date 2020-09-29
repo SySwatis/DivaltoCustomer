@@ -303,7 +303,7 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
 Test subscription new client in checkout order
 
 - Action "Créer Client" au login, valider l'utilisation
-- Action "Créer Client" au passage de la commande, déterminer 
+- Action "Créer Client" au passage de la commande, point de conception à revoir 
 
 
 ### Réponse Divalto du "Code Société" (ou Groupe Client magento)
