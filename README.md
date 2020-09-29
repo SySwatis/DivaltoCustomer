@@ -307,5 +307,10 @@ Test subscription new client in checkout order
 
 
 ### Réponse Divalto du "Code Société" (ou Groupe Client magento)
-    Email inconnu et Société connue
-    Email inconnu et Société inconnue
+    a) Email inconnu et Société connue
+    b) Email inconnu et Société inconnue
+
+### Notes
+    Au 29/09/2020 les données "codes" sont absentes en réponse "Creer Commande"
+    Les emails "Contact.Email" & "Email_Client_Cde" sont indentiques à l'envoie de la commande
+    Le retour réponse serait un "code contact" dans le cas a) ?
