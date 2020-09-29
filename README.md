@@ -304,6 +304,8 @@ Test subscription new client in checkout order
 
 - Action "Créer Client" au login, valider l'utilisation
 - Action "Créer Client" au passage de la commande, déterminer 
--- *Réponse Divaltodu code Societe (ou groupe client magento)*
---- Email inconnu et Société connu
---- Email inconnu et Société inconnu 
+
+
+### Réponse Divaltodu code Societe (ou groupe client magento)
+    Email inconnu et Société connu
+    Email inconnu et Société inconnu 
