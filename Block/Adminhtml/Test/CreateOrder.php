@@ -35,8 +35,8 @@ class CreateOrder extends \Magento\Backend\Block\Template
         parent::__construct($context);
     }
 
-    function responseUrlTest() 
-    {
+    function dataTest {
+
         $emailTest = $this->_helperData->getGeneralConfig('email_test');
         $codeTest = $this->_helperData->getGeneralConfig('code_test');
         $postData = [
@@ -54,7 +54,13 @@ class CreateOrder extends \Magento\Backend\Block\Template
                     'Contact'=>array('Nom'=>'','Prenom'=>'','Telephone'=>'','Email'=>'muratk21@hotmail.com','Fonction'=>'')
                 )
         ];
-        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_ORDER));
+
+        return $postData;
+    }
+
+    function responseUrlTest() 
+    {
+        return array('Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($this->dataTest(), $this->_helperRequester::ACTION_CREATE_ORDER));
     }
     
 }

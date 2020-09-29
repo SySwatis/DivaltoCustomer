@@ -124,7 +124,14 @@ class UpdateOrder implements ObserverInterface
 				
 				if(isset($response['group_name'])) {
 					$this->_helperData->groupCreate($response['group_name']);
-				}    
+				}
+
+				// Add comment to order (Order Id(s) dvialto)
+
+				if( is_array($response) && !empty($response) ){					
+					$this->_comment->addCommentToOrder($order->getId(),self::HEADING_COMMENT.$response['comment']);
+				}
+
 
 			} catch (Exception $e) {
 				
@@ -136,31 +143,25 @@ class UpdateOrder implements ObserverInterface
             	$this->_messageManager->addExceptionMessage($e, __('We can\'t save the order.'));
         	}
 
-        	// Add comment to order (Order Id(s) dvialto)
-
-			if( is_array($response) && !empty($response) ){					
-				$this->_comment->addCommentToOrder($order->getId(),self::HEADING_COMMENT.$response['comment']);
-			}
-
 			// Update customer
 
-			$customer = $this->_helperData->getCustomerById($order->getCustomerId());
+			// $customer = $this->_helperData->getCustomerById($order->getCustomerId());
 
-            if( $customer && isset($response['group_name']) ){
+   //          if( $customer && isset($response['group_name']) ){
 				
-				$groupName = $response['group_name'];
-				$groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
-				try {
-					if($groupId){
-						$customer->setCustomAttribute('divalto_account_id',$groupName);
-						$customer->setGroupId($groupId);
-						$this->_customerRepositoryInterface->save($customer);
-					}
-				} catch (Exception $e) {
-					$this->_logger->critical($e->getMessage());
-            		$this->_messageManager->addExceptionMessage($e, __('We can\'t save the customer.'));
-				}
-			}
+			// 	$groupName = $response['group_name'];
+			// 	$groupId = $this->_helperData->getCustomerGroupIdByName($groupName);
+			// 	try {
+			// 		if($groupId){
+			// 			$customer->setCustomAttribute('divalto_account_id',$groupName);
+			// 			$customer->setGroupId($groupId);
+			// 			$this->_customerRepositoryInterface->save($customer);
+			// 		}
+			// 	} catch (Exception $e) {
+			// 		$this->_logger->critical($e->getMessage());
+   //          		$this->_messageManager->addExceptionMessage($e, __('We can\'t save the customer.'));
+			// 	}
+			// }
 
 			// Add event to log
 
