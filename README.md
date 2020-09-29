@@ -300,11 +300,10 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
 
 ## Todo
 
-Test subscription new client in checkout order
+### Test création d'un nouveau client au passage de la commande
 
-- Action "Créer Client" au login, valider l'utilisation
-- Action "Créer Client" au passage de la commande, point de conception à revoir 
-
+    Action "Créer Client" au login, valider l'utilisation
+    Action "Créer Client" au passage de la commande, point de conception à revoir 
 
 ### Réponse Divalto du "Code Société" (ou Groupe Client magento)
     a) Email inconnu et Société connue
