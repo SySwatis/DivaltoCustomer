@@ -29,7 +29,7 @@ class OrderMap
 
 	const EXCL_TAX_RULE_ORDER = 'EXCL_TAX';
 
-    const DIVALTO_STATE_PROCESSING =  Order::STATE_PROCESSING;
+    const DIVALTO_STATE_PROCESSING = Order::STATE_PROCESSING;
    
 	/** @var LoggerInterface */
     private $_logger;
@@ -55,6 +55,18 @@ class OrderMap
         if($customerOrder->getCustomAttribute($attibuteCode)) {
             return $customerOrder->getCustomAttribute($attibuteCode)->getValue();
         }
+    }
+
+    public function getShipingChargeOrder($order)
+    {
+        $shippingAmount = null;
+        try {
+            $shippingAmount = (float)$order->getShippingAmount();
+        } catch (Exception $exception) {
+            $this->logger->error($exception->getMessage());
+        }
+
+        return $shippingAmount;
     }
 
     function create($orderIn,$orderStatus=self::DIVALTO_STATE_PROCESSING)

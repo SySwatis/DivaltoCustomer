@@ -222,5 +222,31 @@ class Data extends AbstractHelper
     {
         return $this->getGeneralConfig('enabled')==1 ? true : false;
     }
+
+    public function dataOrderTest() 
+    {
+
+        if(  $postData = $this->getGeneralConfig('data_order_test') ) {
+            return json_decode($postData);
+        }
+
+        $emailTest = $this->getGeneralConfig('email_test');
+        $codeTest = $this->getGeneralConfig('code_test');
+        $divaltoStoreId = $this->getGeneralConfig('divalto_store_id');
+
+        $postData ='{"Numero_Dossier":"'.$divaltoStoreId.'","Numero_Commande_Magento":"000001","Email_Client_Cde":"'.$emailTest.'","Code_Client_Divalto":"'.$codeTest.'","Code_Adresse_Livraison":"","Adresse_Livraison_Manuelle":{"Rue":"37 RUE MARYSE BASTIE","Ville":"LYON","Code_Postal":"69008","Pays":"FR"},"Code_Adresse_Facturation":"","Paiement":"processing","liste_detail_ligne":[{"SKU":"00001AIBN","Quantite_Commandee":"10","Prix_Unitaire_TTC":"","Prix_Unitaire_HT":"100","Montant_Ligne":"1000"}],"Client_Particulier":{"Email_Client":"","Raison_Sociale":"POLAT","Titre":"SAS","Telephone":"0610158941","Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}}';
+
+        return json_decode($postData, true);
+    }
+
+    public function dataCustomerTest()
+    {
+        $emailTest = $this->getGeneralConfig('email_test');
+        $codeTest = $this->getGeneralConfig('code_test');
+
+        $postData = '{"Numero_Dossier":"'.$divaltoStoreId.'","Email_Client":"","Raison_Sociale":"","Titre":"","Telephone":"","Numero_Siret":"","Code_APE":"","Numero_TVA":"","Adresse_Facturation":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Adresse_Livraison":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}';
+
+        return json_decode($postData, true);
+    }
     
 }

@@ -37,27 +37,13 @@ class CreateCustomer extends \Magento\Backend\Block\Template
 
     function responseUrlTest() 
     {
-       $emailTest = $this->_helperData->getGeneralConfig('email_test');
-       $postData = [
-            "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
-            "Email_Client"=>"",
-            "Raison_Sociale"=>"",
-            "Titre"=>"",
-            "Telephone"=>"",
-            "Numero_Siret"=>"",
-            "Code_APE"=>"",
-            "Numero_TVA"=>"",
-            "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-            "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-            "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
-        ];
-        return array('Email Test'=>$emailTest, 'Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER, true));
+        return array('Email Test'=>$emailTest, 'Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($this->_helperData->dataCustomerTest(), $this->_helperRequester::ACTION_CREATE_CUSTOMER, true));
     }
     
     function responseUrlProd()
     {
         $postData = array();
-        return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER));
+        return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($this->_helperData->dataCustomerTest(), $this->_helperRequester::ACTION_CREATE_CUSTOMER));
     }
     
 }
