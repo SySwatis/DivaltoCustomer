@@ -127,6 +127,9 @@ class Requester extends AbstractHelper
 
         $responseText = 'Status: '.$statusCode;
 
+        // Error server Connection timed out 443
+        // ..
+
         if ($statusCode !== 200) {
             $responseText .= ' => ';
             switch ($statusCode) {
@@ -152,36 +155,29 @@ class Requester extends AbstractHelper
             }
 
             // CreerClient
+            // outstanding_status : CB only Divalto/Customer/Model/Config/Source/OutstandingStatus.php
 
             if($action == 'CreerClient') {
 
                 if( isset($data['liste_contact']) ) {
                     return array(
-                        'group_name'         => $data['liste_contact'][0]['code_Client'],
-                        'outstanding_status' => 1,  // CB only Divalto/Customer/Model/Config/Source/OutstandingStatus.php
-                        'divalto_response' => $responseText,
-                        'divalto_extrafield_1'=>'',
-                        'divalto_extrafield_2'=>''
-                    );
-                }
-
-                if( isset($data['liste_contact']) ) {
-                    return array(
-                        'group_name'         => $data['liste_contact'][0]['code_Client'],
-                        'outstanding_status' => 1,  // CB only Divalto/Customer/Model/Config/Source/OutstandingStatus.php
-                        'divalto_response' => $responseText,
-                        'divalto_extrafield_1'=>'',
-                        'divalto_extrafield_2'=>''
+                        'group_name'            => $data['liste_contact'][0]['code_Client'],
+                        'divalto_account_id'    => $data['liste_contact'][0]['code_Contact'],
+                        'outstanding_status'    => $data['liste_contact'][0]['autorisation_Paiement'],
+                        'divalto_response'      => $responseText,
+                        'divalto_extrafield_1'  =>'',
+                        'divalto_extrafield_2'  =>''
                     );
                 }
 
                 if( isset($data['message']) ) {
                     return array(
-                        'group_name'         => self::CUSTOMER_GROUP_DEFAULT_NAME,
-                        'outstanding_status' => 0,  // CB only Divalto/Customer/Model/Config/Source/OutstandingStatus.php
-                        'divalto_response' => $responseText.' | '.$data['message'],
-                        'divalto_extrafield_1'=>'',
-                        'divalto_extrafield_2'=>''
+                        'group_name'            => self::CUSTOMER_GROUP_DEFAULT_NAME,
+                        'divalto_account_id'    => '',
+                        'outstanding_status'    => 0,
+                        'divalto_response'      => $responseText.' | '.$data['message'],
+                        'divalto_extrafield_1'  =>'',
+                        'divalto_extrafield_2'  =>''
                     );
                 }
 

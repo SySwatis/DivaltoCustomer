@@ -66,9 +66,10 @@ class UpdateCustomer implements ObserverInterface
             return;
         }
 
-        // Default 
-
-        $outStandingStatus = 1; // CB Only - Divalto/Customer/Model/Config/Source/OutstandingStatus.php
+        // Default
+        
+        $divaltoAccountId = '';
+        $outStandingStatus = 0; // No payments methods - Divalto/Customer/Observer/PaymentMethodDisable.php
         $groupName = '';
         $response = '';
         $extrafield_1 = '';
@@ -87,6 +88,7 @@ class UpdateCustomer implements ObserverInterface
                 $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
 
                 if( $sessionDivaltoData && isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
+                    $divaltoAccountId = $sessionDivaltoData['divalto_account_id'];
                     $groupName = $sessionDivaltoData['group_name'];
                     $outStandingStatus = $sessionDivaltoData['outstanding_status'];
                     $response = $sessionDivaltoData['divalto_response'];
@@ -110,8 +112,8 @@ class UpdateCustomer implements ObserverInterface
 
                 // Set Atttributes
 
+                $customer->setCustomAttribute('divalto_account_id',$divaltoAccountId);
                 $customer->setCustomAttribute('divalto_outstanding_status',$outStandingStatus);
-                $customer->setCustomAttribute('divalto_account_id',$groupName);
                 $customer->setCustomAttribute('divalto_response',$response);
                 $customer->setCustomAttribute('divalto_extrafield_1',$extrafield_1);
                 $customer->setCustomAttribute('divalto_extrafield_2',$extrafield_2);

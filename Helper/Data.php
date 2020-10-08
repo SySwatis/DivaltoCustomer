@@ -226,8 +226,8 @@ class Data extends AbstractHelper
     public function dataOrderTest() 
     {
 
-        if(  $postData = $this->getGeneralConfig('data_order_test') ) {
-            return json_decode($postData);
+        if($postData = $this->getGeneralConfig('data_order_test')) {
+            return json_decode($postData, true);
         }
 
         $emailTest = $this->getGeneralConfig('email_test');
@@ -241,10 +241,14 @@ class Data extends AbstractHelper
 
     public function dataCustomerTest()
     {
-        $emailTest = $this->getGeneralConfig('email_test');
-        $codeTest = $this->getGeneralConfig('code_test');
+        if($postData = $this->getGeneralConfig('data_customer_test')) {
+            return json_decode($postData, true);
+        }
 
-        $postData = '{"Numero_Dossier":"'.$divaltoStoreId.'","Email_Client":"","Raison_Sociale":"","Titre":"","Telephone":"","Numero_Siret":"","Code_APE":"","Numero_TVA":"","Adresse_Facturation":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Adresse_Livraison":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}';
+        $emailTest = $this->getGeneralConfig('email_test');
+        $divaltoStoreId = $this->getGeneralConfig('divalto_store_id');
+        
+        $postData = '{"Numero_Dossier":"'.$divaltoStoreId.'","Email_Client":"'.$emailTest.'","Raison_Sociale":"","Titre":"","Telephone":"","Numero_Siret":"","Code_APE":"","Numero_TVA":"FR999999999","Adresse_Facturation":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Adresse_Livraison":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}';
 
         return json_decode($postData, true);
     }

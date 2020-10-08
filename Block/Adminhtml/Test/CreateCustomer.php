@@ -37,13 +37,9 @@ class CreateCustomer extends \Magento\Backend\Block\Template
 
     function responseUrlTest() 
     {
-        return array('Email Test'=>$emailTest, 'Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($this->_helperData->dataCustomerTest(), $this->_helperRequester::ACTION_CREATE_CUSTOMER, true));
+        $postData = $this->_helperData->dataCustomerTest();
+        $emailTest = 'Email_Client : '.$postData['Email_Client'];
+        $emailTest .= ' | Contact Email : '.$postData['Contact']['Email'];
+        return array('Emails test'=>$emailTest,'Url Test'=>$this->_helperData->getGeneralConfig('api_url_test'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($postData, $this->_helperRequester::ACTION_CREATE_CUSTOMER));
     }
-    
-    function responseUrlProd()
-    {
-        $postData = array();
-        return array('Url Prod'=>$this->_helperData->getGeneralConfig('api_url'),'Response Api'=>$this->_helperRequester->getDivaltoCustomerData($this->_helperData->dataCustomerTest(), $this->_helperRequester::ACTION_CREATE_CUSTOMER));
-    }
-    
 }

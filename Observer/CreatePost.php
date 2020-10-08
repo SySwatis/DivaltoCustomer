@@ -106,7 +106,7 @@ class CreatePost implements ObserverInterface
             "Telephone"=>"",
             "Numero_Siret"=>"",
             "Code_APE"=>"",
-            "Numero_TVA"=>"",
+            "Numero_TVA"=>$requestParams['taxvat'],
             "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
             "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
             "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$requestParams['email'],"Fonction"=>"")

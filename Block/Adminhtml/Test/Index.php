@@ -46,8 +46,10 @@ class Index extends \Magento\Backend\Block\Template
         $html .='<p><b>'.__('Email test:').'</b> '.$this->_helperData->getGeneralConfig('email_test').'</p>';
         $html .='<p><b>'.__('Code test:').'</b> '.$this->_helperData->getGeneralConfig('code_test').'</p>';
         $html .='<p><b>'.__('Api Url Test:').'</b> '.$this->_helperData->getGeneralConfig('api_url_test').'</p>';
-                $html .='<p><b>'.__('Data Order Test:').'</b></p>';
-        $html .= '<p><pre>'.json_encode( ( $this->_helperData->dataOrderTest() ) ).'</pre></p></header>';  
+        $html .='<p><b>'.__('Data Customer Test:').'</b></p>';
+        $html .= '<p><pre>'.json_encode( ( $this->_helperData->dataCustomerTest() ) ).'</pre></p>';
+        $html .='<p><b>'.__('Data Order Test:').'</b></p>';
+        $html .= '<p><pre>'.json_encode( ( $this->_helperData->dataOrderTest() ) ).'</pre></p></header>';
         $html .='<div class="page-main-actions"><p><a class="action-primary" href="'.$this->getUrl('customer/test/ping').'">Ping</a></p>'; 
         $html .='<p><a class="action-primary" href="'.$this->getUrl('customer/test/CreateCustomer').'">'.__('Create Customer').'</a></p>'; 
         $html .='<p><a class="action-primary" href="'.$this->getUrl('customer/test/CreateOrder').'">'.__('Create Order').'</a></p></div>';
