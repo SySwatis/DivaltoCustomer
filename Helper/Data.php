@@ -218,6 +218,13 @@ class Data extends AbstractHelper
         return $this->_customerSession->getCustomer()->getData('divalto_outstanding_status');
     }
 
+    public function outstandingMessage()
+    {
+        $supportEmail = $this->scopeConfig->getValue('trans_email/ident_support/email',ScopeInterface::SCOPE_STORE);
+        $contactText = $this->scopeConfig->getValue('general/store_information/phone',ScopeInterface::SCOPE_STORE);
+        return __('Your account is not activated for the order payment, please contact us: <b>%1</b> or <a href="mailto:%2">%2</a>',$contactText, $supportEmail);
+    }
+
     public function isEnabled()
     {
         return $this->getGeneralConfig('enabled')==1 ? true : false;

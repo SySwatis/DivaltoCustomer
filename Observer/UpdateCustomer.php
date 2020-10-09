@@ -94,6 +94,13 @@ class UpdateCustomer implements ObserverInterface
                     $response = $sessionDivaltoData['divalto_response'];
                     $extrafield_1 = $sessionDivaltoData['divalto_extrafield_1'];
                     $extrafield_2 = $sessionDivaltoData['divalto_extrafield_2'];
+
+                    if($outStandingStatus==0) {
+                        $outStandingMessage = $this->_helperData->outStandingMessage();
+                        $this->_messageManager->addWarning( $outStandingMessage );
+                        $response .= $outStandingMessage;
+                    }
+                    
                 }
 
                 // GroupId
