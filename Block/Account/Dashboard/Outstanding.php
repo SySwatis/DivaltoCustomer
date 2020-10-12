@@ -39,5 +39,10 @@ class Outstanding extends \Magento\Framework\View\Element\Template
     {
         return $this->_helperData->getOutstandingValue();
     }
+
+    public function getOutstandingMessage()
+    {
+        return $this->_helperData->outstandingMessage();
+    }
     
 }

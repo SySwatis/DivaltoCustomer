@@ -96,11 +96,15 @@ class CreatePost implements ObserverInterface
 
         $requestParams = $this->_request->getParams();
 
-        if(!isset($requestParams['email'])) return;
+        // Default
+
+        // $groupName = '';
+
+        if( !isset($requestParams['email']) || !isset($requestParams['taxvat']) ) return;
 
         $postData = [
             "Numero_Dossier"=>$divaltoStoreId,
-            "Email_Client"=>"",
+            "Email_Client"=>$requestParams['email'],
             "Raison_Sociale"=>"",
             "Titre"=>"",
             "Telephone"=>"",
@@ -118,10 +122,6 @@ class CreatePost implements ObserverInterface
 
             $divaltoCustomerData = $this->_helperRequester->getDivaltoCustomerData($postData,$this->_helperRequester::ACTION_CREATE_CUSTOMER);
 
-            // Default (log)
-
-            $groupName = 'Not found';
-
             // Add group if response and create groupe if no exist
 
             if( isset($divaltoCustomerData['group_name']) && $divaltoCustomerData['group_name'] ) {
@@ -130,9 +130,21 @@ class CreatePost implements ObserverInterface
                 $this->_helperData->setSessionDivaltoData($divaltoCustomerData); // For update account before register
             }
 
+            // Add a warning messages
+
+            if( isset($divaltoCustomerData['message']) && $divaltoCustomerData['message'] ) {
+                $outStandingMessage = $this->_helperData->outStandingMessage();
+                $this->_messageManager->addWarning( 'Account creation not valid, please contact us' );
+            }
+
+            if( isset($divaltoCustomerData['outstanding_status']) && $divaltoCustomerData['outstanding_status']==0 ) {
+                $outStandingMessage = $this->_helperData->outStandingMessage();
+                $this->_messageManager->addWarning( $outStandingMessage );
+            }
+
             // Add comment to log file
 
-            $this->_logger->info('Observer CreatePost group name : '.$groupName);
+            $this->_logger->info('Observer CreatePost group name : '.$groupName ?? 'Not found');
 
         } catch (Exception $e) {
             $this->_logger->critical($e->getMessage());

@@ -88,8 +88,8 @@ class UpdateCustomer implements ObserverInterface
                 $sessionDivaltoData = $this->_helperData->getSessionDivaltoData();
 
                 if( $sessionDivaltoData && isset($sessionDivaltoData['group_name']) && $sessionDivaltoData['group_name'] ) {
-                    $divaltoAccountId = $sessionDivaltoData['divalto_account_id'];
-                    $groupName = $sessionDivaltoData['group_name'];
+                    $divaltoAccountId = $sessionDivaltoData['group_name'].':'.$sessionDivaltoData['divalto_account_id'];
+                    
                     $outStandingStatus = $sessionDivaltoData['outstanding_status'];
                     $response = $sessionDivaltoData['divalto_response'];
                     $extrafield_1 = $sessionDivaltoData['divalto_extrafield_1'];
@@ -97,10 +97,11 @@ class UpdateCustomer implements ObserverInterface
 
                     if($outStandingStatus==0) {
                         $outStandingMessage = $this->_helperData->outStandingMessage();
-                        $this->_messageManager->addWarning( $outStandingMessage );
-                        $response .= $outStandingMessage;
+                        $response .= ' '.$outStandingMessage;
+                    } else {
+                        $groupName = $sessionDivaltoData['group_name'];
                     }
-                    
+
                 }
 
                 // GroupId

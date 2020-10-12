@@ -20,6 +20,6 @@
 <?php if($block->getOutstanding()>0) :  ?>
 	<p><?= __('You can order and pay online') ?></p>
 <?php else : ?>
-	<p><?= __('You can only order, payment online not authorized') ?></p>
+	<p><?= $block->getOutstandingMessage() ?></p>
 <?php endif ?>
 </div>
