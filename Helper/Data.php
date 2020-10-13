@@ -241,7 +241,7 @@ class Data extends AbstractHelper
         $codeTest = $this->getGeneralConfig('code_test');
         $divaltoStoreId = $this->getGeneralConfig('divalto_store_id');
 
-        $postData ='{"Numero_Dossier":"'.$divaltoStoreId.'","Numero_Commande_Magento":"000001","Email_Client_Cde":"'.$emailTest.'","Code_Client_Divalto":"'.$codeTest.'","Code_Adresse_Livraison":"","Adresse_Livraison_Manuelle":{"Rue":"37 RUE MARYSE BASTIE","Ville":"LYON","Code_Postal":"69008","Pays":"FR"},"Code_Adresse_Facturation":"","Paiement":"processing","liste_detail_ligne":[{"SKU":"00001AIBN","Quantite_Commandee":"10","Prix_Unitaire_TTC":"","Prix_Unitaire_HT":"100","Montant_Ligne":"1000"}],"Client_Particulier":{"Email_Client":"","Raison_Sociale":"POLAT","Titre":"SAS","Telephone":"0610158941","Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}}';
+        $postData = '{"Numero_Dossier":"'.$divaltoStoreId.'","Numero_Commande_Magento":"000001","Email_Client_Cde":"'.$emailTest.'","Code_Client_Divalto":"'.$codeTest.'","Code_Adresse_Livraison":"","Adresse_Livraison_Manuelle":{"Rue":"37 RUE MARYSE BASTIE","Ville":"LYON","Code_Postal":"69008","Pays":"FR"},"Code_Adresse_Facturation":"","Paiement":"processing","liste_detail_ligne":[{"SKU":"00001AIBN","Quantite_Commandee":"10","Prix_Unitaire_TTC":"","Prix_Unitaire_HT":"100","Montant_Ligne":"1000"}],"Client_Particulier":{"Email_Client":"","Raison_Sociale":"POLAT","Titre":"SAS","Telephone":"0610158941","Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}}';
 
         return json_decode($postData, true);
     }
