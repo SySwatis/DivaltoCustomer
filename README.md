@@ -301,4 +301,4 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
     ----------
 
     Le process de création client a été réactivé avec une nouvelle conception.
-    La réponse du serveur Divalto contient les ids codes : société & contact
+    La réponse du serveur Divalto contient le status d'autorisation de paiement (outstanding) + les ids codes : société & contact
