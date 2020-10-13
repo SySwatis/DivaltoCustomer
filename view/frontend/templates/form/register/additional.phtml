@@ -47,9 +47,11 @@
       <span><?= $block->escapeHtml(__('VAT number')) ?></span>
     </label>
     <div class="control">
-<!--        <input type="text" name="taxvat" id="taxvat" value="" title="<?= $block->escapeHtmlAttr(__('VAT number')) ?>" class="input-text" data-validate="{required:true,'remote':'<?php echo $this->getUrl('divalto/validate/vat', ['_secure' => true]); ?>'}"> -->
-<input type="text" name="taxvat" id="taxvat" value="" title="<?= $block->escapeHtmlAttr(__('VAT number')) ?>" class="input-text" data-validate="{required:true}">
-
+<?php if($block->validateVat()==1) : ?>
+      <input type="text" name="taxvat" id="taxvat" value="" title="<?= $block->escapeHtmlAttr(__('VAT number')) ?>" class="input-text" data-validate="{required:true,'remote':'<?php echo $this->getUrl('divalto/validate/vat', ['_secure' => true]); ?>'}">
+<?php else : ?>
+      <input type="text" name="taxvat" id="taxvat" value="" title="<?= $block->escapeHtmlAttr(__('VAT number')) ?>" class="input-text" data-validate="{required:true}">
+<?php endif ?>
     </div>
 </div>
 <div class="field ape required">

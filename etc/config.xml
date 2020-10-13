@@ -34,6 +34,7 @@
                 <ssl_verifypeer>0</ssl_verifypeer>
                 <data_customer_test>{"Numero_Dossier":"1","Email_Client":"muratk21@hotmail.com","Raison_Sociale":"","Titre":"","Telephone":"","Numero_Siret":"","Code_APE":"","Numero_TVA":"FR999999999","Adresse_Facturation":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Adresse_Livraison":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"muratk21@hotmail.com","Fonction":""}}</data_customer_test>
                 <data_order_test>{"Numero_Dossier":"1","Numero_Commande_Magento":"000001","Email_Client_Cde":"muratk21@hotmail.com","Code_Client_Divalto":"C0000043","Code_Adresse_Livraison":"","Adresse_Livraison_Manuelle":{"Rue":"37 RUE MARYSE BASTIE","Ville":"LYON","Code_Postal":"69008","Pays":"FR"},"Code_Adresse_Facturation":"","Paiement":"processing","liste_detail_ligne":[{"SKU":"00001AIBN","Quantite_Commandee":"10","Prix_Unitaire_TTC":"","Prix_Unitaire_HT":"100","Montant_Ligne":"1000"}],"Client_Particulier":{"Email_Client":"","Raison_Sociale":"POLAT","Titre":"SAS","Telephone":"0610158941","Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"muratk21@hotmail.com","Fonction":""}}}</data_order_test>
+                <validate_vat>0</validate_vat>
             </general>
         </divalto_customer>
     </default>

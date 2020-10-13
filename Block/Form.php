@@ -63,5 +63,10 @@ class Form  extends \Magento\Framework\View\Element\Template
         }
         return $html;
     }
+
+    public function validateVat()
+    {
+        return $this->_helperData->getGeneralConfig('validate_vat');
+    }
     
 }
