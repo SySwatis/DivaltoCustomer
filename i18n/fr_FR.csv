@@ -28,3 +28,5 @@
 "Invalid VAT Number (Europa VAT)","Numéro de TVA non valide (Europa VAT)"
 "This account was validate with this VAT Number:","Ce compte a été validé avec le numéro de TVA :"
 "Invalid VAT Number, error unknown","Numéro de TVA non valide, erreur non spécifique"
+"Your account is not activated for the order payment, please contact us: <b>%1</b> or <a href="mailto:%2">%2</a>","Votre compte n'est pas activé pour le paiement de la commande, veuillez nous contacter: <b>%1</b> or <a href="mailto:%2">%2</a>"
+"Validate Vat","Valider la TVA"
