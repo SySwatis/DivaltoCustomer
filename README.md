@@ -91,8 +91,8 @@ Dans le cas précis du Cdc, on autorisera le module "Purshase Order" (ou bon com
 
 #### Les attributs
 
-Les attributs "customer" sont ajouté à l'installation du module.
-Pour ajouter un nouvel attribut, il faut upgrader la version de ce dernier
+Les attributs "customer" sont ajoutés à l'installation du module.
+Attention, un attribut supplémentaire nécessite un upgrade de version.
 
 ##### Clients
 
@@ -107,6 +107,7 @@ Pour ajouter un nouvel attribut, il faut upgrader la version de ce dernier
 	divalto_extrafield_2
 
 ##### Commandes
+
 Aucuns
 
 ### Le MVC
@@ -114,7 +115,7 @@ Aucuns
 	- Block
 	- Controller => Urls : admin, customer, validation
 	- etc => Config : menu, url, module, admin config, events
-	- Helper => Fonctionnalités générales
+	- Helper => Fonctionnalités principales
 	- i18n => Traductions (csv)
 	- Logger => Générateur des logs
 	- Model => Fonctionnalités spécifiques
@@ -122,19 +123,13 @@ Aucuns
 	- Setup => Installateur (attributs, upgrade)
 	- view => Frontend (user & admin) : pHtml, js, layout
 
-### Fonctionnalités détaillées
-
-	Helper
-	- Data
-	- Requester
-
 ## Administration Magento
 
 ### Le menu "Divalto"
 
 #### Mode test
 
-Permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons "Ping","Créer un Client","Créer une Commande" (cf. configuration).
+Ce mode permet de vérifier la communication avec l'url* "Api Url Test" du serveur distant et de valider les actions sur la base de données statiques avec les boutons "Ping","Créer un Client","Créer une Commande" (cf. configuration).
 
 **Ping (test)**
 
@@ -144,46 +139,21 @@ Une <b>latence trop importante</b> et/ou une erreur timeout (curl) est probablem
 **Créer un Client (test)**
 
 Retourne le code client (test) si succès avec "Numero_Dossier"* & "Contact.Email"*.<br>
-Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateCustomer.php".
+Tableau source Json dataCustomerTest() : "Divalto/Customer/Helper/Data.php".
 
 
-	$postData = [
-        "Numero_Dossier"=>$this->_helperData->getGeneralConfig('divalto_store_id'),
-        "Email_Client"=>"",
-        "Raison_Sociale"=>"",
-        "Titre"=>"",
-        "Telephone"=>"",
-        "Numero_Siret"=>"",
-        "Code_APE"=>"",
-        "Numero_TVA"=>"",
-        "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-        "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-        "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$emailTest,"Fonction"=>"")
-    ];
+	$postData = '{"Numero_Dossier":"'.$divaltoStoreId.'","Email_Client":"'.$emailTest.'","Raison_Sociale":"","Titre":"","Telephone":"","Numero_Siret":"","Code_APE":"","Numero_TVA":"FR999999999","Adresse_Facturation":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Adresse_Livraison":{"Rue":"","Ville":"","Code_Postal":"","Pays":""},"Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}';
+
 
 **Administrable dans la partie configuration du module Magento*
 
 **Créer une Commande (test)**
 
 Retourne le n° de commande Divalto si succès avec "Email_Client_Cde"* & Code_Client_Divalto"*.<br>
-Extrait source code : "Divalto/Customer/Block/Adminhtml/Test/CreateOrder.php".
+Tableau source Json dataOrderTest() : "Divalto/Customer/Helper/Data.php".
 
 
-	$postData = [
-        'Numero_Dossier'=>'1',
-        'Numero_Commande_Magento'=>'000001',
-        'Email_Client_Cde'=>$emailTest,
-        'Code_Client_Divalto'=>$codeTest,
-        'Code_Adresse_Livraison'=>'',
-        'Adresse_Livraison_Manuelle'=>array('Rue'=>'37 RUE MARYSE BASTIE','Ville'=>'LYON','Code_Postal'=>'69008','Pays'=>'FR'),
-        'Code_Adresse_Facturation'=>'',
-        'Paiement'=>'processing',
-        'liste_detail_ligne'=>array(array('SKU'=>'00001AIBN','Quantite_Commandee'=>'10','Prix_Unitaire_TTC'=>'','Prix_Unitaire_HT'=>'100','Montant_Ligne'=>'1000')),
-            'Client_Particulier'=>array(
-                'Email_Client'=>'','Raison_Sociale'=>'POLAT','Titre'=>'SAS','Telephone'=>'0610158941',
-                'Contact'=>array('Nom'=>'','Prenom'=>'','Telephone'=>'','Email'=>'muratk21@hotmail.com','Fonction'=>'')
-            )
-    ];
+	  $postData ='{"Numero_Dossier":"'.$divaltoStoreId.'","Numero_Commande_Magento":"000001","Email_Client_Cde":"'.$emailTest.'","Code_Client_Divalto":"'.$codeTest.'","Code_Adresse_Livraison":"","Adresse_Livraison_Manuelle":{"Rue":"37 RUE MARYSE BASTIE","Ville":"LYON","Code_Postal":"69008","Pays":"FR"},"Code_Adresse_Facturation":"","Paiement":"processing","liste_detail_ligne":[{"SKU":"00001AIBN","Quantite_Commandee":"10","Prix_Unitaire_TTC":"","Prix_Unitaire_HT":"100","Montant_Ligne":"1000"}],"Client_Particulier":{"Email_Client":"","Raison_Sociale":"POLAT","Titre":"SAS","Telephone":"0610158941","Contact":{"Nom":"","Prenom":"","Telephone":"","Email":"'.$emailTest.'","Fonction":""}}}';
 
 **Administrable dans la partie configuration du module Magento*
 
@@ -214,6 +184,10 @@ Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC)
 Email utilisé pour les modes test "Créer Client" & "Créer Commande"
 ##### Code Test
 Code Société Divalto utilisé pour le mode test "Créer Commande".
+##### Data Order Test
+Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses donnée ici.
+##### Data Customer Test
+Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses donnée ici.
 ##### Statut de la commande
 Status autorisés à l'appel du serveur Divalto (Créer Commande).
 ##### Mode de paiement
@@ -225,7 +199,7 @@ Liste des formes juridiques entreprise (Titre - cf. Mapping).
 
 ### Création de compte
 
-L'accès à la création de compte est ouvert à tous les visiteurs. Son inscription est soumise à la validation du serveur Divalto. Si ce dernier n'a pas été reconnu (adresse email). Le compte est toutefois enregistré sur Magento, il cependant est averti par un message d'erreur "Compte client non validé, merci de nous contacter".
+L'accès à la création de compte est ouvert à tous les visiteurs. Son inscription est soumise à la validation du serveur Divalto. Si ce dernier n'a pas été reconnu (adresse email). Le compte est toutefois enregistré sur Magento mais ne peut pas valider de commande (outstanding "0") et assigné au groupe client general (tarification de base). Il est cependant averti par un message d'alerte "Compte client non validé, merci de nous contacter" et sur le tableau de bord de son compte client.
 
 #### Siret
 
@@ -242,11 +216,13 @@ Validation effectuée à la création de compte par le format.
 ### Gestion de compte
 
 #### Gestion des adresses (Facturation & livraison)
+
 Uniquement en lecture, l'utilisateur n'a pas accès à l'édition de ces données.
 Un message et un accès au formulaire de contact permet de demander une mise à jour des données.
 Pas d'interactions, ni d'interfacages de mises à jour Serveur/Client. Cf. Gestions des données.
 
 #### Factures
+
 Le fonctionnement de base de magento de cette partie a été supprimé.
 Elles sont donc déposées (en externe) et stockées au format PDF 
 dans le répertoire identifié sur avec le code société Divalto.
