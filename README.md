@@ -163,37 +163,6 @@ Raccourci vers la section "Divalo > Client" contenant tous les réglages du modu
 
 **Administrable dans la partie configuration du module Magento*
 
-### Configuration
-
-##### Activer le module (Oui/Non)
-Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test).
-##### Api Url
-Addresse Url du Serveur Divalto de production.
-##### Api Url Test
-Addresse Url du Serveur Divalto de pre-production.
-##### SSL Peer’s Certificate
-Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur.<br>
-Pris en compte également dans le mode test.
-##### Clé Api
-Clé de validation d'échange avec Divato (serveur).
-##### Dossier magasin
-Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux.
-##### Validation commandes (Taxe)
-Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC).
-##### Email Test
-Email utilisé pour les modes test "Créer Client" & "Créer Commande"
-##### Code Test
-Code Société Divalto utilisé pour le mode test "Créer Commande".
-##### Data Order Test
-Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses données ici.
-##### Data Customer Test
-Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses données ici.
-##### Statut de la commande
-Status autorisés à l'appel du serveur Divalto (Créer Commande).
-##### Mode de paiement
-Paiements autorisés à l'appel du serveur Divalto (Créer Commande).
-##### Forme juridique
-Liste des formes juridiques entreprise (Titre - cf. Mapping).
 
 ## Compte client (utilisateur fontend)
 
@@ -209,6 +178,8 @@ Désactivé sur le formulaire au profit du VAT. Le champ pays est obligatoire po
 #### VAT
 
 Validation effectuée à la création de compte par le format & à la validation du VAT  (http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl).
+
+**Administrable dans la partie configuration du module Magento*
 
 #### Ape
 
@@ -272,6 +243,39 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
 	-/var/log/debug.log
 	-/var/log/system.log
 
+### Configuration
+
+##### Activer le module (Oui/Non)
+Active ou désactive les évènements de l'observer en relation avec Divalto (ne désactive pas le mode test).
+##### Api Url
+Addresse Url du Serveur Divalto de production.
+##### Api Url Test
+Addresse Url du Serveur Divalto de pre-production.
+##### SSL Peer’s Certificate
+Sécurité d'échange de données (curl option). Mettre oui, si installé sur le serveur.<br>
+Pris en compte également dans le mode test.
+##### Clé Api
+Clé de validation d'échange avec Divato (serveur).
+##### Dossier magasin
+Format dig. 1, 2, 3, ... Identifiant du magasin associé au flux.
+##### Validation commandes (Taxe)
+Règle de validation des totaux des lignes de commandes selon la règle (HT/TTC).
+##### Email Test
+Email utilisé pour les modes test "Créer Client" & "Créer Commande"
+##### Code Test
+Code Société Divalto utilisé pour le mode test "Créer Commande".
+##### Data Order Test
+Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses données ici.
+##### Data Customer Test
+Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses données ici.
+##### Statut de la commande
+Status autorisés à l'appel du serveur Divalto (Créer Commande).
+##### Mode de paiement
+Paiements autorisés à l'appel du serveur Divalto (Créer Commande).
+##### Forme juridique
+Liste des formes juridiques entreprise (Titre - cf. Mapping).
+##### Validation VAT
+Activer la validation à distance du numéro de TVA intracommunautaire sur le formulaire de création de compte.
 
 ## Contribution
 
