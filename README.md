@@ -185,9 +185,9 @@ Email utilisé pour les modes test "Créer Client" & "Créer Commande"
 ##### Code Test
 Code Société Divalto utilisé pour le mode test "Créer Commande".
 ##### Data Order Test
-Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses donnée ici.
+Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses données ici.
 ##### Data Customer Test
-Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses donnée ici.
+Laisser vide pour utiliser les données test du module ou personnaliser le tableau et ses données ici.
 ##### Statut de la commande
 Status autorisés à l'appel du serveur Divalto (Créer Commande).
 ##### Mode de paiement
@@ -199,7 +199,8 @@ Liste des formes juridiques entreprise (Titre - cf. Mapping).
 
 ### Création de compte
 
-L'accès à la création de compte est ouvert à tous les visiteurs. Son inscription est soumise à la validation du serveur Divalto. Si ce dernier n'a pas été reconnu (adresse email). Le compte est toutefois enregistré sur Magento mais ne peut pas valider de commande (outstanding "0") et assigné au groupe client general (tarification de base). Il est cependant averti par un message d'alerte "Compte client non validé, merci de nous contacter" et sur le tableau de bord de son compte client.
+L'accès à la création de compte est ouvert à tous les visiteurs. Son inscription est soumise à la validation du serveur Divalto. Si ce dernier n'a pas été reconnu (adresse email, tva intr.). Le compte est toutefois enregistré sur Magento mais l'utilisateur ne peut pas valider de commande (outstanding "0"). Son groupe client est créé si nécessaire mais il est assigné temporairement au "Géneral" (tarification de base).
+Il est cependant averti par un message d'alerte : "Compte client non validé, merci de nous contacter" et sur le tableau de bord de son compte client.
 
 #### Siret
 
@@ -266,6 +267,7 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
         ];
 
 ## Logs
+
 	-/var/log/divalto/customer/debug.log
 	-/var/log/debug.log
 	-/var/log/system.log
@@ -282,10 +284,21 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
     Action "Créer Client" au passage de la commande, point de conception à revoir 
 
 ### Réponse Divalto du "Code Société" (ou Groupe Client magento)
+
     a) Email inconnu et Société connue
     b) Email inconnu et Société inconnue
 
 ### Notes
-    Au 29/09/2020 les données "codes" sont absentes en réponse "Creer Commande".
+
+    29/09/2020 
+    ----------
+
+    les données "codes" sont absentes en réponse "Creer Commande".
     Les emails "Contact.Email" & "Email_Client_Cde" sont indentiques à l'envoie de la commande.
     Le retour réponse serait un "code contact" dans les cas a) ou b) ?
+
+    13/11/2020
+    ----------
+
+    Le process de création client a été réactivé avec une nouvelle conception.
+    La réponse du serveur Divalto contient les ids codes : société & contact
