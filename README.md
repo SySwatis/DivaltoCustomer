@@ -300,5 +300,8 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
     13/11/2020
     ----------
 
-    Le process de création client a été réactivé avec une nouvelle conception.
-    La réponse du serveur Divalto contient le status d'autorisation de paiement (outstanding) + les ids codes : société & contact
+    Le process de création client a été réactivé avec une nouvelle conception :
+    L'envoie côté client contient : "Contact.Email" & "Email_Client_Cde" + "Numero_TVA"
+    La réponse du serveur Divalto "liste_contact" contient :
+    - le status d'autorisation de paiement (outstanding) "autorisation_Paiement"
+    - les ids codes "code_Client" & code_Contact
