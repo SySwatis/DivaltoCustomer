@@ -6,9 +6,12 @@
   "license": "OSL-3.0",
   "authors": [
     {
+        "email": "syswatis@gmail.com",
         "name": "Stéphane JIMENEZ"
     }
   ],
+  "minimum-stability": "dev",
+  "require": {},
   "autoload": {
     "files": [
       "registration.php"

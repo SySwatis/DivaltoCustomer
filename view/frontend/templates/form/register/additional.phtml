@@ -41,7 +41,16 @@
     <div class="control">
        <input type="text" name="siret" id="siret" value="" title="<?= $block->escapeHtmlAttr(__('Siret')) ?>" class="input-text" data-validate="{required:true, siret:true,'remote':'<?php echo $this->getUrl('divalto/validate/siretbyvat', ['_secure' => true]); ?>'}">
     </div>
-</div> -->
+</div> 
+<div class="field ape required">
+    <label class="label" for="ape">
+      <span><?= $block->escapeHtml(__('Code Ape')) ?></span>
+    </label>
+    <div class="control">
+       <input type="text" name="ape" id="ape" value="" title="<?= $block->escapeHtmlAttr(__('Code Ape')) ?>" class="input-text" data-validate="{required:true, ape:true}">
+    </div>
+</div>
+-->
 <div class="field siret required">
     <label class="label" for="taxvat">
       <span><?= $block->escapeHtml(__('VAT number')) ?></span>
@@ -54,14 +63,15 @@
 <?php endif ?>
     </div>
 </div>
-<div class="field ape required">
-    <label class="label" for="ape">
-      <span><?= $block->escapeHtml(__('Code Ape')) ?></span>
-    </label>
-    <div class="control">
-       <input type="text" name="ape" id="ape" value="" title="<?= $block->escapeHtmlAttr(__('Code Ape')) ?>" class="input-text" data-validate="{required:true, ape:true}">
-    </div>
+<div class="field phone_number required">
+   <label class="label" for="phone_number">
+       <span><?= $block->escapeHtml(__('Phone')) ?></span>
+   </label>
+   <div class="control">
+       <input type="text" name="phone_number" id="phone_number" value="" title="<?= $block->escapeHtmlAttr(__('Phone number')) ?>" class="input-text" data-validate="{required:true}">
+   </div>
 </div>
+
 <script type="text/x-magento-init">
    {
        "*": {

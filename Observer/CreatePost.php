@@ -105,15 +105,15 @@ class CreatePost implements ObserverInterface
         $postData = [
             "Numero_Dossier"=>$divaltoStoreId,
             "Email_Client"=>$requestParams['email'],
-            "Raison_Sociale"=>"",
-            "Titre"=>"",
-            "Telephone"=>"",
+            "Raison_Sociale"=>$requestParams['company_name'],
+            "Titre"=>$requestParams['legal_form'],
+            "Telephone"=>$requestParams['phone_number'],
             "Numero_Siret"=>"",
             "Code_APE"=>"",
             "Numero_TVA"=>$requestParams['taxvat'],
             "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
             "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-            "Contact"=>array("Nom"=>"","Prenom"=>"","Telephone"=>"","Email"=>$requestParams['email'],"Fonction"=>"")
+            "Contact"=>array("Nom"=>$requestParams['lastname'],"Prenom"=>$requestParams['firstname'],"Telephone"=>"","Email"=>$requestParams['email'],"Fonction"=>"")
         ];
 
         try {
