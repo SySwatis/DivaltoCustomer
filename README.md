@@ -217,9 +217,11 @@ Extrait source code : "Divalto/Customer/Model/OrderMap.php"
             'Code_Client_Divalto'=>$groupCode,
             'Code_Adresse_Livraison'=>'',
             'Adresse_Livraison_Manuelle'=>$shippingAddressData,
+            'Adresse_Facturation_Manuelle'=>$billingAddressData,
             'Code_Adresse_Facturation'=>'',
             'Paiement'=>'processing',
             'liste_detail_ligne'=>$orderDataItems,
+            'MontantLivraison'=>$this->getShipingChargeOrder($order),
             'Client_Particulier'=>array(
                 'Numero_TVA'=>$customerOrder->getTaxvat(),
                 'Code_Ape'=>$this->getCustomerAttributeValue($customerOrder,'ape'),
@@ -301,7 +303,7 @@ Activer la validation à distance du numéro de TVA intracommunautaire sur le fo
     Les emails "Contact.Email" & "Email_Client_Cde" sont indentiques à l'envoie de la commande.
     Le retour réponse serait un "code contact" dans les cas a) ou b) ?
 
-    13/11/2020
+    13/10/2020
     ----------
 
     Le process de création client a été réactivé avec une nouvelle conception :
@@ -309,3 +311,54 @@ Activer la validation à distance du numéro de TVA intracommunautaire sur le fo
     La réponse du serveur Divalto "liste_contact" contient :
     - le status d'autorisation de paiement (outstanding) "autorisation_Paiement"
     - les ids codes "code_Client" & code_Contact
+
+    03/11/2020
+
+    Mise à jour des datas orders avec les champs, adresse facturation, montant de la livraison
+
+    Data Order test :
+
+    {
+        "Numero_Dossier": "1",
+        "Numero_Commande_Magento": "000001",
+        "Email_Client_Cde": "muratk21@hotmail.com",
+        "Code_Client_Divalto": "C0000043",
+        "Code_Adresse_Livraison": "",
+        "Adresse_Livraison_Manuelle": {
+            "Rue": "37 RUE MARYSE BASTIE",
+            "Ville": "LYON",
+            "Code_Postal": "69008",
+            "Pays": "FR"
+        },
+        "Adresse_Facturation_Manuelle": {
+            "Rue": "1 IMPASSE SOUS LA GRIMAUDIERE",
+            "Ville": "DIEMOZ",
+            "Code_Postal": "38790",
+            "Pays": "FR"
+        },
+        "Code_Adresse_Facturation": "",
+        "Paiement": "processing",
+        "Montant_Livraison": "10",
+        "liste_detail_ligne": [{
+            "SKU": "00001AIBN",
+            "Quantite_Commandee": "10",
+            "Prix_Unitaire_TTC": "",
+            "Prix_Unitaire_HT": "100",
+            "Montant_Ligne": "1000"
+        }],
+        "Client_Particulier": {
+            "Email_Client": "",
+            "Raison_Sociale": "POLAT",
+            "Titre": "SAS",
+            "Telephone": "0610158941",
+            "Contact": {
+                "Nom": "",
+                "Prenom": "",
+                "Telephone": "",
+                "Email": "muratk21@hotmail.com",
+                "Fonction": ""
+            }
+        }
+    }
+
+

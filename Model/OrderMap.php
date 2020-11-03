@@ -96,6 +96,22 @@ class OrderMap
 
         $billingAddress = $order->getBillingAddress();
 
+        $billingAddress = $order->getbillingAddress();
+        $billingAddressStreets = $billingAddress->getStreet();
+        $billingStreet = '';
+        $billingStreetSeparator = '';
+        
+        foreach ($billingAddressStreets as $street) {
+            $billingStreet .= $billingStreetSeparator.$street;
+            $billingStreetSeparator = ', ';
+        }
+
+        $billingAddressData = array(
+                'Rue'=>$billingStreet,
+                'Ville'=>$billingAddress->getCity(),
+                'Code_Postal'=>$billingAddress->getPostcode(),
+                'Pays'=>$billingAddress->getCountryId());
+
         // Get Shippigng Address
 
         $shippingAddress = $order->getShippingAddress();
@@ -151,9 +167,11 @@ class OrderMap
             'Code_Client_Divalto'=>$groupCode,
             'Code_Adresse_Livraison'=>'',
             'Adresse_Livraison_Manuelle'=>$shippingAddressData,
+            'Adresse_Facturation_Manuelle'=>$billingAddressData,
             'Code_Adresse_Facturation'=>'',
             'Paiement'=>'processing',
             'liste_detail_ligne'=>$orderDataItems,
+            'MontantLivraison'=>$this->getShipingChargeOrder($order),
             'Client_Particulier'=>array(
                 'Numero_TVA'=>$customerOrder->getTaxvat(),
                 'Code_Ape'=>$this->getCustomerAttributeValue($customerOrder,'ape'),
