@@ -361,4 +361,51 @@ Activer la validation à distance du numéro de TVA intracommunautaire sur le fo
         }
     }
 
+    ou (MontantLivraison)
+
+    {
+      "Numero_Dossier": "1",
+      "Numero_Commande_Magento": "123456879",
+      "Email_Client_Cde": "zeggriim@sgagence.com",
+      "Code_Client_Divalto": "C0000795",
+      "Code_Adresse_Livraison": "",
+      "Adresse_Livraison_Manuelle": {
+        "Rue": "37 RUE MARYSE BASTIE",
+        "Ville": "LYON",
+        "Code_Postal": "69008",
+        "Pays": "FR"
+      },
+      "Adresse_Facturation_Manuelle": {
+        "Rue": "1 IMPASSE SOUS LA GRIMAUDIERE",
+        "Ville": "DIEMOZ",
+        "Code_Postal": "38790",
+        "Pays": "FR"
+      },
+      "Code_Adresse_Facturation": "",
+      "Paiement": "Processing",
+      "MontantLivraison": "",
+      "liste_detail_ligne": [
+        {
+          "SKU": "00001AIBN",
+          "Quantite_Commandee": "10",
+          "Prix_Unitaire_TTC": "",
+          "Prix_Unitaire_HT": "100.000",
+          "Montant_Ligne": "1000"
+        }
+      ],
+      "Client_Particulier": {
+        "Email_Client": "",
+        "Raison_Sociale": "",
+        "Titre": "",
+        "Telephone": "",
+        "Contact": {
+          "Nom": "",
+          "Prenom": "",
+          "Telephone": "",
+          "Email": "",
+          "Fonction": ""
+        }
+      }
+    }
+
 
