@@ -87,7 +87,11 @@ La création des commandes en appel serveur se fait <b>uniquement</b> sur le sta
 Ce paramètre est figé en constante "DIVALTO_STATE_PROCESSING".
 La configuration du module permet l'appel du serveur selon mode de paiment ou le status d'une commande.
 Ceci permet de gérer l'évènement d'un changement de status.
-Dans le cas précis du Cdc, on autorisera le module "Purshase Order" (ou bon commande) & 
+Dans le cas précis du Cdc, on autorisera le module "Purshase Order" (ou bon commande).
+
+08/02/2021
+
+Modification du module autorisé "Checkmo" au lieu de "Purshase Order". 
 
 #### Les attributs
 
