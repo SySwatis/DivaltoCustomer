@@ -98,7 +98,7 @@ class UpdateOrder implements ObserverInterface
 		
 		$orderStatusAllowed = explode(",",$this->_helperData->getGeneralConfig('order_status'));
 
-		// Payment method Allowed (Default: purchaseorder)
+		// Payment method Allowed (Default: checkmo)
 
 		$orderPaymentMethodAllowed = explode(",",$this->_helperData->getGeneralConfig('payment_method'));
 

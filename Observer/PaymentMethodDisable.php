@@ -51,7 +51,7 @@ class PaymentMethodDisable implements ObserverInterface {
 		$payment_method_code = $observer->getEvent()->getMethodInstance()->getCode();
 
 		// 0 = No payments (Pas de paiement autorisé)
-		// 1 = All except "purchaseorder" (CB uniquement)
+		// 1 = All except "checkmo" (CB uniquement)
 		// 2 = All (CB + Bon de commande)
 		// 3 = Custom rule config not avaible in this version
 
@@ -60,7 +60,7 @@ class PaymentMethodDisable implements ObserverInterface {
 			$result->setData('is_available', false);
 
 		}
-		if( $this->_helperData->getOutstandingValue()==1 && $payment_method_code === 'purchaseorder' ) {
+		if( $this->_helperData->getOutstandingValue()==1 && $payment_method_code === 'checkmo' ) {
 			$result = $observer->getEvent()->getResult();
 			$result->setData('is_available', false);
 		}
