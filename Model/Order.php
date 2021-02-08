@@ -32,7 +32,6 @@ class Order
     ) {
         $this->_orderRepository = $orderRepository;
         $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
-        parent::__construct($context);
     }
     
     public function getOrderById($id) 
