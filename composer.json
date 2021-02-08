@@ -1,6 +1,6 @@
 {
   "name": "divalto/customer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "this module manage customer and order (Api,WS)",
   "type": "magento2-module",
   "license": "OSL-3.0",
@@ -10,7 +10,6 @@
         "name": "Stéphane JIMENEZ"
     }
   ],
-  "minimum-stability": "dev",
   "require": {},
   "autoload": {
     "files": [
