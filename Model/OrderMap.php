@@ -156,7 +156,7 @@ class OrderMap
                 $itemPrice = $item->getPrice();
                 $itemPriceTaxInc =  $priceTaxConfig == self::INCL_TAX_RULE_ORDER ? $item->getPrice() : '';
                 $itemPriceTaxExc =  $priceTaxConfig == self::EXCL_TAX_RULE_ORDER ? $item->getPrice() : '';
-                $isCatalogPriceTaxExc = $this->getPriceById($item->getProductId()) != $itemPriceTaxExc ? 'Oui' : 'Non';
+                $isCatalogPriceTaxExc = $this->getPriceById($item->getProductId()) != $itemPriceTaxExc ? 'Non' : 'Oui';
 
                 $orderDataItems[$i]['SKU']=$item->getSku();
                 $orderDataItems[$i]['Quantite_Commandee']=$item->getQtyOrdered();
