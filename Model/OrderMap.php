@@ -12,7 +12,7 @@
  * @package    Divalto_Customer
  * @subpackage Model
  * @author SySwatis (Stéphane JIMENEZ)
- * @copyright Copyright (c) 2020 SySwatis (http://www.syswatis.com)
+ * @copyright Copyright (c) 2021 SySwatis (http://www.syswatis.com)
  */
  
 namespace Divalto\Customer\Model;
@@ -21,6 +21,7 @@ use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Exception;
 use Magento\Sales\Model\OrderRepository;
 use Magento\Sales\Model\Order;
+use Magento\Catalog\Model\ProductFactory;
 
 class OrderMap
 {
@@ -38,16 +39,28 @@ class OrderMap
     private $_orderRepository;
 
     /** @var */
+    private $_productFactory;
+
+    /** @var */
     private $_helperData;
 
     public function __construct(
     	OrderRepository $orderRepository,
     	PsrLoggerInterface $logger,
+        ProductFactory $productFactory,
     	\Divalto\Customer\Helper\data $helperData
     ) {
     	$this->_logger = $logger;
     	$this->_orderRepository = $orderRepository;
+        $this->_productFactory = $productFactory;
     	$this->_helperData = $helperData;
+    }
+
+    public function getPriceById($id)
+    {
+        $product = $this->productFactory->create();
+        $productPriceById = $product->load($id)->getPrice();
+        return $productPriceById;
     }
 
     function getCustomerAttributeValue($customerOrder, $attibuteCode)
@@ -143,12 +156,14 @@ class OrderMap
                 $itemPrice = $item->getPrice();
                 $itemPriceTaxInc =  $priceTaxConfig == self::INCL_TAX_RULE_ORDER ? $item->getPrice() : '';
                 $itemPriceTaxExc =  $priceTaxConfig == self::EXCL_TAX_RULE_ORDER ? $item->getPrice() : '';
-                
+                $isCatalogPriceTaxExc = $this->getPriceById($item->getProductId()) != $itemPriceTaxExc ? 'Oui' : 'Non';
+
                 $orderDataItems[$i]['SKU']=$item->getSku();
                 $orderDataItems[$i]['Quantite_Commandee']=$item->getQtyOrdered();
                 $orderDataItems[$i]['Prix_Unitaire_TTC']=$itemPriceTaxInc;
                 $orderDataItems[$i]['Prix_Unitaire_HT']=$itemPriceTaxExc;
                 $orderDataItems[$i]['Montant_Ligne']=$itemPrice*$item->getQtyOrdered();
+                $orderDataItems[$i]['Est_Prix_Catalogue_HT']=$isCatalogPriceTaxExc;
 
                 $i++;
             }
