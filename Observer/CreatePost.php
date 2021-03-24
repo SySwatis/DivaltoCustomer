@@ -106,8 +106,6 @@ class CreatePost implements ObserverInterface
 
         // CheckVatNumber
 
-        $checkVatNumber['is_valid'] = false;
-
         if(isset($requestParams['taxvat'])) {
             $checkVatNumber = $this->_vatCustomer->checkVatNumber($requestParams['taxvat']);
             if(!$checkVatNumber['is_valid']) {
