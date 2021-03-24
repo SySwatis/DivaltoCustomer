@@ -72,13 +72,15 @@ class CreatePost implements ObserverInterface
         ManagerInterface $messageManager,
         PsrLoggerInterface $logger,
         \Divalto\Customer\Helper\Data $helperData,
-        \Divalto\Customer\Helper\Requester $helperRequester
+        \Divalto\Customer\Helper\Requester $helperRequester,
+        \Divalto\Customer\Model\Vat $vatCustomer
     ) {
         $this->_request = $request;
         $this->_messageManager = $messageManager;
         $this->_logger = $logger;
         $this->_helperData = $helperData;
         $this->_helperRequester = $helperRequester;
+        $this->_vatCustomer = $vatCustomer;
     }
 
     public function execute(Observer $observer)
@@ -100,23 +102,36 @@ class CreatePost implements ObserverInterface
 
         // $groupName = '';
 
-        if( !isset($requestParams['email']) || !isset($requestParams['taxvat']) ) return;
+        // if( !isset($requestParams['email']) || !isset($requestParams['taxvat']) ) return;
 
-        $postData = [
-            "Numero_Dossier"=>$divaltoStoreId,
-            "Email_Client"=>$requestParams['email'],
-            "Raison_Sociale"=>$requestParams['company_name'],
-            "Titre"=>$requestParams['legal_form'],
-            "Telephone"=>$requestParams['phone_number'],
-            "Numero_Siret"=>"",
-            "Code_APE"=>"",
-            "Numero_TVA"=>$requestParams['taxvat'],
-            "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-            "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
-            "Contact"=>array("Nom"=>$requestParams['lastname'],"Prenom"=>$requestParams['firstname'],"Telephone"=>"","Email"=>$requestParams['email'],"Fonction"=>"")
-        ];
+        // CheckVatNumber
+
+        $checkVatNumber['is_valid'] = false;
+
+        if(isset($requestParams['taxvat'])) {
+            $checkVatNumber = $this->_vatCustomer->checkVatNumber($requestParams['taxvat']);
+            if(!$checkVatNumber['is_valid']) {
+                $this->_messageManager->addWarning( 'VAT number is not valid' );
+                $this->_logger->info('VAT number is not valid :'.$requestParams['taxvat']);
+                return;
+            }
+        }
 
         try {
+
+            $postData = [
+                "Numero_Dossier"=>$divaltoStoreId,
+                "Email_Client"=>$requestParams['email'],
+                "Raison_Sociale"=>$requestParams['company_name'],
+                "Titre"=>$requestParams['legal_form'],
+                "Telephone"=>$requestParams['phone_number'],
+                "Numero_Siret"=>"",
+                "Code_APE"=>"",
+                "Numero_TVA"=>$requestParams['taxvat'],
+                "Adresse_Facturation"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+                "Adresse_Livraison"=>array("Rue"=>"","Ville"=>"","Code_Postal"=>"","Pays"=>""),
+                "Contact"=>array("Nom"=>$requestParams['lastname'],"Prenom"=>$requestParams['firstname'],"Telephone"=>"","Email"=>$requestParams['email'],"Fonction"=>"")
+            ];
 
             // Get group name (code_Client Divalto "users")
 
@@ -145,6 +160,7 @@ class CreatePost implements ObserverInterface
             // Add comment to log file
 
             $this->_logger->info('Observer CreatePost group name : '.$groupName ?? 'Not found');
+            
 
         } catch (Exception $e) {
             $this->_logger->critical($e->getMessage());
